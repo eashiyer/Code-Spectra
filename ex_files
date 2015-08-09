@@ -1,0 +1,9 @@
+cibi/config/application.rb
+cibi/config/boot.rb
+cibi/config/deploy.rb
+cibi/config/environment.rb
+cibi/config/routes.rb
+cibi/config/environments/development.rb
+cibi/config/environments/production.rb
+cibi/config/environments/test.rb
+

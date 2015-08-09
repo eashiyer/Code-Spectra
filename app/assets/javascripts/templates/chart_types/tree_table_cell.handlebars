@@ -1,0 +1,13 @@
+
+<tr {{bindAttr id='view.elemId' class='view.className'}}>
+	<td>
+		<a {{action 'toggle' contextBinding="key" target='view' }}> 
+			{{#times depth}}
+				&nbsp;&nbsp;&nbsp;&nbsp;
+			{{/times}}
+			<i class='icon-chevron-right table-tree-icon-collapsed'></i>
+			{{key}} 
+		</a>
+	</td>
+	<td class='span3'> {{money val}} </td>
+</tr>

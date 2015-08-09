@@ -1,0 +1,38 @@
+<div class="tabbable tabs-left">
+	<ul class="nav nav-tabs span2 main-tab-links" style="width:210px">
+	<li>
+		<div class='row dashboardsheading'>
+			<div class='span'>
+				<h5>{{name}} Dashboards</h5>
+			</div>
+		</div>
+	</li>
+	<hr style="margin: 5px; border-bottom-width: 0px">
+	<li>
+		<input type='hidden' id='currentVertical' {{bindAttr value='id'}} />
+		<div class="tab-link">
+			{{#linkTo 'vertical.users' this class="btn auth-users" }}
+				<i class='icon-user muted pull-right'></i>
+			{{/linkTo }}		
+
+			{{#if this.can_edit}}
+				{{#linkTo 'vertical.new' this class="btn new-dashboard" }}
+					<i class='icon-plus-sign muted pull-right'></i>
+				{{/linkTo }}
+			{{/if}}
+		</div>		
+	</li>
+	<hr style="margin: 5px; border-bottom-width: 0px">
+	{{render "dashboards" dashboards }}
+	</ul>
+
+	<div class="tab-content main-tab" id="main-tab">
+		 {{#if dashboardDeleted}}
+     	<h4 class='alert alert-success'> Dashboard Deleted </h4>
+    {{/if}}
+		{{outlet}}
+		
+	</div><!-- tab-content -->
+
+</div><!-- tabbable -->
+

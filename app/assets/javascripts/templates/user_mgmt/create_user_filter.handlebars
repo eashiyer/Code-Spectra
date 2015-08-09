@@ -1,0 +1,75 @@
+<a {{action open_popover target=view}} rel="popover" class="dropdown-toggle" data-toggle="dropdown" >
+	Add Filter &nbsp;<i class="icon-filter"></i>					
+</a>		
+
+<div class="popover fade bottom in hidden" {{bindAttr id='userFilterPopoverId'}} style="display: block; width: 300px;">
+	<div class="arrow hidden"></div>
+	<h3 class="popover-title hidden">Create Filter for {{view.dataSource.name}}</h3>	
+	
+	<div class="popover-content hidden">	
+		<form class="form" style="margin-bottom:0px;">
+		<div class='row'>				
+			<label>
+				Filter Display Name
+			</label>
+			{{input valueBinding="view.display_name" class='input-medium'}}
+
+			<div class='span' style="margin: 4px 0px 0px;">
+				Hide Data Source
+				&nbsp;&nbsp;
+			</div>
+			<div class='span'>
+			&nbsp;&nbsp;
+				{{view Ember.Checkbox checkedBinding=view.hide style="margin: 0px;"}}
+			</div>
+				
+		</div>
+		<br />
+		{{#if view.hide}}
+			<h5 class='muted'>
+				User will have no visibility for this data source!
+			</h5>
+		{{else}}
+
+			<label style="margin-top: 3px;">
+				Select Field
+			</label>	
+			{{view Ember.Select 
+				contentBinding=view.fields
+		        optionValuePath="content"
+		        optionLabelPath="content.name"
+				valueBinding="view.field"
+				class='input-medium'
+			}}
+
+			{{#if view.isDateField}}
+				<label>
+					Format As
+				</label>
+				{{view Ember.Select 
+					contentBinding=view.dateFormats
+					valueBinding="view.format_as"
+					class='input-medium'
+				}}
+			{{/if}}
+
+			{{view Ember.Select
+			    contentBinding="view.operators"
+			   	optionLabelPath="content.display"
+			    optionValuePath="content.value"
+				valueBinding="view.comparison_operator"
+				class='input-medium'
+			}}
+
+			<div {{bindAttr id='view.filterValuesId'}}>
+			</div>
+		{{/if}}
+		<div style="margin-top: 5px">
+			<input type="submit" value="Save" />
+			<button {{action cancel target=view}}> Cancel </button>
+		</div>
+	
+		</form>
+	</div>
+	
+</div>

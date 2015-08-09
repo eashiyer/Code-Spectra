@@ -1,0 +1,105 @@
+- id: 1
+  dashboard_id: 1
+  chart_type: ctable
+  css_class_name: span
+  width: 600
+  height: 500
+  margin:
+    top: 20
+    left: 40
+    right: 40
+    bottom: 20
+  title: Funds Report
+  # Custom Configs for this chart
+  hierarchy: 
+  - IAA_NUMBER
+  - CAN
+  - PROJNUM
+  - AGRNUM
+  - TRX
+  - TRXAMT
+  expansion_depth: 1
+  columns: 
+    - key
+    - values
+  drill_through: 
+    chart_type: modal
+    title: Transaction Summary
+- id: 2
+  dashboard_id: 2
+  chart_type: bar
+  title: Top 20 Customers By Revenue
+  subtitle: (For 2012 & 2013)
+  css_class_name: span
+  width: 500
+  height: 360
+  margin: 
+    top: 20
+    right: 20
+    left: 80
+    bottom: 80
+  valueFormat: money
+  y_axis_label: Transaction Amount
+  rotate: true
+- id: 3
+  dashboard_id: 2
+  chart_type: pie
+  title: Total Revenue By Year
+  subtitle: (For 2012 & 2013)
+  valueFormat: money
+  css_class_name: span
+  rotate: true
+  margin: 
+    top: 20
+    right: 20
+    left: 20
+    bottom: 20
+  width: 500
+  height: 400
+- id: 4
+  dashboard_id: 2
+  chart_type: bar
+  title: Total Revenue by Department
+  subtitle: (For 2012 & 2013)
+  margin: 
+    top: 20
+    right: 20
+    left: 80
+    bottom: 80
+  valueFormat: money
+  y_axis_label: Transaction Amount
+  css_class_name: span
+  rotate: true
+  width: 1012
+  height: 360
+- id: 5
+  dashboard_id: 3
+  chart_type: geo
+  title: World Wide Revenue
+  subtitle: (For 2012 & 2013)
+  margin: 
+    top: 20
+    right: 20
+    left: 20
+    bottom: 20
+  css_class_name: span
+  width: 1012
+  height: 500
+- id: 6
+  dashboard_id: 4
+  chart_type: ctree
+  title: Organization Hierarchy
+  subtitle: 
+  hierarchy: 
+  - DEPARTMENT
+  - LEVEL1_MANAGER
+  - EMPLOYEE
+  margin: 
+    top: 20
+    right: 20
+    left: 120
+    bottom: 20
+  css_class_name: span
+  width: 960
+  height: 600
+    

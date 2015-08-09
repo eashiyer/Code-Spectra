@@ -1,0 +1,167 @@
+		<div {{bindAttr id='view.rangeFilterPopoverId'}} class="pop_div">
+		<a rel="popover" class="range_filter_popover"  data-toggle="tooltip" data-placement="bottom" style="font-size:12px;border-right:1px solid grey;">	
+				{{ view.range }}
+				<span class="caret" style="vertical-align: middle; opacity: 0.4"></span>
+		</a>
+
+		<div class="popover fade bottom in hidden" style="display: block; height: auto; ">
+			<div class="arrow hidden" style="left:64px;"></div>
+			<h3 class="popover-title hidden">Chart Configs</h3>
+			<div class="popover-content hidden">
+				<form class='form' >
+					<div class="row">
+						<div class="span" style="width:100%;">
+						    <div class='row'>
+						    	<div class='span'>
+									{{view Ember.Checkbox checkedBinding="view.specific_date" class="popup_range_selector radio-align" name="0"}}
+								</div>
+								<div class='span'>
+									<label>Choose specific dates</label>
+								</div>
+							</div>
+						    <div class='row'>
+						    	<div class='span'>
+									{{view Ember.Checkbox checkedBinding="view.reference_date_option" class="popup_range_selector radio-align" name="1"}}
+								</div>
+								<div class='span'>
+									<label>Specify periods w.r.t reference date</label>
+								</div>
+							</div>
+						    <div class='row'>
+						    	<div class='span'>
+									{{view Ember.Checkbox checkedBinding="view.predefined_range" class="popup_range_selector radio-align" name="2"}}
+								</div>
+								<div class='span'>
+									<label>Predefined range</label>
+								</div>
+							</div>							
+
+							{{#if view.specific_date}}
+								<div class="row" style="margin-top:5px;">
+									<div class="span" style="width:100%;">
+										<div class="row">
+											<span>Lower: </span><br/>
+										  	<div id="datetimepicker" class="input-append" style="width: 140px; margin-bottom: 0px;">
+											    {{#if view.isDate}}
+													{{view Cibi.NewDateField valueBinding="view.lower_range" classNames="startDate dashboard_filter_lower_range" style="margin-right:10px; width:100px;"}}	
+												{{else}}
+													{{#if view.isTime}}
+														{{view Cibi.NewTimeField valueBinding="view.lower_range"  classNames="startDate dashboard_filter_lower_range" style="margin-right:10px; width:100px;"}}	
+													{{else}}
+														{{#if view.isDateTime}}
+															{{view Cibi.NewDateTimeField valueBinding="view.lower_range"  classNames="startDate dashboard_filter_lower_range"}}	
+														{{/if}}
+													{{/if}}
+												{{/if}}
+										  	</div>
+										</div>
+										<div class="row">
+										<span>Upper:</span> <br/>
+									  	<div id="datetimepicker" class="input-append" style="width: 140px; margin-bottom: 0px;">
+										    {{#if view.isDate}}
+												{{view Cibi.NewDateField valueBinding="view.upper_range" classNames="startDate dashboard_filter_upper_range" style="margin-right:10px; width:100px;"}}	
+											{{else}}
+												{{#if view.isTime}}
+													{{view Cibi.NewTimeField valueBinding="view.upper_range"  classNames="startDate dashboard_filter_upper_range" style="margin-right:10px; width:100px;"}}	
+												{{else}}
+													{{#if view.isDateTime}}
+														{{view Cibi.NewDateTimeField valueBinding="view.upper_range"  classNames="startDate dashboard_filter_upper_range"}}	
+													{{/if}}
+												{{/if}}
+											{{/if}}
+									  	</div>								
+										</div>
+									</div>
+								</div>
+							{{/if}}
+
+							{{#if view.reference_date_option}}
+								<div class="row">
+									<div class="span" style="width:100%;">
+										<div class='row' style="margin-top:10px;">
+											<b>Specify Period</b>
+										</div>
+									    <div class='row' style="margin-top:5px;">
+											<div class='span' style="width:45%;">
+												<input type="radio" class="radio-align" name="reference_direction" value="previous" > previous
+											</div>
+											<div class='span' style="width:45%;">
+												<input type="radio" class="radio-align" name="reference_direction" value="next" > next
+											</div>
+										</div>
+										<div class='row' style="margin-top:5px;">
+											<div class="span">
+												{{view Cibi.NumberField valueBinding="view.reference_count" min="1" style="width:80px;"}}
+											</div>
+											<div class="span" style="margin-left:10px;">
+												{{view Ember.Select
+							    			    contentBinding="view.period_unit"
+							    			    valueBinding="view.reference_unit"
+							       				class='input-medium'}}
+											</div>									
+										</div>
+
+										<div class='row' style="margin-top:10px;">
+											<b>Reference Date</b>
+										</div>
+										<div class='row' style="margin-top:5px;">
+											<div class="span">
+												{{view Ember.Checkbox checkedBinding="view.reference_date_today" }}Today
+											</div>
+											<div class="span" style="margin-left:10px;">
+												<div id="datetimepicker" class="input-append" style="width: 140px; margin-bottom: 0px;">
+												    {{#if view.isDate}}
+														{{view Cibi.NewDateField valueBinding="view.reference_date" classNames="startDate dashboard_filter_reference_date" style="margin-right:10px; width:100px;"}}
+													{{else}}
+														{{#if view.isTime}}
+															{{view Cibi.NewTimeField valueBinding="view.reference_date"  classNames="startDate dashboard_filter_reference_date" style="margin-right:10px; width:100px;"}}	
+														{{else}}
+															{{#if view.isDateTime}}
+																{{view Cibi.NewDateTimeField valueBinding="view.reference_date"  classNames="startDate dashboard_filter_reference_date"}}	
+															{{/if}}
+														{{/if}}
+													{{/if}}
+											  	</div>
+											</div>								  		
+										</div>
+									</div>
+								</div>
+							{{/if}}
+
+							{{#if view.predefined_range}}
+								<div class='row' style="margin-top:5px;">
+									<b>Select a range:</b>
+								</div>
+								<div class='row' style="margin-top:5px;">
+							  		{{#if view.isDate}}
+										{{view Ember.Select
+									       contentBinding="view.range_types"
+									       valueBinding='view.selected_range'
+									       selectionBinding='view.selected_range'
+									       class="input-medium"
+								        }}	
+									{{else}}
+										{{#if view.isDateTime}}
+											{{view Ember.Select
+										       contentBinding="view.combined_range_types"
+										       valueBinding='view.selected_range'
+										       selectionBinding='view.selected_range'
+										       class="input-medium"
+									        }}
+									    {{/if}}	
+									{{/if}}
+								</div>	
+							{{/if}}
+						</div>	
+					</div>
+					<div class="row">
+						<div class="span2" style="margin-top:10px;">
+							<button type="submit" class='btn' >Save</button>
+							<button class="btn" aria-hidden="true" onclick="$(this).closest('.pop_div').find('.range_filter_popover').click();return false;">Cancel</button>
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+			</div>
+

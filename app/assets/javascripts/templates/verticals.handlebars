@@ -1,0 +1,66 @@
+
+{{#if Cibi.Auth.signedIn}}
+  <div class="span affix" id="vertical_affix" style="width:4.3%;" data-spy="affix">
+    <div id="create-vertical" class="row" {{bindAttr style=view.accountLeftNavColor}}>
+      <!--input type="text" class="input_vertical" style="background-color: #3a3a3a; box-shadow: none; border-width: 0px; border-radius: 0px; padding-left: 4px; color: #fff; opacity: 0.8;" placeholder="New Workspace*" id="newVerticalName"/-->
+      {{#if Cibi.Auth.currentUser.isAdmin}}  
+        {{#linkTo "verticals.new"}}
+          <span class="btn btn-primary" id="new-workspace" style="margin-top:7px;">
+            <i class="icon-plus"></i>
+          </span>                
+        {{/linkTo}} 
+      {{/if}}
+    </div>
+    
+    <div id="show-vertical" class="row tabbable tabs-left" style="width:100%;">
+      {{#if errors}}
+        <div class="alert alert-error" style="padding: 5px; text-align: center; margin-top: 5px; margin-bottom: 5px;">
+          <label style="font-weight: bold; font-size: 15px; margin: 0px; padding: 0px;">
+            {{errors}}
+          </label>
+        </div>
+      {{/if}} 
+
+    <ul style="text-align:right;position:absolute;width:97.5%;opacity:0.8;background-color:#000000;padding:2px;margin-left:0px;" id="collapse-li"><a href="javascript:void(0);" id="collapse"><i class="icon-fast-forward icon-white" id="collapse-icon"></i></a></ul>
+     <ul id = "verticals_nav" onmouseout="$(this).find('.options').hide();" class="nav nav-tabs" {{bindAttr style=view.accountLeftNavPillsColor}}>
+        {{#each vertical in controller}}
+            <li style="word-wrap: break-word;" class="vertical-tooltip" {{bindAttr title=vertical.titleDescription}} data-placement="right" >
+                {{#linkTo "vertical" vertical class='tab-link' }}                        
+                            <div class="row">
+                              <table>
+                                <tr>
+                                  <td>
+                                    <div class="span" style="margin-right:3px;">
+                                    <img {{bindAttr src="vertical.iconUrl"}} width="25" height="25" />
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <span class="span vertical-name" style="display:none;">
+                                      {{ vertical.name }}
+                                    </span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>                            
+                {{/linkTo}}
+                <div class="options" style="display:none;margin-top:-25px;float:right;;margin-right:7px;padding:0 2px;" onmouseout="$(this).hide();">
+                  {{#if vertical.can_edit}}                    
+                    {{#linkTo "vertical.edit" vertical}}
+                      <i class="icon-edit icon-white" ></i>
+                    {{/linkTo}}  
+                      <i class="icon-trash icon-white" {{action 'deleteVertical' vertical target=view}}></i>           
+                  {{/if}}                  
+                </div>                
+            </li>
+            {{view view.editVerticalsView}}
+        {{/each}}
+      </ul>      
+    </div>   
+  </div>
+
+  <div id="verticals_content" class="span tab-content" style="width:95.7%; margin-left: 4.3%; overflow: hidden; -webkit-overflow-scrolling: touch">
+        {{outlet}}
+  </div>
+{{else}}
+  {{partial main_landing}}
+{{/if}}

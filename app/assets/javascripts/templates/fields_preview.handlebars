@@ -1,0 +1,14 @@
+<table class='table table-bordered'>
+	<tr>
+		<th>Fields</th>
+		<th>Data Types</th>
+		<th>Options</th>
+		<th>Default Values</th>
+		<th>Ignore Field</th>
+	</tr>
+	{{#each field in view.fields}}
+		<tr class="previewFields">
+			{{view view.previewFieldView contentBinding='field'}}
+		</tr>
+	{{/each}}
+</table>

@@ -1,0 +1,37 @@
+
+<div class="row" style="margin-left:0px; padding-top:0px;">
+  	<div class="span affix" style="width:11.3%;" data-spy="affix">    
+	    <div class="tabbable tabs-left" style="width:100%;">
+	    	<div id="create-data-source" class="pagination-centered" {{bindAttr style=view.accountLeftNavColor}}>
+	    		
+	    		{{#linkTo "data_sources.new"}} 
+		    		<h4 style="opacity: 0.5; width: 11.3%; height:15px; margin-top:10px; background-color: #3a3a3a; color: #cecece; font-size:11pt; font-weight: normal; display: inline;">
+		    			New Data Source	 
+		    			&nbsp;   			
+						<img src="/assets/plus_icon.png" width="15" height="15" />					
+		    		</h4>
+	    		{{/linkTo}}    						
+		    	
+	    	</div>	 
+	    	<!--input type='text' id="data_source_search" class="input-small" style="width:110px;"/-->
+			<div class="input-prepend" style="width:100%;text-align:center;margin:0px;padding:3px 0;background-color:#323232;">
+				<span class="add-on" style="width:0px;"><i class="icon-search"></i></span>
+		        {{view Ember.TextField class="input-small" valueBinding="view.search_text" name='search_text' placeholder="search"}}        
+		    </div>
+		    <ul class="nav nav-tabs span" id="data_sources_nav" {{bindAttr style=view.accountLeftNavPillsColor}}> 
+				{{#each data_source in view.data_sources}}
+					<li>
+						{{#linkTo "data_source" data_source class='tab-link'}}
+							{{data_source.name}}
+						{{/linkTo}}						
+					</li>
+				{{/each}}
+		    </ul>   
+		    <div class="holder" style="margin-bottom:0px;background-color:#323232;"></div>   
+		    <div style="font-size:12px;color:#CCCCCC;padding:5px 0 15px 5px;background-color:#323232;">Product by <a target="_blank" href="http://www.cerebrateinc.com">Cerebrate Inc</a></div>	   
+	    </div>   
+  	</div>
+  	<div class="span tab-content" id="data_sources_content" style="width:88.7%; min-height:620px; margin-left:11.3%">
+        {{outlet}}
+  	</div>
+</div>

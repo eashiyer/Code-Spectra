@@ -1,0 +1,47 @@
+<div class="span" style="width:100%;">
+	<div class="row" style="background-color: #E3E3E3; padding-left:20px; padding-top: 10px">
+		<div class="span7" >
+			<h4> Data Filters for {{fullName}} </h4>
+		</div>
+		<div class="span pull-right right-contained">
+			{{#linkTo "user_mgmt.index"}} User Management {{/linkTo}} &nbsp; > &nbsp; {{fullName}}			
+		</div>
+	</div>
+	<div class='row' style="background-color: #E3E3E3; padding-left:20px; padding-top: 10px">
+		<div class='span'>
+			{{#if success_message}}
+				<span class='text-success'>{{success_message}}</span>
+			{{/if}}
+			{{#if error_message}}
+				<span class='text-error'>{{error_message}}</span>
+			{{/if}}
+		</div>
+	</div>
+
+	<div class="row" style="background-color: #E3E3E3; min-height: 620px; padding-left:20px; padding-top: 10px">
+		<div class="span right-contained">
+			<table class="table table-striped table-bordered" style="width:100%;">
+				<thead>
+					<tr>
+						<th>Data Sources</th>						
+						<th>Existing Filters</th>
+						<th>Add</th>
+					</tr>
+				</thead>
+				{{#each dataSource in dataSources}}
+					<tr>
+						<td>{{dataSource.name}}</td>
+						<td>
+							{{view view.userFiltersListView dataSourceBinding=dataSource}}								
+						</td>
+						<td>
+ 						    {{view view.createUserFilterView dataSourceBinding=dataSource userBinding=controller.content}}			
+ 						</td>
+					</tr>
+				{{/each}}
+			</table>
+		</div>
+	</div>
+
+</div>
+

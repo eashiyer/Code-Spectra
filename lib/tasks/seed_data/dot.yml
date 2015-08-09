@@ -1,0 +1,474 @@
+--- 
+configs: 
+  verticals:
+    - name: Project Budget
+      data: 
+      - group: 
+          fact: TRXAMT
+          factType: money
+          ignore: \"\"
+          filter: TRX
+        filename: public/data/dot_iaa.csv
+        dimensions: 
+        - IAA_NUMBER
+        - PROJNUM
+        - PARTY
+        - AGRNUM
+        - TRX
+        - TRXAMT
+        - AGRYR
+        - CODE
+        - CITY
+        - COUNTRY
+        - LAT
+        - LON
+        format: csv
+        name: DOT IAA Data
+        dashboards: 
+        - title: National Institute of Health
+          display_name: "Funds Report"
+          charts: 
+          - chart_type: ctable
+            count: 200
+            title: Funds Report
+            hierarchy: 
+            - IAA_NUMBER
+            - CAN
+            - PROJNUM
+            - AGRNUM
+            - TRX
+            - TRXAMT
+            drill_through: 
+              chart_type: modal
+              title: Transaction Summary
+            width: 600
+            expansion_depth: 1
+            dimensionName: IAA_NUMBER
+            columns: 
+            - key
+            - values
+            class: span
+            fact: TRXAMT
+            factType: money
+            groupName: IAA_NUMBER
+            height: 500
+        - title: National Institute of Health
+          display_name: "Top 20 (By $)"
+          charts: 
+          - chart_type: bar
+            count: 20
+            title: Top 20 Customers By Revenue
+            subtitle: (For 2012 & 2013)
+            margins: 
+              top: 20
+              right: 40
+              left: 80
+              bottom: 80
+            dimensionName: PROJNUM
+            groupName: PROJNUM
+            valueFormat: money
+            y_axis_label: Transaction Amount
+            rotate: true
+            class: span6
+            width: 500
+            height: 340
+          - chart_type: pie
+            count: 5
+            title: Total Revenue By Year
+            subtitle: (For 2012 & 2013)
+            dimensionName: AGRYR
+            groupName: AGRYR
+            valueFormat: money
+            class: span5
+            rotate: true
+            margins: 
+              top: 9
+              right: 10
+              left: 10
+              bottom: 1
+            radius: 100
+            width: 300
+            height: 280
+          - chart_type: bar
+            count: 20
+            title: Total Revenue by Department
+            subtitle: (For 2012 & 2013)
+            margins: 
+              top: 20
+              right: 40
+              left: 80
+              bottom: 80
+            dimensionName: PARTY
+            groupName: PARTY
+            fact: TRXAMT
+            valueFormat: money
+            y_axis_label: Transaction Amount
+            class: span6
+            rotate: true
+            width: 600
+            height: 400
+        - title: World Wide Revenue
+          display_name: "Geo Map"
+          charts: 
+          - chart_type: geoMap
+            class: span12
+            count: Infinity
+            rotate: true
+            dimensionName: PARTY
+            groupName: PARTY
+            fact: TRXAMT
+            factType: money
+          subtitle: Funds distribution by agency
+        - title: National Institute of Health
+          display_name: "Transactions"
+          charts: 
+          - chart_type: table
+            count: Infinity
+            title: Funds Report
+            class: span11
+            hierarchy: 
+            - IAA_NUMBER
+            - CAN
+            - PROJNUM
+            - AGRNUM
+            - TRX
+            - TRXAMT
+            dimensionName: IAA_NUMBER
+            fact: TRXAMT
+            factType: money
+            columns: 
+            - id: IAA_NUMBER
+              width: 150
+              cssClass: cell-selection
+              resizable: true
+              name: IAA NUMBER
+              field: IAA_NUMBER
+              sortable: true
+            - id: CAN
+              cssClass: cell-selection
+              resizable: true
+              name: CAN
+              field: CAN
+              sortable: true
+            - id: PROJNUM
+              width: 120
+              cssClass: cell-selection
+              resizable: true
+              name: PROJNUM
+              field: PROJNUM
+              sortable: true
+            - id: AGRNUM
+              width: 150
+              cssClass: cell-selection
+              resizable: true
+              name: AGRNUM
+              field: AGRNUM
+              sortable: true
+            - id: TRX
+              width: 150
+              cssClass: cell-selection
+              resizable: true
+              name: TRX
+              field: TRX
+              sortable: true
+            - id: TRXAMT
+              width: 150
+              cssClass: cell-selection
+              resizable: true
+              name: TRXAMT
+              field: TRXAMT
+              sortable: true
+            options: 
+              enableCellNavigation: true
+              forceFitColumns: false
+              editable: false
+              asyncEditorLoading: true
+              enableAddRow: true
+              topPanelHeight: 25
+            groupName: IAA_NUMBER
+      - filename: public/data/hierarchy.csv
+        dashboards: 
+        - title: "Organizational Hierarchy"
+          display_name: "Org Tree"
+          charts: 
+          - chart_type: ctree
+            count: Infinity
+            title: ""
+            hierarchy: 
+            - DEPARTMENT
+            - LEVEL1_MANAGER
+            - EMPLOYEE
+            width: 1280
+            dimensionName: EMPLOYEE
+            margins: 
+              top: 20
+              right: 120
+              left: 120
+              bottom: 20
+            class: span7
+            groupName: EMPLOYEE
+            height: 600
+        dimensions: 
+        - LEVEL2_MANAGER
+        - LEVEL1_MANAGER
+        - DEPARTMENT
+        - EMPLOYEE
+    - name: Banking
+      data: 
+      - filename: public/data/ssb/ssb_deposit_targets.csv
+        dashboards: 
+        - title: 
+          display_name: "Deposit"
+          charts: 
+          - chart_type: heatMap
+            title: "Forecast v/s Actual Deposit" 
+            subtitle: For Rolling Six Quarters
+            width: 450
+            height: 600
+            margins: 
+              top: 20
+              right: 40
+              left: 80
+              bottom: 80
+            class: span5
+            count: Infinity
+            gridSize: 60
+            dimensionName: QuarterYr
+            groupName: BranchName
+            xDim: QuarterYr
+            yDim: BranchName
+            fact: DepositTarget
+            dDim: DepositTarget
+            drill_through: 
+              chart_type: modal
+              title: Deposit Summary
+            colorScheme: red-green
+            external: 
+              file: data/ssb/ssb_deposit_actuals.csv
+              dimension: Date
+              fact: ActualDeposit
+              yDim: BranchName
+              dDim: ActualDeposit
+              groupName: Date
+              groupBy: Quarter
+        dimensions: 
+        - BranchName
+        - QuarterYr
+        - ActualDeposit
+        - DepositTarget
+      - filename: public/data/ssb/ssb_churn.csv
+        dashboards: 
+        - title: 
+          display_name: Accounts Churn
+          charts: 
+          - chart_type: combination
+            count: Infinity
+            title: Account Churn
+            subtitle: For Rolling Six Quarters
+            margins: 
+              top: 20
+              right: 40
+              left: 100
+              bottom: 80
+            dimensionName: Date
+            groupName: Date
+            groupBy: Quarter
+            fact1: AccountsOpened
+            fact2: AccountsClosed
+            valueFormat: number
+            y_axis_label_left: Accounts Opened
+            y_axis_label_right: Accounts Closed
+            class: span6
+            rotate: true
+            width: 600
+            height: 400
+            secondaryDimension: Branch
+          - chart_type: multiline
+            stacked: true
+            count: Infinity
+            title: Account Summary
+            subtitle: For Rolling Six Quarters
+            margins: 
+              top: 60
+              right: 80
+              left: 80
+              bottom: 80
+            dimensionName: Date
+            groupName: Date
+            groupBy: Quarter
+            fact1: AccountsOpened
+            fact2: AccountsClosed
+            y_axis_label: Accounts
+            class: span6
+            rotate: true
+            width: 600
+            height: 400
+            secondaryDimension: Branch
+        dimensions: 
+        - Branch
+        - Date
+        - AccountsOpened
+        - AccountsClosed
+      - filename: public/data/ssb/ssb_loans.csv
+        dashboards: 
+        - title: 
+          display_name: Loans
+          charts: 
+          - chart_type: bar
+            stacked: true
+            count: Infinity
+            title: Loan Summary
+            subtitle: For Rolling Six Quarters
+            margins: 
+              top: 60
+              right: 80
+              left: 80
+              bottom: 80
+            dimensionName: Date
+            groupName: Date
+            groupBy: Quarter
+            fact: Loan Amount
+            factUnit: Rs
+            depth: Loan Type
+            valueFormat: money
+            y_axis_label: Loan 
+            class: span6
+            rotate: true
+            width: 500
+            height: 500
+            secondaryDimension: Branch Name
+        dimensions: 
+        - Branch Name
+        - Date
+        - Loan Type
+        - Loan Amount
+        - Quarter
+      - filename: public/data/ssb/ssb_cust_sat.csv
+        dashboards: 
+        - title: 
+          display_name: "CSI"
+          charts: 
+          - chart_type: heatMap
+            title: "Customer Satisfaction Index"
+            subtitle: For Rolling Six Quarters
+            width: 450
+            height: 600
+            margins: 
+              top: 20
+              right: 40
+              left: 80
+              bottom: 80
+            class: span5
+            count: Infinity
+            gridSize: 60
+            dimensionName: QuarterYr
+            groupName: Branch Name
+            xDim: QuarterYr
+            yDim: Branch Name
+            dDim: Cust Sat
+            colorScheme: red-green
+        dimensions: 
+        - Branch Name
+        - QuarterYr
+        - Cust Sat
+    # - name: Order Management
+    #   data: 
+    #   - filename: public/data/netapp_orders.csv
+    #     dashboards: 
+    #     - title: "Orders Summary"
+    #       display_name: "Orders (Tabular)"
+    #       charts: 
+    #       - chart_type: ctable
+    #         count: Infinity
+    #         title: Orders Summary Report
+    #         hierarchy: 
+    #         - Country
+    #         - ORDER_BOOKED_YEAR
+    #         - TOTAL_AMOUNT
+    #         drill_through: 
+    #           chart_type: modal
+    #           title: Order Summary
+    #         width: 600
+    #         expansion_depth: 1
+    #         columns: 
+    #         - key
+    #         - values
+    #         class: span
+    #         fact: TOTAL_AMOUNT
+    #         factType: money
+    #         dimensionName: Country
+    #         groupName: Country
+    #         height: 500
+    #     - title: "Orders Summary"
+    #       display_name: "Orders (Bar)"
+    #       charts: 
+    #       - chart_type: bar
+    #         stacked: true
+    #         count: Infinity
+    #         title: Order Summary
+    #         subtitle: (For 2011 - 2013)
+    #         margins: 
+    #           top: 20
+    #           right: 40
+    #           left: 80
+    #           bottom: 80
+    #         dimensionName: Country
+    #         groupName: Country
+    #         fact: TOTAL_AMOUNT
+    #         depth: ORDER_BOOKED_YEAR
+    #         valueFormat: money
+    #         y_axis_label: Order Amount
+    #         class: span12
+    #         rotate: true
+    #         width: 600
+    #         height: 350
+    #       - chart_type: combination
+    #         count: Infinity
+    #         title: Revenue v/s Forecast
+    #         subtitle: (For 2012 & 2013)
+    #         margins: 
+    #           top: 10
+    #           right: 40
+    #           left: 80
+    #           bottom: 80
+    #         dimensionName: ORDER_BOOKED_DATE
+    #         groupName: ORDER_BOOKED_DATE
+    #         groupBy: Quarter
+    #         fact: TOTAL_AMOUNT
+    #         valueFormat: money
+    #         y_axis_label: Amount (in $)
+    #         class: span12
+    #         rotate: true
+    #         width: 600
+    #         height: 330
+    #         external: 
+    #           file: data/netapp_forecast.csv
+    #           dimension: QuarterFY
+    #           fact: Forecast 
+    #           range:
+    #           - 1
+    #           - 8
+    #     - title: "World Wide Orders"
+    #       display_name: "Geo Distribution"
+    #       charts: 
+    #       - chart_type: geoMap
+    #         class: span12
+    #         width: 900
+    #         height: 600            
+    #         count: Infinity
+    #         rotate: true
+    #         dimensionName: CITY
+    #         groupName: CITY
+    #         fact: TOTAL_AMOUNT
+    #         factType: money
+    #     group: 
+    #       fact: TOTAL_AMOUNT
+    #       factType: money
+    #       ignore: \"\"
+    #       filter: ""
+    #     dimensions: 
+    #     - CITY
+    #     - Country
+    #     - ORDER_BOOKED_YEAR
+    #     - TOTAL_AMOUNT
+    #     - ORDER_BOOKED_DATE

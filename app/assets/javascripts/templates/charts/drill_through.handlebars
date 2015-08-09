@@ -1,0 +1,77 @@
+<li class='filterDiv'>
+	<!-- <button {{bindAttr id='drillId'}} data-toggle="tooltip" {{bindAttr title='titleToggle'}} {{bindAttr class='classToggle'}}  {{ action 'toggleDrill' this }} style="padding: 0px; width: 100%; margin-top: -2px; border: 0px;">
+		<i class = "icon-tasks muted" ></i>
+	</button>
+	-->
+
+
+	<a rel="popover" class='drill_through_popover' data-toggle="tooltip" data-placement="right auto" {{bindAttr title='titleToggle'}} {{bindAttr id='drillId'}}  style="padding: 0px; width: 100%; margin-top: -2px; border: 0px;">
+		<i class = "icon-tasks muted" ></i>
+	</a>
+
+	<div class="popover fade bottom in hidden" style="display: block; height: auto; ">
+		<div class="arrow hidden" style="left:168px;"></div>
+		<h3 class="popover-title hidden">On click settings</h3>
+		<div class="popover-content hidden">
+			<form class='form form-inline' >				
+				<div class="row">
+
+					<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+						<div class="row">
+							<div class="span" style="width:40%;">
+								<span style="line-height: 30px;">Details Dashboard</span>
+							</div>
+							<div class="span" style="width:60%;">
+								{{view Ember.Select
+									contentBinding="view.dashboardList"
+									optionValuePath="content.id"
+									optionLabelPath="content.displayName"
+									valueBinding="view.detailsDashboard" 
+						        }}
+							</div>
+						</div>
+					</div>
+
+					<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+						<div class="row">
+							<input type="checkbox" {{bindAttr id='drillId'}} data-toggle="tooltip" {{bindAttr checked=view.modalEnabled}}>
+							<span style="vertical-align: sub; margin-left: 5px;">
+								Drill Through on Click
+							</span>
+						</div>
+					</div>
+
+					<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+						<div class="row" style="margin-bottom:3px;">
+							<span>Title</span>
+						</div>
+						<div class="row">
+							{{view Ember.TextField valueBinding="modalTitle"}}
+						</div>
+					</div>
+
+					<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+						<div class="row" style="margin-bottom:3px;">
+							<span>Select Fields for Drill Through</span>
+						</div>
+						<div class="row">
+							<div class="span" style="height: 80px; overflow: auto; width: 370px; border-width: 1px; border-style: solid; border-radius: 5px; border-color: #ccc;">
+								{{partial "fields"}}
+							</div>
+						</div>
+					</div>
+
+					<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+						<div class="row">
+							<div class="span2" style="margin-top:10px;">
+								<button type="submit" class='btn' >Save</button>
+								<button class="btn" aria-hidden="true" onclick="$(this).closest('li').find('.icon-tasks').click();return false;">Cancel</button>
+							</div>
+						</div>
+					</div>					
+				</div>
+			</form>
+		</div>
+	</div>
+
+</li> 

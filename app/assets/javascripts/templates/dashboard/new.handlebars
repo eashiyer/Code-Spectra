@@ -1,0 +1,180 @@
+<div class="row">
+	<div class="span">
+		<h3 style="font-family:Roboto-Medium; font-size:18px;">
+			Create a New Chart
+		</h3>
+		<hr class='compact' />
+	</div>
+</div>
+<div id='new-chart-notice' style="text-align: center">
+</div>
+<form class="form-horizontal">
+	<div class="row" style="width:91.5%;">
+		<div class='span4' style="margin-right:10px;">
+			<label>
+				Title
+			</label>
+			{{input type='text' class='input-xlarge' valueBinding="view.title"}}		
+		</div>
+		<div class='span4'>
+			<label>Sub Title</label>
+			{{input type='text' class='input-xlarge' valueBinding="view.subtitle"}}		
+		</div>
+		<div class='span pull-right'>
+			<label>
+				&nbsp;
+			</label>
+			<div class=" ">
+				<button type="submit" class="btn btn-primary">Create</button>
+				<button class="btn" onclick="javascript:history.go(-1); return false;">Cancel</button>
+			</div>
+		</div>
+	</div>
+	<div class="row" style="width:91.5%;">
+		<div class='span7'>
+			<label>Description</label>
+			{{view Cibi.TextArea rows=3 valueBinding="view.description" class="queryTextArea" }}	
+		</div>
+	</div>
+	<br/>
+	<div class="row">
+		{{view view.chartTypeView}}
+		
+		<div class='span3' style="margin-left: 20px;">
+			<h5 class='text-info'> 
+				Select Data Source
+			</h5>
+
+			{{#if data_sources}}
+				{{view Ember.Select
+			       contentBinding="data_sources"
+			       valueBinding=view.dataSourceId
+			       optionValuePath="content.id"
+			       optionLabelPath="content.name"
+		        }}
+	        
+	        	<ul class='unstyled' style="margin-top: 10px; max-height: 255px; overflow-y: auto; width:220px;" {{ action "attach_drag_n_drop_events" on="mouseEnter" target="view"}}>
+		        	{{#each field in view.fieldsArr}}
+		        		{{#if field}}
+			        		<li class="draggable-field" >
+			        			{{field}}
+			        		</li>
+			        	{{/if}}
+			        {{/each}}			        
+			    </ul>
+		    {{else}}
+		    	Loading..
+		    {{/if}}
+		</div>
+
+		<div class='span'>
+			<h5 class='text-info'> 
+				Define Chart Attributes
+			</h5>
+
+			{{#if view.toShowRowsAndCols}}
+				<div class="row">
+					<div class='span6'>
+						<label>
+							Rows
+							{{#if view.row_error_message}}
+								&nbsp;&nbsp;
+								<span class='text-error'>
+									{{view.row_error_message}}
+								</span>
+							{{/if}}
+						</label>
+						{{ view view.chartRowsView}}
+					</div>
+				</div>
+				<div class="row">
+					<div class='span6'>
+						<label>
+							Columns
+							{{#if view.column_error_message}}
+								&nbsp;&nbsp;
+								<span class='text-error'>
+									{{view.column_error_message}}
+								</span>
+							{{/if}}
+						</label>
+						{{ view view.chartColumnsView}}
+					</div>
+				</div>
+			{{else}}
+				<div class="row" >
+					<div class='span6'>
+						<label>
+							Dimensions
+							{{#if view.dimension_error_message}}
+								&nbsp;&nbsp;
+								<span class='text-error'>
+									{{view.dimension_error_message}}
+								</span>
+							{{/if}}
+						</label>
+						{{ view view.chartDimensionsView}}
+					</div>
+				</div>
+			{{/if}}			
+			<div class="row">
+				<div class='span6'>
+					<label>
+						Measures
+
+						{{#if view.measure_error_message}}
+							&nbsp;&nbsp;
+							<span class='text-error'>
+								{{view.measure_error_message}}
+							</span>
+						{{/if}}
+					</label>
+
+					{{ view view.chartMeasuresView}}
+
+				</div>
+			</div>
+			<div class="row" style="margin-bottom: 15px">
+				<div class='span'>
+					<label>
+						Count
+					</label>
+					{{input type='text'  valueBinding="view.count" class="input-small" style=""}}
+				</div>
+				<div class='span' style="padding-left:5%;">
+					<label> 
+						Isolated 
+					</label>					
+					&nbsp &nbsp {{view Ember.Checkbox id="isolated" class="input-small" checkedBinding="view.isolated"}} 				
+				</div>
+				<div class='span pull-right'>
+					<label>
+						&nbsp;
+					</label>
+					<button type="button" class="btn pull-right" value="generate_preview" {{action 'getPreviewData' 'generate_preview' target='view' }} >Generate Preview</button>
+				</div>
+			</div>
+		
+			<div class="row">
+				<div id="display_option" class="btn-group" data-toggle="buttons-radio" valueBinding="view.display_option">
+			      <button type="button" class="btn active" value="chart_data" {{action 'getPreviewData' 'chart_data' target='view'}}>
+				  	Chart Data
+				  </button>
+		  	      <button type="button" class="btn" value="visualization" {{action 'getPreviewData' 'visualization' target='view'}}>
+				  	Visualization
+				  </button>
+				</div>
+
+				<div class="row" >
+					<div class='span6' style="border:1px solid grey;height:300px;overflow-y:auto;overflow-x:hidden;">
+						<div id="new-preview-notice"></div>
+						<div id="chart-null">
+						<div class='alert alert-info'><b>Define chart attributes and click Generate Preview</b></div>
+						</div>
+					</div>
+				</div>			
+			</div>	
+		</div>
+	</div>
+
+</form>

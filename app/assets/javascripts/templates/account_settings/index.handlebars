@@ -1,0 +1,151 @@
+<div class="span" style="width:100%;">
+	<div class="row" style="background-color: #E3E3E3;min-height: 620px; padding-left:20px;">
+		<div class="span" style="width:100%;">
+			<div class="row">
+				<div class="span"><h3>{{Cibi.Auth.currentUser.account.name}}</h3></div>
+			</div>
+		</div>
+
+		{{#if isSaving}}
+			<div class="row">
+				<h4 class='alert alert-info'>
+					Saving...
+				</h4>
+			</div>
+		{{/if}}
+
+		<form class="form" >
+			<div class="span" style="width:100%;">
+				<div class="row" style="padding-right:20px;padding-top:25px;">
+					<div class="span6">
+						<h4 style="margin-bottom:10px;">Date & Time Settings</h4>
+						
+							<div class="row">
+								<div class="span2">
+									Fiscal year start date									
+								</div>
+								<div class="span">
+									{{view Ember.Select
+								       contentBinding="view.daysArr"
+								       valueBinding="fiscalYearStartDay" 
+								       class="input-small"
+								       prompt="date"
+							        }}
+								</div>	
+								<div class="span">
+									{{view Ember.Select
+								       contentBinding="view.monthsArr"	      
+								       optionValuePath="content.id"
+								       optionLabelPath="content.name"							       
+								       valueBinding="fiscalYearStartMonth"
+								       class="input-small"
+								       prompt="month"
+							        }}
+								</div>					
+							</div>
+							<div class="row">
+								<div class="span2">
+									Timezone
+								</div>
+								<div class="span2">
+									{{view Ember.Select
+								       contentBinding="view.timezonesArr"
+								       valueBinding='timezone'
+								       class="input-medium"
+							        }}
+								</div>						
+							</div>					
+					</div>
+
+					<div class="span6">
+						<h4 style="margin-bottom:10px;">Number Settings</h4>
+						
+							<div class="row">
+								<div class="span2">
+									Format
+								</div>
+								<div class="span">
+									{{view Ember.Select
+								       contentBinding="view.numberFormats"
+								       valueBinding="numberFormat" 
+								       class="input-small"
+							        }}
+								</div>						
+							</div>
+							<div class="row">
+								<div class="span2">
+									Currency
+								</div>
+								<div class="span2">
+									{{view Ember.Select
+								       contentBinding="view.currencies"
+								       valueBinding="currency"
+								       class="input-small"
+							        }}
+								</div>						
+							</div>					
+					</div>				
+				</div>
+			</div>		
+			<div class="span" style="width:100%;">
+				<div class="row" style="padding-right:20px;padding-top:25px;">
+					<h4 style="margin-bottom:10px;margin-top:25px;">Display Settings</h4>
+					<div class="span6">										
+						<div class="row resizable ui-box" {{bindAttr style=view.logoDims}} >
+							<img id="preview" {{bindAttr src=view.logoUrl style=view.logoDims}}/>
+						</div>
+						<div class="row" style="padding-right:20px;">
+							<!--div class="control-group">
+							  	<span class='fileinput-button'>
+									<span class='btn'> Change Company Logo </span>
+									<input id="logoUpload" type="file" name="files[]" multiple>					
+								</span>						
+							</div-->
+							<input id="logoUpload" type="file" name="files[]" multiple>	
+							<div>
+								<a {{action 'removeLogo' this target="view" }}>Use Default Logo</a>
+							</div>
+						</div>
+					</div>
+					<div class="span6">
+						<div class="row" style="padding-right:20px;">
+							<div class="span2">
+								Collapse top bar on scroll
+							</div>
+							<div class="span1">
+								{{view Ember.Checkbox checkedBinding="collapseNavbar" valueBinding="collapseNavbar" id='collapse'}}
+							</div>					
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="span6">
+					<h4 style="margin-bottom:10px;margin-top:25px;">Color Theme</h4>
+					<div class="row" style="padding-right:20px;">
+						<div class="span2">
+							Top bar color<br/>
+							{{input type="color" class='input-mini' placeholder="#ff6633" valueBinding="topBarColor"}}
+						</div>
+						<div class="span2">
+							Workspace<br/>
+							{{input type="color" class='input-mini' placeholder="#ff6633" valueBinding="workspaceColor"}}	
+						</div>	
+						<div class="span2">
+							Dashboards bar<br/>
+							{{input type="color" class='input-mini' placeholder="#ff6633" valueBinding="dashboardBarColor"}}
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class='row'>
+				<div class="span">
+					<input type="submit" value="Save" class="btn btn-primary"></input>
+				</div>
+			</div>
+		</form>	
+
+	</div>
+</div>

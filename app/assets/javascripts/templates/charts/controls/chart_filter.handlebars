@@ -1,0 +1,171 @@
+<div>
+	<div class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" data-target="#" style="color:#2980B9;font-family:'Roboto-Medium';text-decoration:none;">
+			<div style="text-align:right;margin-top:-32px; margin-right: -12px; height:15px;">
+				{{#if view.content.isGlobal}}
+					<span class="label label-info tags" style="font-size:9px;padding:2px 4px 0px 4px;vertical-align:top;" data-toggle="tooltip" title="This filter is visible to all the users of the dashboard">Shared</span>
+				{{else}}
+					<span class="label label-warning tags" style="font-size:9px;padding:2px 4px 0px 4px;vertical-align:top;" data-toggle="tooltip" title="This filter is visible only to you">Personal</span>
+				{{/if}}
+			</div>
+			{{ view.content.fieldName }} 	
+		</a>
+
+		<ul class="dropdown-menu" role="menu"  style="top:110%;left:-25px; font-size: 14px;">
+			<div class="row" style="min-width: 250px;max-width: 250px; overflow-y: auto">
+				<div class="span" style="margin: 10px;">
+					<div class="row">
+						<label style="color: #2980B9; font-family: 'Roboto-Medium'; font-size: 14px;" class='pull-left'>
+							{{view.content.fieldName}} &nbsp;&nbsp; {{view.content.operator}}
+							{{#if view.max_min}}
+								&nbsp;&nbsp; {{view.content.comparison}}
+							{{/if}}
+							{{#if view.not_null}}
+								&nbsp;&nbsp; {{view.content.comparison}}
+							{{/if}}
+						</label>						
+					</div>
+					{{#if view.range}}	
+						<div {{bindAttr id='view.rangeFilterPopoverId'}}>
+							<div style="display: block;">
+								<form class='form form-inline' >
+								    <div class='row'>
+								    	<div class='span'>
+											{{view Ember.Checkbox checkedBinding="view.specific_date" class="popup_range_selector radio-align" name="0"}}
+										</div>
+										<div class='span'>
+											<label>Choose specific dates</label>
+										</div>
+									</div>
+								    <div class='row'>
+								    	<div class='span'>
+											{{view Ember.Checkbox checkedBinding="view.reference_date_option" class="popup_range_selector radio-align" name="1"}}
+										</div>
+										<div class='span'>
+											<label>Specify periods w.r.t reference date</label>
+										</div>
+									</div>
+
+									{{#if view.specific_date}}
+										<div class="row" style="margin-top:5px;">
+											<div class="span">
+												<table>
+													<tr>
+														<td>
+															<span>Lower:</span>
+														</td>
+														<td>
+															<div id="datetimepicker" class="input-append" style="width: 140px;">
+											    			{{#if view.isDate}}
+																	{{view Cibi.NewDateField valueBinding="view.lower_range" classNames="startDate chart_filter_lower_range" style="margin-right:10px; width:100px;"}}	
+																{{else}}
+																	{{#if view.isTime}}
+																		{{view Cibi.NewTimeField valueBinding="view.lower_range"  classNames="startDate chart_filter_lower_range" style="margin-right:10px; width:100px;"}}	
+																	{{else}}
+																		{{#if view.isDateTime}}
+																			{{view Cibi.NewDateTimeField valueBinding="view.lower_range" classNames="startDate chart_filter_lower_range"}}			
+																		{{/if}}
+																	{{/if}}
+																{{/if}}
+											  			</div>
+											  		</td>
+													</tr>
+													<tr>
+														<td>
+															<span>Upper:</span>
+														</td>
+														<td>
+															<div id="datetimepicker" class="input-append" style="width: 140px;">
+														    	{{#if view.isDate}}
+																	{{view Cibi.NewDateField valueBinding="view.upper_range" classNames="startDate chart_filter_upper_range" style="margin-right:10px; width:100px;"}}	
+																{{else}}
+																	{{#if view.isTime}}
+																		{{view Cibi.NewTimeField valueBinding="view.upper_range" classNames="startDate chart_filter_upper_range" style="margin-right:10px; width:100px;"}}	
+																	{{else}}
+																		{{#if view.isDateTime}}
+																			{{view Cibi.NewDateTimeField valueBinding="view.upper_range" classNames="startDate chart_filter_upper_range"}}			
+																		{{/if}}
+																	{{/if}}
+																{{/if}}
+														  	</div>	
+														</td>
+													</tr>
+												</table>				  	
+											</div>
+										</div>
+									{{/if}}
+
+									{{#if view.reference_date_option}}
+										<div class='row' style="margin-top:5px;">
+											<b>Specify Period</b>
+										</div>
+									    <div class='row' style="margin-top:5px;">
+											<div class='span' style="width:45%;">
+												<input type="radio" name="reference_direction" value="previous" > previous
+											</div>
+											<div class='span' style="width:45%;">
+												<input type="radio" name="reference_direction" value="next" > next
+											</div>
+										</div>
+										<div class='row' style="margin-top:5px;">
+											<div class='span'>
+												{{view Cibi.NumberField valueBinding="view.reference_count" min="1" class="mini"}}
+											</div>
+											<div class='span' style="margin-left:10px;">
+												{{view Ember.Select
+								    			    contentBinding="view.period_unit"
+								    			    valueBinding="view.reference_unit"
+								       				class='input-medium'
+												}}
+											</div>
+										</div>
+
+										<div class='row' style="margin-top:5px;">
+											<b>Reference Date</b>
+										</div>
+										<div class='row' style="margin-top:5px;">
+											{{view Ember.Checkbox checkedBinding="view.reference_date_today" }}Today
+										  	<div id="datetimepicker" class="input-append" style="width: 140px;">
+											    {{#if view.isDate}}
+														{{view Cibi.NewDateField valueBinding="view.reference_date" classNames="startDate chart_filter_reference_date" style="margin-right:10px; width:100px;"}}	
+													{{else}}
+														{{#if view.isTime}}
+															{{view Cibi.NewTimeField valueBinding="view.reference_date" classNames="startDate chart_filter_reference_date" style="margin-right:10px; width:100px;"}}	
+														{{else}}
+															{{#if view.isDateTime}}
+																{{view Cibi.NewDateTimeField valueBinding="view.reference_date" classNames="startDate chart_filter_reference_date"}}			
+															{{/if}}
+														{{/if}}
+													{{/if}}
+										  	</div>	
+										</div>
+									{{/if}}		
+								</form>
+							</div>
+						</div>
+
+					{{else}}
+						<div class="row" {{bindAttr id='view.chartFilterValuesId'}}>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+			<hr class="compact">
+			<div class="row well-small" style="padding-top:0px;">
+				<div class="span">
+					<a {{action disableFilter target=view}}> {{ view.filterState }} </a> &nbsp; | &nbsp;
+				</div>
+				<div class="span">
+					<a {{action updateChartFilter target=view}}> Save </a>  &nbsp; | &nbsp;
+				</div>
+				<div class="span">
+					<a {{action deleteChartFilter target=view}}> Delete </a> 
+				</div>
+
+				<div class="span pull-right" style="color: blue">
+					<a {{action closeChartFilter target=view}}> Close </a> 
+				</div>
+			</div>
+		</ul>			
+	</div>
+</div>

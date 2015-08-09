@@ -1,0 +1,307 @@
+{{#if fileDataSource}}
+		<div id='data-source-new-content' class='pull-right'>
+			{{view view.newDataContentView}}
+		</div>
+{{else}}
+	<div id='data-source-details'>
+		{{!view Cibi.ConnectionDataSourceDetails}}
+	</div>
+{{/if}}	
+<div class='tabbable tabs-below'>
+	<div class="row" {{bindAttr style=view.accountTopNavColor}}>
+		<ul class="nav nav-tabs data-source-nav">
+		  	<li id = 'data_model' class='active'>
+		  		<a href="#model" data-toggle="tab">Data Model</a>
+		  	</li>
+		  	<li id ='data_content'>
+		  		<a href="#content" data-toggle="tab" {{action 'change_dataContents' target=view}}>Data Content</a>
+		  	</li>		  
+			{{#if queryDataSourceApi}}
+				<li>
+					<a href="#query" data-toggle="tab">Query</a>
+				</li>
+			{{/if}}
+			{{#if spreeApi}}
+				<li>
+					<a href="#store_details" data-toggle="tab">Store Details</a>
+				</li>				
+			{{/if}}
+		</ul>
+	</div>
+	<div class='tab-content' style="padding-left:15px; padding-right:15px;">			
+		<div class="row" style="padding-left: 10px;">
+			{{#if isSaving}}
+				<h4 class='text-info'> Saving... </h4>
+			{{/if}}
+			
+			{{#if isError}}
+				<h4 class='text-error'> Unable to Save!</h4>
+			{{/if}}
+			{{#if isAddingContent}}
+				<h4 class='text-info'> Uploading File <img src='/assets/file-loader.gif' /></h4>
+			{{/if}}
+			{{#if fileUploadSuccessful}}
+				<h4 class='text-success'> File Uploaded Successfully!</h4>
+			{{/if}}
+			{{#if fileUploadFailed}}
+				<h4 class='text-error'> File Upload Failed! {{errorMessage}}</h4>
+			{{/if}}
+			{{#if uploadError}}
+				<h4 class='text-error'>{{errorMessage}}</h4>
+			{{/if}}			
+			{{#if multipleSheets}}
+				{{view view.selectSheetView}}
+			{{/if}}
+		</div>
+		<div id="model" class='tab-pane active' style="padding-left: 10px;">
+			<div class='row' style="min-height:55px; line-height:50px;">
+				<div class='span'>
+					<img {{bindAttr src='imageUrl'}}  class='img-rounded' style="height: 28px; width: 28px;"/>
+				</div>
+				<div class='span' style='margin-left:5px;'>
+					<h3 style="line-height:50px;">
+						{{name}} 
+						{{#linkTo "data_sources.edit" this }}
+							<i class="icon-edit muted" style="padding-left:5px; cursor: pointer" >
+							</i>
+						{{/linkTo}}
+						<i class="icon-trash muted" style="padding-left:5px; cursor: pointer" {{action 'deleteDataSource' this target=view}} >
+				        </i>
+					</h3>						
+				</div>
+
+
+				<div {{bindAttr class="progressVisible :span4"}} style="margin:20px 0 0 10px;">
+					<div class="progress progress-success progress-striped active" >
+					  <div id="progressbar" class="bar" style="width: 0%;">0</div>
+					</div>
+				</div>
+
+
+				<div class="span pull-right" style="vertical-align:middle;width:146px;">
+					{{#if isUploadingFile}}
+						<span class='cancel-button' style='margin-right:10px;float:right;'>
+							<button class="btn btn-info" style="color:white;" {{action 'cancelUploadProcess' this}}>Cancel</button>
+						</span>
+					{{/if}}
+
+					{{#if fileUploadState}}
+						{{#unless dataTypesUpdated}}
+							{{#unless uploadedToRedis}}
+									{{view view.saveButtonView}}
+								{{/unless}}	
+						{{/unless}}
+					{{/if}}
+				</div>
+			</div>
+			{{#if dataContents}}
+				<div class='row'>
+	            	<div class="span muted">
+	            		<small>Last import:&nbsp; {{ time_ago updatedAt }}</small>
+	        		</div>
+	        	</div>
+    		{{/if}}
+    		{{#unless fileDataSource}}
+    			{{#if nextRun}}
+	    			<div class='row'>
+		        		<div class="span muted">
+		            		<small>Next run at:&nbsp; {{ time_ago nextRun }}</small>
+		        		</div>
+		        	</div>
+	        	{{/if}}
+	        	{{#if lastRunStatus}}
+	        		<div class="row">
+	        			<div class="span muted">
+	        				<small>Last Run Status:&nbsp; {{lastRunStatus}}</small>
+	        			</div>
+	        		</div>
+	        	{{/if}}
+    		{{/unless}}
+			<div class='row' {{bindAttr id='containerId'}}>
+				{{#if fieldsStr}}			
+					{{#if uploadedToRedis}}
+						<div class='span' style="width:100%;background-color:#fff;">
+							{{ view  view.dataModelingView}}
+						</div>	
+					{{else}}						
+						{{#if ruleApplied}}
+							<div class="row">
+								<div class="span pull-right">
+									{{#if dataTypesUpdated}}
+										{{view Ember.TextField class="input-medium" valueBinding="uniqueKeyField" disabled="disabled"}}
+									{{else}}
+										{{view Ember.Select
+											contentBinding="uniqueKeyFieldsArr"
+											id='file_ds_unique_key_id'
+											class="pull-left"
+									    }}
+									{{/if}}
+								</div>
+								<div class="span pull-right" style="width: 10%;margin-top: 3px;">
+									<h4>Unique Key</h4>
+								</div>								
+							</div>
+
+							<div class='span' style="width:100%;background-color:#fff;">
+								<table class=" span table" style="border-right-style:solid; border-right-width:1px; border-right-color:#D7D7D7;">
+									<tr>
+										<th>Field</th>
+										<!--th>Alias</th-->
+										<th>Data type</th>
+										{{#unless dataTypesUpdated}}
+											<th>Options</th>
+										{{/unless}}
+										<th>Default Value</th>
+										{{#unless dataTypesUpdated}}
+											<th style="text-align:center;">Ignore Field</th>
+										{{/unless}}
+									</tr>
+									{{#each field in fieldsHash}}
+										<tr class="fieldsList">
+											<td>
+												<label>										
+													{{ fieldname field }}					
+												</label>
+											</td>											
+											
+											{{#if dataTypesUpdated}}
+												<td>
+													<label>{{datatype field}}</label>
+												</td>
+										        
+								       			<td>
+								       			  	<label>{{default_value field}}</label>
+								       			</td>												
+											{{else}}
+												{{ view view.check_dataTypes contentBinding='field'}}       
+									        {{/if}}											
+										</tr>
+									{{/each}}
+								</table>
+							</div>
+						{{/if}}						
+					{{/if}}					
+				{{else}}
+					{{#if fileDataSource}}
+						<h4>No Contents Uploaded! Get Started by uploading a Content File</h4>			
+					{{/if}}		
+					{{#if spreeApi}}
+						<h4>Get started by entering your store's details in the "Store Details" tab</h4>			
+					{{/if}}
+				{{/if}}
+			</div>
+		</div>
+		{{#if queryDataSourceApi}}
+			<div  class="tab-pane" id="query" style="padding-left: 10px;">
+				<div class='row' style="min-height:55px; line-height:50px;">
+					<div class='span'>
+						<img {{bindAttr src='imageUrl'}}  class='img-rounded' style="height: 28px; width: 28px;"/>
+					</div>
+					<div class='span' style='margin-left:5px;'>
+						<h3 style="line-height:50px;">
+							{{name}} 
+							{{#linkTo "data_sources.edit" this }}
+								<i class="icon-edit muted" style="padding-left:5px; cursor: pointer" >
+								</i>
+							{{/linkTo}}
+							<i class="icon-trash muted" style="padding-left:5px; cursor: pointer" {{action 'deleteDataSource' this target=view}} >
+					        </i>
+						</h3>						
+					</div>
+				</div>
+				<div class="row">
+					{{view Cibi.QueryDataSourceView}}
+				</div>
+			</div>
+		{{/if}}
+		{{#if spreeApi}}
+		<div  class="tab-pane" id="store_details" style="padding-left: 10px;">
+			<div class='row' style="min-height:55px; line-height:50px;">
+				<div class='span'>
+					<img {{bindAttr src='imageUrl'}}  class='img-rounded' style="height: 28px; width: 28px;"/>
+				</div>
+				<div class='span' style='margin-left:5px;'>
+					<h3 style="line-height:50px;">
+						{{name}} 
+						{{#linkTo "data_sources.edit" this }}
+							<i class="icon-edit muted" style="padding-left:5px; cursor: pointer" >
+							</i>
+						{{/linkTo}}
+						<i class="icon-trash muted" style="padding-left:5px; cursor: pointer" {{action 'deleteDataSource' this target=view}} >
+				        </i>
+					</h3>						
+				</div>
+			</div>
+			<div class="row">
+				{{view Cibi.SpreeDataSourceView}}
+			</div>			
+		</div>
+		{{/if}}		
+		<div id='content' class="tab-pane"  style="padding-left: 10px;">
+			<div class='row' style="min-height:55px; line-height:50px;">
+				<div class='span'>
+					<img {{bindAttr src='imageUrl'}}  class='img-rounded' style="height: 28px; width: 28px;"/>
+				</div>
+				<div class='span' style='margin-left:5px;'>
+					<h3 style="line-height:50px;">
+						{{name}} 
+						{{#linkTo "data_sources.edit" this }}
+							<i class="icon-edit muted" style="padding-left:5px; cursor: pointer" >
+							</i>
+						{{/linkTo}}
+						<i class="icon-trash muted" style="padding-left:5px; cursor: pointer" {{action 'deleteDataSource' this target=view}} >
+				        </i>
+					</h3>						
+				</div>
+				{{#if queryDataSourceApi}}
+					<div class="span pull-right">
+						<a {{ action 'fetchData'}} class="btn btn-medium" style="padding: 4px 10px;">
+							<i class="icon-upload" style="margin-top:3px;"></i>
+							<span>Fetch</span>
+						</a>
+					</div>
+				{{/if}}
+			</div>
+			<div class="row">
+				<div class="span" style="width:100%;">
+				{{#if data_contents}}
+							<table id="paginate-contents" class="table table-bordered" width="1000px" >
+							  	<thead>
+								    <tr>
+									    <th width="20%">Filename</th>
+									    <th width="20%">Format</th>
+									    <th width="20%">Size</th>
+									    <th width="20%">Created</th>
+									    <th width="10%"><i class="icon-exclamation-sign icon-white"></i></th>
+									</tr>
+								</thead>
+								{{#each data_content in data_contents}}
+								  	<tbody>
+									    <tr>
+									      	<td width="20%">{{data_content.filename}}</td>
+											<td width="20%">{{data_content.format}}</td>
+											{{#if data_content.size}}
+											   	<td width="20%">{{data_content.size}}kb</td>
+											{{else}}
+											   	<td width="20%"> < 1kb</td>
+											{{/if }}
+											<td width="20%">{{data_content.created_at}}</td>
+											<td width="10%">
+											  	<a {{ action 'deleteDataContent' data_content }} class="btn btn-danger btn-small">	<i class="icon-trash icon-white"></i>
+											  	</a>
+											</td>
+										</tr>
+								</tbody>
+							{{/each}}
+						</table>
+				{{else}}
+					{{#if fileDataSource}}
+						<td><h4>No Contents Uploaded! Get Started by uploading a Content File</h4></td>
+					{{/if}}
+				{{/if}}
+					<div class="data-contents" style="margin-bottom:0px;background-color:#cccccc;"></div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>

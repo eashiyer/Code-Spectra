@@ -1,0 +1,65 @@
+	<div class="row" style="padding: 10px">
+		<div class="span">
+			Data Preview
+		</div>		
+	</div>
+	<div class="row" style="margin-bottom:30px;padding: 5px">
+		<div style="height:350px;overflow:auto;border:1px solid grey;">
+			<table id="table" class="table table-bordered" >
+				<thead>
+				<tr>
+					{{#each previewHeadersArr}}
+						<th>{{ this }}</th>
+					{{/each}}
+				</tr>
+				</thead>
+				<tbody style="">
+					{{#each dataPreviewHash}}
+							<tr>
+								{{#each this}}
+									<td style="height:auto;">
+										{{ this }}
+									</td>
+								{{/each}}
+							<tr>
+					{{/each}}
+				</tbody>
+			</table>	
+		</div>		
+		<div class='pull-right'>
+
+		</div>
+	</div>
+
+	<div class="row" style="padding: 10px; padding-bottom: 0px; padding-top: 0px;">
+		<div class="span2">
+			<label>Combine Columns</label>
+		</div>
+		<div class="span">
+			<input type="text" id="combine_columns" ondrop="$('#apply-pivot').prop('disabled', false);" style="width:500px;" placeholder="Drag and drop column headers here." ></input>
+		</div>
+	</div>
+	<div class="row" style="padding: 10px; padding-bottom: 0px; padding-top: 0px;">
+		<div class="span2">
+			<label>into New Keys Columns</label>
+		</div>
+		<div class="span">
+			<input type="text" id="new_keys_column"></input>
+		</div>
+	</div>
+	<div class="row" style="padding: 10px; padding-bottom: 0px; padding-top: 0px;">
+		<div class="span2">
+			<label>New Values Columns</label>
+		</div>
+		<div class="span2">
+			<input type="text" id="new_values_column"></input>
+		</div>
+		<div class="span2 pull-right" style="text-align:right;">
+			<button id="apply-pivot" class="btn btn-medium" disabled="disabled" {{action "applyPivot" this target=view}}>Apply Pivot</button>
+		</div>
+	</div>
+	<div class="row" style="padding: 10px; padding-bottom: 0px; padding-top: 0px;">
+		<div class="span6 pull-right" style="text-align:right;">
+			<button class="btn btn-medium" {{action "applyRule" this target=view}}>Looks Good! Define Data Types</button>
+		</div>
+	</div>

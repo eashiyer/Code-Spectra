@@ -1,0 +1,60 @@
+<br>
+<div class='row main-tab-title'>
+	<div class='span'>
+		<h4 class='text-info'>Authorized Users</h4>
+	</div>
+	<div class='span pull-right right-contained'>
+		{{#if can_destroy}}
+			<button class='btn' {{action 'addNew' target=view}} >
+				User
+				<i class='icon-plus-sign muted'></i>				
+			</button>
+		{{/if}}
+	</div>
+</div>
+
+<div class="row">
+	<div class="span">
+		{{render "permissions" }}
+	</div>
+
+	{{#if view.showCreateForm}}
+		<div class='span3 pull-right ui-box' style="margin-right: 40px">
+			<h4>Add new user</h4>
+			<hr class="compact">
+
+			{{#if users}}
+				<form class='form-vertical'>
+					<label>User</label>
+					{{view Ember.Select
+				       contentBinding="users"
+				       optionValuePath="content.id"
+				       optionLabelPath="content.fullName"
+				       valueBinding=view.user
+				       class="input-large"
+				       required=true
+					}}
+					<label>Role</label>
+					{{view Ember.Select
+				       contentBinding="view.roles"
+				       valueBinding=view.role
+				       class="input-large"
+				       required=true
+					}}
+					<hr>
+					<button class='btn' {{action 'save' target=view}}>
+						Save
+					</button>
+
+					<button class='btn' {{action 'cancel' target=view}}>
+						Cancel
+					</button>
+				</form>
+			{{else}}
+				<h4 class='alert alert-info'>
+					All users are already authorized for this workspace!
+				</h4>
+			{{/if}}
+		</div>
+	{{/if}}
+</div>

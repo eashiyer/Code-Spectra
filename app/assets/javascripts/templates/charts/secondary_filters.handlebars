@@ -1,0 +1,43 @@
+	<div class="btn-group">
+	<button class='btn btn-mini disabled'>{{secondaryDimension}}</button>
+	  <button class="btn btn-mini btn-info dropdown-toggle" data-toggle="dropdown" style="max-height:22px;">
+	    <span class=""><i class='icon-pencil muted'></i></span>
+	  </button>
+
+	  <ul class="dropdown-menu">
+	  	<li>
+			<a data-toggle="dropdown" {{action 'setSecondaryDim' null target=view}}>-- clear -- </a>
+		</li>
+		{{log secondaryDims}}
+		{{#each dim in secondaryDims}}
+			<li>
+				<a {{action 'setSecondaryDim' dim target=view}}>
+					{{dim}}
+				</a>
+			</li>
+		{{/each}}
+	  </ul>
+	</div>
+	{{#if secondaryFilterOn}}
+		<span>{{currentSecondaryFilter}}</span>
+	{{/if}}
+
+	<div class="btn-group">
+	  <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+	    <i class='icon-filter'></i>
+	  </button>
+
+	  <ul class="dropdown-menu">
+	  	<li>
+			<a {{action 'applySecondaryFilter' null}}>All</a>
+		</li>
+		{{log secondaryFilters}}
+		{{#each filter in secondaryFilters}}
+			<li>
+				<a {{action 'applySecondaryFilter' filter}}>
+					{{filter}}
+				</a>
+			</li>
+		{{/each}}
+	  </ul>
+	</div>

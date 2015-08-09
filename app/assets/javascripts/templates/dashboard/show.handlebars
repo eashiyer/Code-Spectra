@@ -1,0 +1,26 @@
+<div {{ bindAttr id='tabId' class=':tab-pane'}}>
+	<div class='row main-tab-title' >
+		<div class='span'>
+			<h3> {{title}} 	  </h3>
+			<h4> {{subtitle}} </h4>
+		</div>
+		<div class='span pull-right right-contained'>
+			<br>
+			{{#if isFiltered }}
+				<a {{ action "reset" this }}> Reset All </a> &nbsp; | &nbsp;
+			{{/if}}
+
+			{{#if can_edit}}
+				<a {{ action showNewChartForm }} >Add Chart <i class='icon-plus-sign muted icon-white'></i></a>
+				 &nbsp; | &nbsp;
+				{{#linkTo 'dashboard.users'}}
+					Authorized Users <i class='icon-user muted icon-white'></i>
+				{{/linkTo}}		
+			{{/if}}
+		</div>
+	</div>
+	<hr class='compact'>
+
+	{{ render "charts" charts }}
+</div>
+

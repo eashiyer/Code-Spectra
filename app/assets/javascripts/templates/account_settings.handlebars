@@ -1,0 +1,11 @@
+<div class="span" style="width:100%;">
+	<div class="row" id="account-settings" {{bindAttr style= view.accountTopNavColor}}>	
+		{{#linkTo "account_settings.index" Cibi.Auth.currentUser.account.accountSetting}}
+			<button class="btn btn-info flat-button" type="button" style="margin-top:7px; background-color:#4093cd;">Account Settings</button>
+		{{/linkTo}}
+		{{#linkTo "account_settings.account_templates"}}
+			<button class="btn btn-info flat-button" type="button" style="margin-top:7px; background-color:#4093cd;">Account Templates</button>		
+		{{/linkTo}}
+	</div>
+</div>
+{{outlet}}

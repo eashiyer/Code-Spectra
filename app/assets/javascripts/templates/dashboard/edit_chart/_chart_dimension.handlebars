@@ -1,0 +1,77 @@
+
+  <div class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="text-decoration:none;color:#000000;">
+        {{view.field_display}} 
+    </a>  &nbsp;<a {{action "removeFromList" this target="view"}}>&times;</a>
+
+
+	  <ul class="dropdown-menu" style="top:110%;left:-7px;">
+	    <div class="span4" style="height:auto;overflow-x:auto;">
+				<form class='form form-inline' style="margin-bottom:0px;padding:10px 10px;">
+					<div class="row" style="margin-bottom:8px;">
+						<div class="span2">
+							Field Display
+						</div>	
+						<div class="span2">
+							{{view Ember.TextField class='input-medium field_display' type='text'}}
+						</div>
+					</div>
+					<div class="row" style="margin-bottom:8px;">
+						<div class="span2">
+							Field Name
+						</div>	
+						<div class="span2">
+							{{view Cibi.DisabledTextField class='input-medium fieldName' type='text'}}
+						</div>
+					</div>
+					{{#if view.date_type}}
+					<div class="row">
+						<div class="span2">
+							Format As
+						</div>	
+						<div class="span2">
+							{{view Ember.Select
+						       contentBinding="view.supportedFormats"
+						       optionValuePath="content.key"
+						       optionLabelPath="content.key"
+						       valueBinding="view.field_display_format"
+						       required=true
+						       class="format_as dimension-format-as input-medium"
+							}}
+							<!-- <select class="format_as dimension-format-as input-medium">
+							  <option value=""></option>
+							  <option value="Month">Month</option>
+							  <option value="Quarter">Quarter</option>
+							  <option value="Year">Year</option>
+							</select> -->
+						</div>			
+					</div>
+					{{/if}}	
+
+					<div class="row">
+						<div class="span2">
+							Sort Order
+						</div>	
+						<select class="sort_order dimension-format-as input-medium">
+						  <option value=""></option>
+						  <option value="asc">Ascending</option>
+						  <option value="desc">Descending</option>
+						</select>
+					</div>
+					
+					{{#if view.error_msg}}
+						<div class="alert" style="margin-bottom: 0px; margin-top: 10px;">
+							<span>{{view.error_msg}}</span>
+						</div>
+					{{/if}}
+
+					<div class="row">
+						<div class="span2" style="margin-top:10px;text-align:right;">
+							<button class='btn' {{action 'save_changes' target="view"}}>Ok</button>
+							<button class="btn" aria-hidden="true" {{action 'cancel_changes' target="view"}}>Cancel</button>
+						</div>
+					</div>
+				</form>
+	    </div>
+	  </ul>
+  </div>

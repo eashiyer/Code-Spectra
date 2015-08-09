@@ -1,0 +1,58 @@
+	<button class="btn btn-info flat-button" type="button" style="background-color:#4093cd; padding-left: 8px; padding-right: 8px; padding-top: 3px; padding-bottom: 3px;" {{action "openPopover" target=view on="click"}}>
+		<a rel="popover" class="schedule_reports_popover" data-toggle="tooltip" data-placement="right" title="Schedule Report"  {{bindAttr id='view.scheduleReportsPopoverId'}} >
+			<img src='/assets/alarm-clock.png' style="height: 13px; padding-bottom: 5px;">
+			</img>
+			<span class="caret">
+			</span>
+		</a>
+	</button>
+
+	<div class="popover fade bottom in hidden" style="display: block; width: 250px;">
+		<div class="arrow hidden"></div>
+		<h3 class="popover-title hidden">Schedule Report</h3>
+		<div class="popover-content hidden">
+			<div class='row' style="min-height: 50px;">
+				<div class='span' style='margin-left: 10px;'>
+					<form class='form' style="margin-bottom:0px;">
+						<div class="row">							
+								{{view Ember.Checkbox checkedBinding="view.is_scheduled" name='is_global' value=false class="align-checkbox"}} Schedule Report
+								<br>							
+						</div>
+
+						<div class="row">
+							<div class='span1'>
+								Every 
+							</div>
+							<div class='span'>
+								{{view Ember.TextField class="input-mini" valueBinding="view.days" required="true" id="days" placeholder=""}} day(s)
+							</div>
+						</div>
+
+						<div class="row">
+							<div class='span1'>
+								at 
+							</div>
+							<div class='span'>
+							{{view Ember.Select
+						       contentBinding="view.time_arr"
+						       valueBinding="view.time"
+						       checkedBinding="view.time"
+						       id="time"		
+						       class="input-mini" 			       
+					        }}	hrs
+					    	</div>
+				        </div>	
+	
+						
+						<div class="row">
+							<input type="submit" value='Save' class='btn'/ >
+							<button class="btn" aria-hidden="true" {{action 'cancel' target="view"}}>Cancel</button>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+	</div>
+

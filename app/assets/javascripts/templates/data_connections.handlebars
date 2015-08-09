@@ -1,0 +1,61 @@
+<div class='row'>
+	<div class='span7 divided' >
+		<h3> Data Connections </h3>
+		<hr>
+		{{#if errors}}
+			<div class="alert alert-error">
+				<p>{{errors}}</p>
+			</div>
+		{{/if}}
+		{{#if controller.length}}
+			<table class='table table-bordered'>
+				<tr>
+					<th>Name</th>
+					<th>Host</th>
+					<th>Database</th>
+					<th>UserName</th>
+					<th>Port</th>
+					<th>Type</th>
+					<th><icon class='icon-signal icon-white'></i></th>
+					<th>&nbsp;</th>
+				</tr>	
+				{{#each data_connection in controller}}
+				<tr>
+					<td>{{data_connection.displayName}}</td>
+					<td>{{data_connection.host}}</td>
+					<td>{{data_connection.dbname}}</td>
+					<td>{{data_connection.username}}</td>
+					<td>{{data_connection.port}}</td>
+					<td>{{data_connection.connectionType}}</td>
+					<td style="display: inline-flex;"><a {{action 'testConnection' data_connection}}>Test Connection</a>
+					<div style="visibility: hidden;" {{bindAttr class="data_connection.connectionInfoClass"}}>
+						{{#if data_connection.connectionStatus}}
+							<span class='badge badge-success'>
+								<i class='icon-ok-circle icon-white'></i>
+							</span>
+						{{else}}							
+							<span class='badge badge-important'><i class='icon-ban-circle icon-white'></i></span>
+						{{/if}}
+					</div>
+					</td>
+					<td>
+						<button class='btn btn-mini' {{action 'deleteConnection' data_connection}}>
+							<i class="icon-trash muted"></i>
+						</button>
+					</td>
+				</tr>
+				{{/each}}
+			</table>
+
+		{{else}} 
+			<h4 class='alert alert-info'>
+				No Data Connections Defined
+			</h4>
+		{{/if}}
+	</div>
+	<div class='span4'>
+		<h3> New Connection </h3>
+		<hr>
+		{{ view Cibi.DataConnectionNewView }}
+	</div>
+</div>

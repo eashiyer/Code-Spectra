@@ -1,0 +1,77 @@
+<form class='form form-inline fixed' id='new-data-connection-form'>
+	<div class="input-prepend">	
+		<span class="add-on">Data Source Type</span>
+			{{view Ember.Select
+		       contentBinding="view.connectionTypes"
+		       valueBinding="view.connectionType" 
+	        }}
+	</div>
+	<br><br>
+
+	<div class="input-prepend">
+	  <span class="add-on">Display Name</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.displayName" required=true placeholder="Display Name"}}
+	</div>
+	<p class='muted'>Unique name to represent this connection</p>
+	
+	<div class="input-prepend">
+	  <span class="add-on">Host</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.host" required=true placeholder="Host eg. localhost"}}
+	</div>
+	<p class='muted'>Domain Name or IP Address of the DB Host</p>
+
+	<div class="input-prepend">
+	  <span class="add-on">DB Name</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.dbname" required=true placeholder="DB Name"}}
+	</div>
+	<p class='muted'>Data base name</p>
+
+	<div class="input-prepend">
+	  <span class="add-on">User Name</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.username" required=true placeholder="User Name"}}
+	</div>
+	<p class='muted'>User Name (Preferable read only user)</p>
+
+	<div class="input-prepend">
+	  <span class="add-on">Password</span>
+	  {{view Ember.TextField type='password' class="input-large" valueBinding="view.password" required=true placeholder="Password"}}
+	</div>
+	<p class='muted'>Password for the above username</p>
+
+	{{#if view.isOracle}}
+		<div class="input-prepend">
+		  <span class="add-on">Service Name</span>
+		  {{view Ember.TextField class="input-large" valueBinding="view.serviceName" required=true placeholder="Service Name"}}
+		</div>
+		<p class='muted'>Service name as specified in tnsnames.ora file</p>
+	{{/if}}
+
+	{{#if view.isMssql}}
+		<div class="input-prepend">
+		  <span class="add-on">Data Server Name</span>
+		  {{view Ember.TextField class="input-large" valueBinding="view.dataServerName" required=true placeholder="Data Server Name"}}
+		</div>
+		<p class='muted'>Data Server name as specified in freetds.conf file</p>
+	{{/if}}
+
+	<div class="input-prepend">
+	  <span class="add-on">Port</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.port" required=true placeholder="Port eg. 3306"}}
+	</div>
+	<p class='muted'>Port on which the service is running</p>
+
+	<div class="input-prepend">
+	  <span class="add-on">Socket</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.socket" required=true placeholder="Socket"}}
+	</div>
+	<p class='muted'>Socket on which the service is running</p>
+
+	<div class="input-prepend">
+	  <span class="add-on">Query Duration (ms)</span>
+	  {{view Ember.TextField class="input-large" valueBinding="view.queryDuration" required=true placeholder="Query Duration in ms eg. 5000"}}
+	</div>
+	<p class='muted'>Define Query Timeout. Default is 3s</p>
+
+
+	<input type='submit' class='btn btn-primary' value='Create' />
+</form>

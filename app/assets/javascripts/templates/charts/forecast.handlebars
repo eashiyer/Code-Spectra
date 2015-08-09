@@ -1,0 +1,173 @@
+<li class='filterDiv'>
+	<a rel="popover" class='forecast_popover' data-toggle="tooltip" data-placement="right auto" title="Enable/Disable Forecasting" {{bindAttr id='drillId'}}>
+		<i class="icon-eye-open muted forecast_icon"></i>
+	</a>
+
+	<div class="popover fade bottom in hidden" style="top: 64px; display:block; width:375px; height: 350px;">
+		<div class="arrow hidden" style="left:194px;"></div>
+		<h3 class="popover-title hidden">Forecast</h3>
+		<div class="popover-content hidden" style="height:290px; overflow:auto; padding:8px;">
+			<form class='form form-inline' >
+				{{#if isLineOrAreaChart}}				
+					<div class="row">
+						<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+							<div class="row">
+								<div class="span" style="width: 125px;">
+									<span>Enable Forecast</span>
+								</div>
+								<div class="span" style="margin-left: 5px;">
+									<input type="checkbox" {{bindAttr id='drillId'}} data-toggle="tooltip" {{bindAttr checked=view.forecastObject.enableForecast}}>
+								</div>							
+							</div>
+						</div>
+
+						<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+							<div class="row"> 
+								<div class="span" style="width: 125px;">
+									<span>Forecast Period</span>
+								</div>
+								<div class="span" style="margin-left: 5px;">
+									{{view Ember.TextField class="input-small" valueBinding="view.forecastObject.forecastPeriod"}}
+								</div>
+								<div class="span" style="font-size: 14px; margin-left: 10px; width: 100px;">
+									<span class="muted" style="vertical-align: -webkit-baseline-middle;"> {{view.forecastPeriodFormat}} </span>
+								</div>
+							</div>
+						</div>
+
+						<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+							<div class="row">
+								<div class="span" style="width: 125px;">
+									<span>Forecast Method</span>
+								</div>
+								<div class="span" style="margin-left: 5px;">
+									{{view Ember.Select
+								       contentBinding="view.supportedForecastMethods"
+								       valueBinding="view.forecastObject.forecastMethod"
+									}}
+								</div>
+							</div>
+						</div>
+
+						{{#if view.isETS}}
+							<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+								<div class="row" style="margin:5px;">
+									{{view Ember.Checkbox checkedBinding="view.forecastObject.specifyETSModel"}}
+									<span style="vertical-align:sub;">Specify Model</span>
+								</div>
+
+								{{#if view.forecastObject.specifyETSModel}}
+									<div class="row">
+										<div class="span">
+											<span>Error</span>
+											{{view Ember.Select
+										       contentBinding="view.errorOptions"
+										       valueBinding="view.forecastObject.errorValue"
+										       class="mini"
+											}}
+										</div>
+										<div class="span" style="margin-left:10px;">
+											<span>Trend</span>
+											{{view Ember.Select
+										       contentBinding="view.trendAndSeasonalityOptions"
+										       valueBinding="view.forecastObject.trendValue"
+										       class="mini"
+											}}
+										</div>
+										<div class="span" style="margin-left:10px;">
+											<span>Seasonality</span>
+											{{view Ember.Select
+										       contentBinding="view.trendAndSeasonalityOptions"
+										       valueBinding="view.forecastObject.seasonalityValue"
+										       class="mini"
+											}}
+										</div>
+									</div>
+								{{/if}}
+							</div>
+						{{/if}}
+
+						{{#if view.isHoltWinters}}
+							<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+								<div class="row" style="margin:5px;">
+									{{view Ember.Checkbox checkedBinding="view.forecastObject.specifyHoltWintersModel"}}
+									<span style="vertical-align:sub;">Specify Model</span>
+								</div>
+
+								{{#if view.forecastObject.specifyHoltWintersModel}}
+									<div class="row">
+										<div class="span">
+											<span>alpha</span>
+											{{view Ember.TextField
+										       valueBinding="view.forecastObject.alphaValue"
+										       class="input-mini"
+											}}
+										</div>
+										<div class="span" style="margin-left:10px;">
+											<span>beta</span>
+											{{view Ember.TextField
+										       valueBinding="view.forecastObject.betaValue"
+										       class="input-mini"
+											}}
+										</div>
+										<div class="span" style="margin-left:10px;">
+											<span>gamma</span>
+											{{view Ember.TextField
+										       valueBinding="view.forecastObject.gammaValue"
+										       class="input-mini"
+											}}
+										</div>
+									</div>
+								{{/if}}
+							</div>
+						{{/if}}
+
+						{{#if view.isArima}}
+							<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+								<div class="row" style="margin:5px;">
+									{{view Ember.Checkbox checkedBinding="view.forecastObject.specifyArimaModel"}}
+									<span style="vertical-align:sub;">Specify Model</span>
+								</div>
+
+								{{#if view.forecastObject.specifyArimaModel}}
+									<div class="row">
+										<div class="span">
+											<span>order</span>
+											{{view Ember.TextField
+										       valueBinding="view.forecastObject.orderValue"
+										       class="input-mini"
+											}}
+										</div>
+									</div>
+								{{/if}}
+							</div>
+						{{/if}}
+
+						<div class="span" style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+							{{view view.forecastDetailsView}}
+						</div>
+
+						<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+							<div class="row">
+								<div class="span2" style="margin-top:10px;">
+									<button type="submit" class='btn' >Save</button>
+									<button class="btn" aria-hidden="true" onclick="$(this).closest('li').find('.forecast_icon').click();return false;">Cancel</button>
+								</div>
+							</div>
+						</div>					
+					</div>
+				{{else}}
+					<p>Forecasting is only supported for "Simple line and area charts"</p>
+					<div class="span" style="width:100%; margin-top:10px; margin-bottom:10px;">
+							<div class="row">
+								<div class="span2" style="margin-top:10px;">
+									<button class="btn" aria-hidden="true" onclick="$(this).closest('li').find('.forecast_icon').click();return false;">Cancel</button>
+								</div>
+							</div>
+						</div>	
+				{{/if}}
+			</form>
+		</div>
+	</div>
+
+</li> 

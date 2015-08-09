@@ -1,0 +1,39 @@
+<div id='modal-new-account' class='modal hide fade'>
+	<div class="modal-header" style="background-color:323232;">
+	<h1>Create Account</h1>
+	</div>
+	<div class="modal-body">
+		<form class="form-horizontal">
+		  <div class="control-group">
+		    <label class="control-label" for="inputAccountName">Account Name</label>
+		    <div class="controls">
+		      <input type="text" id="inputAccountName" placeholder="Account Name">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputFirstName">First Name</label>
+		    <div class="controls">
+		      <input type="text" id="inputFirstName" placeholder="First Name">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputLastName">Last Name</label>
+		    <div class="controls">
+		      <input type="text" id="inputLastName" placeholder="Last Name">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <label class="control-label" for="inputEmail">Email (Username)</label>
+		    <div class="controls">
+		      <input type="text" id="inputEmail" placeholder="Email">
+		    </div>
+		  </div>
+		  <div class="control-group">
+		    <div class="form-actions">
+			  <button type="button" class="btn btn-primary" {{action 'createAccount' target="view"}}>Create</button>
+			  <button type="button" data-dismiss="modal" class="btn">Cancel</button>
+			</div>
+		  </div>
+		</form>
+	</div>
+</div>
