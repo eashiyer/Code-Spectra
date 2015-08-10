@@ -471,13 +471,14 @@ ul.dropdown-menu > li > a.active{
 }
 
 div.homepage-bg {
-    background-image: url('/assets/blurred_vision-wallpaper.jpg');
+    //background-image: url('/assets/blurred_vision-wallpaper.jpg');
     background-size: 100%;
     margin-right: -30px;
     margin-top: -12px;
     margin-bottom: -12px;
-    background-repeat: no-repeat;    
-    background-color: #323232;
+    //background-repeat: no-repeat;
+    //background-color: #e0e0e0;
+    //background-color: #323232;
 }
 
 .homepage-notice {
@@ -488,7 +489,7 @@ div.homepage-bg {
 }
 
 div.login-bg {
-    background: rgba(255, 255, 255, 0.3);
+    //background: rgba(255, 255, 255, 0.3);
     padding: 6px 25px;
     min-width: 225px;
     max-width: 225px;
@@ -1295,4 +1296,8 @@ table.table-small > tbody > tr > td{
 
 table.pvtTable tr td{
   color:#333;
+}
+
+.input-large {
+  width: 410px;
 }

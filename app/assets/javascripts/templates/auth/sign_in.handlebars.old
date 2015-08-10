@@ -1,4 +1,4 @@
-<!--{{ view view.freeTrialView }}-->
+{{ view view.freeTrialView }}
 <h3 style="color: #FFFFFF;font-family: 'Helvetica Neue LT Com', Helvetica, Arial, sans-serif;"> Sign In </h3>
 
 
@@ -23,6 +23,6 @@
 	<br>
 	{{input type='submit' class='btn btn-small btn-homepage' style="margin-top: 0px" value="Sign In"}}
 	
-	<!--<a {{action 'showFreeTrialForm' target="view"}} class='btn btn-small btn-homepage pull-right' style="margin-top: 0px">Try for free</a>-->
+	<a {{action 'showFreeTrialForm' target="view"}} class='btn btn-small btn-homepage pull-right' style="margin-top: 0px">Try for free</a>
 	
 </form>
