@@ -1,28 +1,42 @@
-<!--{{ view view.freeTrialView }}-->
-<h3 style="color: #FFFFFF;font-family: 'Helvetica Neue LT Com', Helvetica, Arial, sans-serif;"> Sign In </h3>
+{{ view view.freeTrialView }}
+<h3 style="color: black;font-family: 'Helvetica Neue LT Com', Helvetica, Arial, sans-serif;"> Login to Spectra </h3>
 
 
 <form class='form-vertical'>
 
-	{{input type='text' class='input-large' placeholder='Email' value=view.email}}
+  <div class="row">
+    {{input type='text' class='input-large' placeholder='Email' value=view.email}}
+  </div>
 
-	<br>
-	{{input type='password' class='input-large' placeholder='Password' value=view.password}}
-	{{#linkTo 'forgot_password'}}<span style="color:#005BAF;">Forgot password?</span>{{/linkTo}}
-{{#if Cibi.Auth.infoMessage}}
-	<h5 class='small-alert' style="width:174px;font-size:14px;">
-		{{Cibi.Auth.infoMessage}}
-	</h5>
-{{/if}}
+  <div class="row">
+    {{input type='password' class='input-large' placeholder='Password' value=view.password}}
+  </div>
 
-{{#if Cibi.Auth.errorMessage}}
-	<h5 class='text-error small-alert' style="width:174px;font-size:14px;">
-		{{Cibi.Auth.errorMessage}}
-	</h5>
-{{/if}}
-	<br>
-	{{input type='submit' class='btn btn-small btn-homepage' style="margin-top: 0px" value="Sign In"}}
-	
-	<!--<a {{action 'showFreeTrialForm' target="view"}} class='btn btn-small btn-homepage pull-right' style="margin-top: 0px">Try for free</a>-->
-	
+  <div class="row">
+    {{#if Cibi.Auth.infoMessage}}
+      <h5 class='small-alert' style="width:174px;font-size:14px;">
+        {{Cibi.Auth.infoMessage}}
+      </h5>
+    {{/if}}
+  </div>
+
+  <div class="row">
+    {{#if Cibi.Auth.errorMessage}}
+      <h5 class='text-error small-alert' style="width:174px;font-size:14px;">
+        {{Cibi.Auth.errorMessage}}
+      </h5>
+    {{/if}}
+  </div>
+
+  <div>
+    {{input type='submit' class='btn btn-small btn-homepage btn-sign-in' style="margin-top: 0px" value="Sign In"}}
+    <div>{{#linkTo 'forgot_password'}}<span class="forgot-password">Forgot password?</span>{{/linkTo}}</div>
+  </div>
+
+  <p>
+    <div class="dont-have-account">Don't have an account?</div>
+    <a {{action 'showFreeTrialForm' target="view"}} class='btn btn-small btn-homepage' style="margin-top: 0px">
+      Try for free</a>
+  </p>
+
 </form>

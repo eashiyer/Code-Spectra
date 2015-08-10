@@ -4,5 +4,23 @@
     width: 15%;
   }
 
-  //background-color: #e0e0e0;
+  .btn-sign-in {
+    background-color: #6080BA;
+    width: 200px;
+  }
+
+  .dont-have-account {
+    font-weight: bold;
+    font-size: 13px;
+    color: #7e7e7e;
+    font-family: Roboto-Regular;
+  }
+
+  .forgot-password {
+    font-weight: bold;
+    color: #005BAF;
+    text-decoration: underline;
+    font-size: 13px;
+    font-family: Roboto-Regular;
+  }
 }
