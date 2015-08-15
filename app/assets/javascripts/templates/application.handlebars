@@ -2,8 +2,9 @@
 	<div class="container" style="padding-left:0px; padding-right:0px; padding-bottom:0px;" >
 	  
 
-	  	<nav class="navbar navbar-fixed-top">
-			<div id='top-nav-bar' class="navbar navbar-fixed-top pagination-centered" {{bindAttr style=view.accountIconBarColor}}>
+    <!-- TODO: fix header and footer -->
+	  	<nav class="navbar">
+			<div id='top-nav-bar' class="navbar pagination-centered" {{bindAttr style=view.accountIconBarColor}}>
 			    <div class="row" style="height:58px; padding-left:1%; padding-right: 1%;">
 			      <a class="b line-height:58px;tn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 			  	   	<span class="icon-bar"></span>
@@ -32,7 +33,7 @@
 	  		{{partial account_expiry_model}}
 	  	{{/if}}
 	  	
-		<div class="row" style="margin-left:0px; padding-top:0px;">
+		<div class="row">
 	 		{{outlet}}
 	  	</div>
 

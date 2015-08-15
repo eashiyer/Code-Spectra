@@ -1,12 +1,12 @@
 .homepage-bg {
-  .space {
-    padding: 5% 8%;
-    width: 15%;
-  }
+  //.space {
+  //  padding: 5% 8%;
+  //  width: 40%;
+  //}
 
   .btn-sign-in {
-    background-color: #6080BA;
-    width: 200px;
+    background-color: #b0e44f;
+    //width: 200px;
   }
 
   .dont-have-account {
@@ -18,9 +18,20 @@
 
   .forgot-password {
     font-weight: bold;
-    color: #005BAF;
+    //color: #005BAF;
+    color: #b0e44f;
     text-decoration: underline;
     font-size: 13px;
     font-family: Roboto-Regular;
   }
+
+  .sigin-input {
+    border: 2px solid #475d87;
+  }
+
+  .login-title {
+    color: #FFF;
+    font-family: 'Helvetica Neue LT Com', Helvetica, Arial, sans-serif;
+  }
+
 }
