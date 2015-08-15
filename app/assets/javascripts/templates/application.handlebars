@@ -1,50 +1,51 @@
 {{#unless Cibi.Auth.signing_in}}
-	<div class="container" style="padding-left:0px; padding-right:0px; padding-bottom:0px;" >
-	  
+  <div class="container" style="padding-left:0px; padding-right:0px; padding-bottom:0px;">
+
 
     <!-- TODO: fix header and footer -->
-	  	<nav class="navbar">
-			<div id='top-nav-bar' class="navbar pagination-centered" {{bindAttr style=view.accountIconBarColor}}>
-			    <div class="row" style="height:58px; padding-left:1%; padding-right: 1%;">
-			      <a class="b line-height:58px;tn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			  	   	<span class="icon-bar"></span>
-			  	    <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			      </a>
-			    	<a class="brand" href="/" style="line-height:30px;">
-			    		{{#if Cibi.Auth.signedIn}}
-				       		<img {{bindAttr src=view.logoUrl style=view.logoDims}} class="brand-image">
-			       		{{else}}
-			       			<img src="/assets/logo_long.png" class="brand-image"> 
-			       		{{/if}}
-			       		<b id="top-account-name" class="hidden" >{{Cibi.Auth.globalSetting.account.name}}</b> 
-			      	</a>
+    <nav class="navbar navbar-fixed-top">
+      <div id='top-nav-bar'
+           class="navbar navbar-fixed-top pagination-centered navbar-content" {{bindAttr style=view.accountIconBarColor}}>
+        <div class="row" style="height:58px; padding-left:1%; padding-right: 1%;">
+          <a class="b line-height:58px;tn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/" style="line-height:30px;">
+            {{#if Cibi.Auth.signedIn}}
+              <img {{bindAttr src=view.logoUrl style=view.logoDims}} class="brand-image">
+            {{else}}
+              <img src="/assets/logo_long.png" class="brand-image">
+            {{/if}}
+            <b id="top-account-name" class="hidden">{{Cibi.Auth.globalSetting.account.name}}</b>
+          </a>
 
-			      <div class="nav-collapse collapse">     
-			  	    {{#if Cibi.Auth.signedIn}}
-			  	    	{{partial main_top_nav_bar}}
-			        {{/if}}
-			      </div>
-			    </div>
-			</div>
-		</nav>
+          <div class="nav-collapse collapse">
+            {{#if Cibi.Auth.signedIn}}
+              {{partial main_top_nav_bar}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </nav>
 
-	  	{{#if Cibi.Auth.accountExpired}}	  		
-	  		{{partial account_expiry_model}}
-	  	{{/if}}
-	  	
-		<div class="row">
-	 		{{outlet}}
-	  	</div>
+    {{#if Cibi.Auth.accountExpired}}
+      {{partial account_expiry_model}}
+    {{/if}}
 
-		
-	</div><!-- container -->  
+    <div class="row">
+      {{outlet}}
+    </div>
+
+
+  </div><!-- container -->
 {{else}}
-	<div style="width: 100%; opacity=0.6; z-index: 9999; text-align: center">
-		<h1> CIBI </h1>
-		<br /> <br />
-		<img src="/ajax-loader-big3.gif">
-		<br /><br />
-		Signing in...
-	</div>			
+  <div style="width: 100%; opacity=0.6; z-index: 9999; text-align: center">
+    <h1> CIBI </h1>
+    <br/> <br/>
+    <img src="/ajax-loader-big3.gif">
+    <br/><br/>
+    Signing in...
+  </div>
 {{/unless}}

@@ -1,9 +1,7 @@
 @import "bootstrap";
-
 //body {
 //  padding-top: 60px;
 //}
-
 @import "bootstrap-responsive";
 
 // Icons
@@ -1325,4 +1323,11 @@ table.pvtTable tr td {
 
 i.muted {
   opacity: 0.8;
+}
+
+.navbar-content {
+  background-color: #FFFFFF;
+  height: 58px;
+  line-height: 58px;
+  box-shadow: 0 3px 1px black;
 }
