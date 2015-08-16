@@ -4,7 +4,7 @@ gem 'rails', '3.2.13'
 
 #gem 'flamegraph'
 #gem 'rack-mini-profiler'
-gem 'thin'
+#gem 'thin'
 
 
 gem 'sqlite3'
@@ -33,7 +33,7 @@ gem 'd3js-plugins-rails'
 gem 'bootstrap-datetimepicker-rails'
 #gem 'bootstrap-multiselect-rails'
 gem 'jquery-multiselect-rails', :git => 'https://github.com/arojoal/jquery-multiselect-rails.git'
-gem 'sidekiq', '2.13.0'
+gem 'sidekiq'
 gem 'slim', '>= 1.1.0'
 # if you require 'sinatra' you get the DSL extended to Object
 gem 'sinatra', '>= 1.3.0', :require => nil
