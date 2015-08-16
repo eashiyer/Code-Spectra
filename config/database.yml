@@ -5,12 +5,12 @@
 #   gem 'sqlite3'
 development:
   adapter: mysql
-  database: cibi_development
-  username: phuonghqh
-  password: 1234567890
-  pool: 5
+  database: cibi_production
+  pool: 25
   timeout: 5000
-  socket: <%= ENV['MYSQL_SOCKET'] || '/var/mysqld/mysqld.sock' %>  
+  username: root         # <%= ENV['MYSQL_USERNAME'] %>
+  password: sk4scrappers # <%= ENV['MYSQL_PASSWORD'] %>
+  socket: <%= ENV['MYSQL_SOCKET'] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
