@@ -1,0 +1,28 @@
+{{ view view.freeTrialView }}
+<h3 style="color: #FFFFFF;font-family: 'Helvetica Neue LT Com', Helvetica, Arial, sans-serif;"> Sign In </h3>
+
+
+<form class='form-vertical'>
+
+	{{input type='text' class='input-large' placeholder='Email' value=view.email}}
+
+	<br>
+	{{input type='password' class='input-large' placeholder='Password' value=view.password}}
+	{{#linkTo 'forgot_password'}}<span style="color:#005BAF;">Forgot password?</span>{{/linkTo}}
+{{#if Cibi.Auth.infoMessage}}
+	<h5 class='small-alert' style="width:174px;font-size:14px;">
+		{{Cibi.Auth.infoMessage}}
+	</h5>
+{{/if}}
+
+{{#if Cibi.Auth.errorMessage}}
+	<h5 class='text-error small-alert' style="width:174px;font-size:14px;">
+		{{Cibi.Auth.errorMessage}}
+	</h5>
+{{/if}}
+	<br>
+	{{input type='submit' class='btn btn-small btn-homepage' style="margin-top: 0px" value="Sign In"}}
+	
+	<a {{action 'showFreeTrialForm' target="view"}} class='btn btn-small btn-homepage pull-right' style="margin-top: 0px">Try for free</a>
+	
+</form>
