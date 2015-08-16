@@ -1,0 +1,67 @@
+# Dashboards for Project Budget
+FundsReport:
+  id: 1
+  vertical_id: 1
+  display_rank: 1
+  title: Institute of Health
+  subtitle: 
+  display_name: Funds Report
+
+Top20:
+  id: 2
+  vertical_id: 1
+  display_rank: 2
+  title: Institute of Health
+  subtitle:
+  display_name: Top 20 (By $)
+
+GeoMap:
+  id: 3
+  vertical_id: 1
+  display_rank: 3
+  title: World Wide Revenue
+  subtitle:
+  display_name: World Revenue
+
+OrgTree:
+  id: 4
+  vertical_id: 1
+  display_rank: 5
+  title: Organization Hierarchy
+  subtitle:
+  display_name: Org Tree
+
+# Dashboards for Banking
+Deposit:
+  id: 5
+  vertical_id: 2
+  display_rank: 1
+  title: 
+  subtitle:
+  display_name: Deposits
+
+Churn:
+  id: 6
+  vertical_id: 2
+  display_rank: 2
+  title: 
+  subtitle:
+  display_name: Accounts Churn
+
+Loans:
+  id: 7
+  vertical_id: 2
+  display_rank: 3
+  title:
+  subtitle:
+  display_name: Loans
+
+CSI:
+  id: 8
+  vertical_id: 2
+  display_rank: 4
+  title:
+  subtitle:
+  display_name: CSI
+
+

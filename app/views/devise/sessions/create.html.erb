@@ -1,0 +1,28 @@
+<% unless params[:admin_user] %>
+	<% if @params["email"] && 
+		@params["password"] && 
+	%>
+		<input type="hidden" value=<%= @params["email"] %> id="email" />
+		<input type="hidden" value=<%= @params["password"]  %> id="password" />	
+	<% end %>
+
+
+
+	<script type="text/javascript">
+		var params = {};
+		params['email'] = $("#email").val();
+		params['password'] = $("#password").val();
+		params['remember'] = true;
+		Cibi.Auth.signIn({data: params});	
+		Cibi.Auth.on('signInSuccess', function() {
+			window.location = "/";
+		});
+
+		Cibi.Auth.set('signing_in', true);
+
+	</script>
+<% else %>
+	<script type="text/javascript">
+			window.location = "/admin";
+	</script>
+<% end %>

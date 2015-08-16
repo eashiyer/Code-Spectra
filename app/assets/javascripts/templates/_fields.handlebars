@@ -1,0 +1,8 @@
+<ul class="drill_through_fields" style="list-style: none; margin-left: 5px; height: 100%;">
+	{{#each field in view.fields}}
+		<li>
+			<input type="checkbox" {{bindAttr name='field'}}>
+			<label style="vertical-align: -webkit-baseline-middle;">{{field}}</label>
+		</li>
+	{{/each}}
+</ul>

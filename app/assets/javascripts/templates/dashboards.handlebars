@@ -1,0 +1,9 @@
+<ul class="dash-board-menu" id="dashboard_list">
+	{{#each dashboard in controller}}
+		<li>
+			{{#linkTo "dashboard.charts" dashboard class='tab-link'}}
+				{{ dashboard.displayName }}
+			{{/linkTo}}
+		</li>	
+	{{/each}}
+</ul>

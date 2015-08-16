@@ -1,0 +1,29 @@
+
+{{#unless view.single_value}}
+	<div class="row">
+		<div class="span2">
+			Select Values
+		</div>
+		<div class="span">
+			{{view Ember.TextField class="arrayField input-medium" valueBinding="configObject.selection_values" name='selection_values' placeholder="Comma Separated List of Fields"}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="span2">
+			Display Rank
+		</div>
+		<div class="span">      
+			{{view Ember.Checkbox valueBinding="configObject.display_rank" checkedBinding="configObject.display_rank" name='display_rank' value=true }}
+		</div>
+	</div>
+	<div class='row'>
+		<div class="span2">
+			Count
+		</div>
+		<div class="span">
+			{{input type='text'  valueBinding="view.count" class="input-small" name='Count' style=""}}
+		</div>
+	</div>
+{{/unless}}
+
+

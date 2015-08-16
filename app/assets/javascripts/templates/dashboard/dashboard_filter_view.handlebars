@@ -1,0 +1,101 @@
+	
+	<div style="text-align:right;margin-top:-10px; margin-right: -12px; height:15px;">
+		{{#if view.is_global}}
+			<span class="label label-info tags" style="font-size:9px;padding:2px 4px 0px 4px;vertical-align:top;" data-toggle="tooltip" title="This filter is visible to all the users of the dashboard">Shared</span>
+		{{else}}
+			<span class="label label-warning tags" style="font-size:9px;padding:2px 4px 0px 4px;vertical-align:top;" data-toggle="tooltip" title="This filter is visible only to you">Personal</span>
+		{{/if}}
+	</div>
+
+	<div class='span'>
+		<label style="color:#2980B9;font-family:'Roboto-Medium';margin-bottom:0px;" class='pull-left'>			
+			{{ view.field_display }} 
+			{{#if view.format_as}} 
+				({{ view.format_as }}) 
+			{{/if}}
+			{{#unless view.max_min}}
+				<span>{{ view.comparison }}</span>
+			{{else}}
+				<span>is</span>
+			{{/unless}}
+		</label>
+	</div>	
+	<br/>
+
+	{{#if view.max_min}}
+		<label style="color:#2980B9;font-family:'Roboto-Medium'" class='pull-left'>
+			{{view.comparison}}
+		</label>
+		<br/><br/>
+	{{else}}
+		{{#if view.is_null}}
+			<label style="color:#2980B9;font-family:'Roboto-Medium'" class='pull-left'>
+				NOT NULL
+			</label>
+			<br/><br/>
+		{{else}}
+			{{#if view.range}}	
+				<div class='row'>					
+					{{ view view.dashboardFilterPopup }}
+				</div>
+
+			{{ else }}
+				{{#if view.show_dropdown}}	
+					<div class='span' style="margin-top:0px;">							
+						<div {{bindAttr id='view.dashboardFilterValuesId'}}>
+						</div>
+					</div>
+					<br><br>
+				{{/if}}
+
+				{{#if view.show_text_box}}
+				<div class="row">
+			        <div class='span' style="margin-top:0px;">
+						<input class='input-small' style="padding:6px;" type='number' {{bindAttr value='view.filter_value'}}></input>
+					</div>				
+				</div>
+				{{/if}}
+			{{/if}}
+
+		{{/if}}
+	{{/if}}
+
+<div class='row'>
+	{{#if view.check_global_and_admin }}
+		<div class='span'>
+			<a {{action disableFilter target=view}}>
+				{{ view.filterState }} &nbsp;
+			</a>
+		</div>
+	
+		{{#unless view.content.disabled}}
+			{{#unless view.is_null}}
+				<div class='span'>
+					&nbsp; <a {{action updateDashboardFilter target=view}}>Save &nbsp;
+					</a>			
+				</div>
+			{{/unless}}
+		{{/unless}}
+
+		<div class='span'>
+			&nbsp;
+			<a style="border-right:none;" {{action deleteDashboardFilter target=view}}>Delete
+				<!--i class='icon-remove-sign' >
+				</i-->
+			</a>
+		</div>
+		<div class='span'>
+			{{#if view.content.isSaving}}
+				<div class='span'>
+					<img src="/assets/ajax-loader.gif"/>
+				</div>
+			{{/if}}
+
+			{{#if view.saveComplete}}
+				<i class="icon-ok"> </i>
+			{{/if}}
+		</div>	
+	{{else}}
+		<div class='span'>&nbsp;</div>
+	{{/if}}
+</div>

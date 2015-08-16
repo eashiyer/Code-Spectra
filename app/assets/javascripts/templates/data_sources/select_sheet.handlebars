@@ -1,0 +1,37 @@
+
+<div class="modal-backdrop fade in"></div>
+<div id='modal-select-sheet' class='modal small-modal'>
+	<div class="modal-header">
+	<div style= "float:right;width:100px">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" {{action 'cancelUploadProcess' model }}>
+			×
+		</button>
+	</div>
+		<h3 id="myModalLabel"> Select a Worksheet </h3>
+
+	</div>
+	<div id='new-chart-notice' style="text-align: center"></div>
+	<div class="modal-body">
+	
+	<form id = "new_chart">
+		<fieldset>
+		<div class="row">
+			{{#each sheet in view.sheetsArr }}
+					<div class='span' style="padding: 5px;">
+						<input type="radio" style="margin-top: -3px;" name="sheet_name" {{bindAttr value=sheet}}> {{sheet}}
+					</div>
+			{{/each}}
+		</div>		
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary" > Upload </button>
+			<button class="btn" {{action 'cancelUploadProcess' model }}  >
+				Cancel
+			</button>
+			
+		</div>
+
+		</fieldset>
+	</form>
+	
+	</div>
+</div>

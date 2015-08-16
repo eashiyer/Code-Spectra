@@ -1,0 +1,50 @@
+<div>
+	<div class="dropdown">
+		<a class="dropdown-toggle" data-toggle="dropdown" data-target="#" style="color:#2980B9;font-family:'Roboto-Medium';text-decoration:none;">
+			{{ view.content.displayName }} 	
+		</a>
+
+		<ul class="dropdown-menu" role="menu"  style="top:110%;left:-25px; font-size: 14px;">
+			<div class="row" style="min-width: 250px;max-width: 250px; overflow-y: auto">
+				<div class="span" style="margin: 10px;">
+					<div class="row">
+						<h5> {{view.content.displayName}} </h5>
+						<hr class='compact' />						
+					</div>
+
+					{{#if view.content.hide}}
+						<span class='small muted'>This data source is hidden for the current user!</span>
+					{{else}}
+						<div class="row">
+							<label style="color: #2980B9; font-family: 'Roboto-Medium'; font-size: 14px;" class='pull-left'>
+								{{ view.content.fieldName }}
+								<br />
+								{{ view.content.operator }}
+							</label>		
+
+						</div>
+
+						<div class="row" {{bindAttr id='view.userFilterValuesId'}}>
+						</div>
+					{{/if}}
+				</div>
+			</div>
+			<hr class="compact">
+			<div class="row well-small">
+				<div class="span">
+					<a {{action disableFilter target=view}}> {{ view.filterState }} </a> &nbsp; | &nbsp;
+				</div>
+				<div class="span">
+					<a {{action updateFilter target=view}}> Save </a>  &nbsp; | &nbsp;
+				</div>
+				<div class="span">
+					<a {{action deleteFilter target=view}}> Delete </a> 
+				</div>
+
+				<div class="span pull-right" style="color: blue">
+					<a {{action closeFilter target=view}}> Close </a> 
+				</div>
+			</div>
+		</ul>			
+	</div>
+</div>

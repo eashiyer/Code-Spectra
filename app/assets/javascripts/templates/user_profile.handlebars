@@ -1,0 +1,98 @@
+
+<div class="span" style="width:100%;">
+	<div class="row" {{bindAttr style = view.accountTopNavColor}}>	
+		<button class="btn btn-info flat-button" type="button" style="margin-top:7px; background-color:#4093cd;">Profile</button>
+	</div>
+</div>
+<div class="span" style="width:100%;">
+	<div class="row" style="background-color: #E3E3E3;min-height: 620px; padding-left:20px; padding-top: 20px;">
+		<div class="span5">
+		{{#if Cibi.Auth.currentUser.isLoaded}}
+			<form class="form-horizontal pull-right">
+			  	<div class="control-group">
+				    <label class="control-label">Name</label>
+				    <div class="controls">
+				      {{input type="text" disabled="disabled" value=view.userName}}  
+				    </div>
+			  	</div>
+			  	<div class="control-group">
+				    <label class="control-label">Email</label>
+				    <div class="controls">
+				      {{input type="text" disabled="disabled" value=view.userEmail}}
+				    </div>
+			  	</div>
+			  	{{#if Cibi.Auth.currentUser.isAdmin}}
+			  		<div class="control-group">
+				    	<label class="control-label">Account Name</label>
+				    	<div class="controls">
+				      	{{view Ember.TextField class="updated_accountname" valueBinding = view.userAccountName}}
+				    	</div>
+			  		</div>
+			  	{{else}}
+			  		<div class="control-group">
+				    	<label class="control-label">Account Name</label>
+				    	<div class="controls">
+				      	{{view Ember.TextField disabled="disabled" valueBinding = view.userAccountName}}
+				    	</div>
+			  		</div>
+			  	{{/if}}
+			  	{{#if view.userHasApiAccess}}
+				  	<div class="control-group" style="margin-left: 90px;"> 
+						<h4>API Access Token</h4>
+						<hr style="border-bottom-color: darkgray; border-bottom-width: 3px; margin-bottom: 0px;">
+					</div>			  			    
+				    <div class="control-group" style="margin-left: 90px;">			    
+				    	{{input type="text" disabled="disabled" class="input-xlarge" value=view.userApiAccessToken}}	
+				    </div>
+				{{/if}}
+				{{#if view.information}}
+			        <div class="alert alert-info" style="padding: 5px; text-align: center; margin-top: 5px; margin-bottom: 5px; max-width:205px;">
+			          <label style="font-weight: bold; font-size: 15px; margin: 0px; padding: 0px;">
+			            {{view.information}}
+			          </label>
+			        </div>
+			    {{/if}}
+				{{#if Cibi.Auth.currentUser.isAdmin}}
+					<div class="control-group">    
+			    		<input type="submit" value="Save" class="btn btn-primary" style="margin-left:65px;">
+			    	</div>
+				{{/if}}
+			</form>
+		{{/if}}
+		</div>
+		<div class="span5">
+			<form class="form-horizontal pull-right">
+				<div class="control-group"> 
+					<h4>Change Password</h4>
+					<hr style="border-bottom-color: darkgray; border-bottom-width: 3px; margin-bottom: 0px;">
+				</div>			  			    
+			    <div class="control-group">			    
+			    	<input type="password" placeholder="Password" id="inputPassword">	
+			    </div>
+			    <div class="control-group">
+			    	<input type="password" placeholder="Confirm Password" id="inputConfirmPassword">
+			    </div>
+			    
+			    	{{#if view.errors}}
+				        <div class="alert alert-error" style="padding: 5px; text-align: center; margin-top: 5px; margin-bottom: 5px; max-width:205px;">
+				          <label style="font-weight: bold; font-size: 15px; margin: 0px; padding: 0px;">
+				            {{view.errors}}
+				          </label>
+				        </div>
+				    {{/if}}
+				    {{#if view.info}}
+				        <div class="alert alert-info" style="padding: 5px; text-align: center; margin-top: 5px; margin-bottom: 5px; max-width:205px;">
+				          <label style="font-weight: bold; font-size: 15px; margin: 0px; padding: 0px;">
+				            {{view.info}}
+				          </label>
+				        </div>
+				    {{/if}}  
+			    
+			    <div class="control-group">    
+			    	<button type="submit" class="btn">Change</button>
+			    </div>			 
+			</form>
+
+		</div>	
+	</div>
+</div>

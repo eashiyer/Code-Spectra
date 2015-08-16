@@ -1,0 +1,242 @@
+<li>
+	<a rel="popover" class="margin_popover"  data-toggle="tooltip" data-placement="right auto" title="Edit Chart Display"  {{bindAttr id='popoverId'}} >
+		<i class='icon-fullscreen muted'></i>
+	</a>
+
+	<div class="popover fade bottom in hidden" style="top: 64px; display:block; width:360px; height: 350px;">
+		<div class="arrow hidden" style="left:12px;"></div>
+		<h3 class="popover-title hidden">Chart Display Settings</h3>
+		<div class="popover-content hidden" style="height:290px; overflow:auto;">
+			<form class='form form-inline' style="margin-bottom:0px;">
+				<div class="control-group">
+				   <h4>Chart Margins (px)</h4>				   
+				</div>
+
+				<table>
+					<tr>
+						<td style="width: 50px;">Top</td>
+						<td>
+							{{ input type="text" class="input-mini margin-top" valueBinding="marginTop" placeholder="20" }}
+						</td>
+						<td style="padding-left:20px; width:50px;">Bottom</td>
+						<td>
+							{{ input type="text" class="input-mini margin-top" valueBinding="marginBottom" placeholder="20" }}
+						</td>
+					</tr>
+					<tr>
+						<td style="width: 50px;">Left</td>
+						<td>{{ input type="text" class="input-mini margin-top" valueBinding="marginLeft" placeholder="20" }}</td>
+						<td style="padding-left: 20px; width:50px;">Right</td>
+						<td>{{ input type="text" class="input-mini margin-top" valueBinding="marginRight" placeholder="20" }}</td>
+					</tr>
+				</table>
+
+				<br>
+				<div class="control-group">
+					<div class="row">
+				   		<div class="span" style="margin-right: 3px;">
+				   			<h4>Chart Size</h4>
+				   		</div>
+				   		<div class="span" style="margin-left: 3px;">
+				   			<h6>(Number of grid blocks)</h6>
+				   		</div>
+			   		</div>
+			   		<div class="row">
+			   			<table>
+			   				<tr>
+			   					<td style="width: 50px;">	
+			   						<span>Width</span>
+			   					</td>
+			   					<td style="padding-right: 20px;">
+			   						{{view Cibi.NumberField valueBinding="columns" min="1" maxBinding="view.columnLimit" class="input-mini"}}
+			   					</td>
+					   			<td style="width: 50px;">
+					   				<span>Height</span>
+					   			</td>
+					   			<td>
+					   				{{view Cibi.NumberField valueBinding="rows" min="1" maxBinding="view.rowLimit" class="input-mini"}}
+					   			</td>
+					   		</tr>
+					   	</table>
+			   		</div>
+				</div>
+
+				<!--
+					<div class="control-group">
+					    <div class='row'>
+							<div class='span' style="width:45%; margin-left:5%;">
+								<input type="radio" name="orientation_type" value="1" {{bindAttr id='orientationRadioId'}}> Default
+							</div>
+							<div class='span' style="width:45%;">
+								<input type="radio" name="orientation_type" value="2" {{bindAttr id='orientationRadioId'}}> Full width
+							</div>
+						</div>
+						<div class='row'>
+							<div class='span' style="width:45%; margin-left:5%;">
+								<input type="radio" name="orientation_type" value="3" {{bindAttr id='orientationRadioId'}}> Full height
+							</div>
+							<div class='span' style="width:45%;">
+								<input type="radio" name="orientation_type" value="4" {{bindAttr id='orientationRadioId'}}> Full screen
+							</div>
+						</div>
+					</div>
+				-->
+
+				{{#if view.hasAxes}}
+					<div class="control-group">
+					   <h4>Format Axis</h4>				   
+					</div>
+					{{#if view.hasSingleYAxis}}
+						<div class="control-group">
+						   <h5>Vertical Axis</h5>				   
+						</div>
+						<div class="control-group">
+							<table style="margin-bottom:10px;">
+								<tr>
+									<td style="width: 50px;">Label</td>
+									<td>
+										{{ input type="text" class="input-medium margin-top" placeholder="Y Axis Label" valueBinding="axesConfigsObj.yAxisLabel" name="yAxisLabel"}}
+									</td>							
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<td style="width: 50px;">Min</td>
+									<td>
+										{{ input type="text" class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.yDomainMinValue" name="yDomainMinValue" disabled=isYAxisScaleOrdinal}}
+									</td>
+									<td style="padding-left: 20px; width:50px;">Max</td>
+									<td>
+										{{ input type="text" class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.yDomainMaxValue" name="yDomainMaxValue" disabled=isYAxisScaleOrdinal}}
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50px;">Display Units</td>
+									<td style="width:105px;">
+										{{view Ember.Select class="fullWidth" contentBinding="view.displayUnits" valueBinding="axesConfigsObj.yAxisDisplayUnit" name="yAxisDisplayUnit"}}
+			        				</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					{{else}}
+						<div class="control-group">
+						   <h5>Vertical Axis (Left)</h5>				   
+						</div>
+						<div class="control-group">
+							<table style="margin-bottom:10px;">
+								<tr>
+									<td style="width: 50px;">Label</td>
+									<td>
+										{{ input type="text" class="input-medium margin-top" placeholder="Y Axis Label" valueBinding="axesConfigsObj.yAxisLabel" name="yAxisLabel"}}
+									</td>							
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<td style="width: 50px;">Min</td>
+									<td>
+										{{ input type="text" class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.yDomainMinValue" name="yDomainMinValue" disabled=isYAxisScaleOrdinal}}
+									</td>
+									<td style="padding-left: 20px; width:50px;">Max</td>
+									<td>
+										{{ input type="text" class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.yDomainMaxValue" name="yDomainMaxValue" disabled=isYAxisScaleOrdinal}}
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50px;">Display Units</td>
+									<td style="width:105px;">
+										{{view Ember.Select class="fullWidth" contentBinding="view.displayUnits" valueBinding="axesConfigsObj.yAxisDisplayUnit" name="yAxisDisplayUnit"}}
+			        				</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+						<div class="control-group">
+						   <h5>Vertical Axis (Right)</h5>				   
+						</div>
+						<div class="control-group">
+							<table style="margin-bottom:10px;">
+								<tr>
+									<td style="width: 50px;">Label</td>
+									<td>
+										{{ input type="text" class="input-medium margin-top" placeholder="Y Axis Label" valueBinding="axesConfigsObj.rightYAxisLabel" name="rightYAxisLabel"}}
+									</td>							
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<td style="width: 50px;">Min</td>
+									<td>
+										{{ input type="text" class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.rightYDomainMinValue" name="rightYDomainMinValue" disabled=isYAxisScaleOrdinal}}
+									</td>
+									<td style="padding-left: 20px; width:50px;">Max</td>
+									<td>
+										{{ input type="text" class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.rightYDomainMaxValue" name="rightYDomainMaxValue" disabled=isYAxisScaleOrdinal}}
+									</td>
+								</tr>
+								<tr>
+									<td style="width: 50px;">Display Units</td>
+									<td style="width:105px;">
+										{{view Ember.Select class="fullWidth" contentBinding="view.displayUnits" valueBinding="axesConfigsObj.rightYAxisDisplayUnit" name="rightYAxisDisplayUnit"}}
+			        				</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</table>
+						</div>
+					{{/if}}
+					<div class="control-group">
+					   <h5>Horizontal Axis</h5>
+					</div>
+					<div class="control-group">
+						<table style="margin-bottom:10px;">
+							<tr>
+								<td style="width: 50px;">Label</td>
+								<td>{{ input type="text" class="input-medium margin-top" placeholder="X Axis Label" valueBinding="axesConfigsObj.xAxisLabel" name="xAxisLabel"}}</td>							
+							</tr>
+						</table>
+						<table>
+							<tr>
+								<td style="width: 50px;">Min</td>
+								<td>
+									<div name="xDomainMinValue" {{bindAttr data-original-title=disabledTooltip}}>
+										{{ input type="text" disabled=isXAxisScaleOrdinal class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.xDomainMinValue" name="xDomainMinValue"}}
+									</div>
+								</td>
+								<td style="padding-left: 20px; width:50px;">Max</td>
+								<td>
+									<div name="xDomainMaxValue" {{bindAttr data-original-title=disabledTooltip}}>
+										{{ input type="text" disabled=isXAxisScaleOrdinal class="input-small margin-top" placeholder="0" valueBinding="axesConfigsObj.xDomainMaxValue" name="xDomainMaxValue"}}
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td style="width: 50px;">Display Units</td>
+								<td style="width:105px;">
+									{{view Ember.Select class="fullWidth" contentBinding="view.displayUnits" valueBinding="axesConfigsObj.xAxisDisplayUnit" name="xAxisDisplayUnit"}}
+		        				</td>
+								<td style="padding-left: 20px; width:50px;">Rotate Angle</td>
+								<td>
+									{{ input type="text" class="input-small margin-top" placeholder="45" valueBinding="axesConfigsObj.xAxisRotateAngle" name="xAxisRotateAngle"}}
+								</td>
+							</tr>
+						</table>
+					</div>
+				{{/if}}
+
+
+				<hr class='compact'>
+				<div class="well-small">
+					<button type="submit" class='btn' >Save</button>
+					<button class="btn" onclick="$(this).closest('li').find('.icon-fullscreen').click();return false;" aria-hidden="true" >Cancel</button>
+				</div>
+
+			</form>
+
+		</div>
+	</div>
+	
+</li>

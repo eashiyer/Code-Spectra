@@ -1,0 +1,23 @@
+<h5>Color Scheme</h5>
+<div class="span" style="margin-bottom:10px;">
+    <div class="input-prepend input-append" style="display:inline; margin-right:8px;">
+        <span class="add-on" style="width:50px;">Low</span>
+        {{view Ember.Select contentBinding="view.colorPallette" valueBinding="configObject.colorSchemeLow" name="colorSchemeLow" class="small"}}
+    </div>
+
+    <div class="input-prepend input-append" style="display:inline; margin-right:8px;">
+    	<span class="add-on" style="width:50px;">High</span>
+    	{{view Ember.Select contentBinding="view.colorPallette" valueBinding="configObject.colorSchemeHigh" name="colorSchemeHigh" class="small"}}
+    </div>
+</div>
+<div class="span" style="margin-bottom:10px;">
+    <div class="input-prepend input-append" style="display:inline; margin-right:8px;">
+        <span class="add-on" style="width:50px;">Low</span>
+        {{view Ember.TextField valueBinding="configObject.colorDomainLow" name="colorDomainLow" class="small colorDomainText"}}
+    </div>
+
+    <div class="input-prepend input-append" style="display:inline; margin-right:8px;">
+        <span class="add-on" style="width:50px;">High</span>
+        {{view Ember.TextField valueBinding="configObject.colorDomainHigh" name="colorDomainHigh" class="small colorDomainText"}}
+    </div>
+</div>

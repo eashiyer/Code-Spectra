@@ -1,0 +1,140 @@
+<div id='modal-new-chart' class='modal large-modal hide fade'>
+	<div class="modal-header">
+		<div style= "float:right;width:100px">
+			<button class="btn" {{action 'removeChart' model target='view' }} >Clear</button>
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" {{action 'removeChart' model target='view' }}>
+				×
+			</button>
+		</div>
+		<h3 id="myModalLabel"> Create New Chart </h3>	
+	</div>
+	<div id='new-chart-notice' style="text-align: center">
+	</div>
+	<div class="modal-body">	
+		<form id = "new_chart">
+			<fieldset>
+			<div class="row">
+
+				<div class="span5">
+					<div class="input-prepend">
+					  <span class="add-on">Title</span>
+					  {{view Ember.TextField class="input-xlarge" valueBinding="view.title" required=true placeholder="Title"}}
+					</div>
+
+					<div class="input-prepend">
+					  <span class="add-on">Subtitle</span>
+					  {{view Ember.TextField class="input-xlarge" valueBinding="view.subtitle" required=true placeholder="Sub Title"}}
+					</div>
+				</div>
+				
+				<div class="span4">
+				<h4>Orientation</h4>
+				 	<div class='row'>
+					<div class='span2'>
+						<input type="radio" name="orientation_type" value="1" checked> Default
+					</div>
+					<div class='span2'>
+						<input type="radio" name="orientation_type" value="2"> Full width
+					</div>
+					</div>
+					<div class='row'>
+					<div class='span2'>
+						<input type="radio" name="orientation_type" value="3"> Full height
+					</div>
+					<div class='span2'>
+						<input type="radio" name="orientation_type" value="4"> Full screen
+					</div>
+					</div>
+				</div>
+				<div class='span10'>
+					<h4>Margins</h4>	
+					<div class="input-prepend input-append">
+					  <span class="add-on">Top</span>
+					  {{view Ember.TextField class="input-mini" valueBinding="view.marginTop" placeholder='20'}}
+					  <span class="add-on">px</span>
+					</div>
+
+					<div class="input-prepend input-append">
+					  <span class="add-on">Bottom</span>
+					  {{view Ember.TextField class="input-mini" valueBinding="view.marginBottom" placeholder='20'}}
+					  <span class="add-on">px</span>
+					</div>
+					<br>
+					<div class="input-prepend input-append">
+					  <span class="add-on">Left</span>
+					  {{view Ember.TextField class="input-mini" valueBinding="view.marginLeft" placeholder='20'}}
+					  <span class="add-on">px</span>
+					</div>
+
+					<div class="input-prepend input-append">
+					  <span class="add-on">Right</span>
+					  {{view Ember.TextField class="input-mini" valueBinding="view.marginRight" placeholder='20'}}
+					  <span class="add-on">px</span>
+					</div>
+				</div>
+
+			</div>
+			<div class='row'>
+				<div class='span' id ="tests">
+					{{view view.chartTypeView}}
+			
+				</div>
+			</div>
+
+			<div class='row'>
+				<div class='span'>
+					{{#unless view.chartType}}
+						<h4 class='alert alert-info'> Select a chart type </h4>
+					{{/unless}}
+					{{view view.chartTypeConfigsView}}
+
+				</div>
+			</div>
+			
+			<div class='row'>
+				<div class='span'>
+					{{view view.addDataSourceView}}
+				</div>
+			</div>
+			<br>
+			<div class='row' id='new-chart-data-source-views'>
+				{{view view.chartsDataSourcesView}}
+			</div>
+			
+			<div class='row' style='margin-top: 10px'>
+				<div class='span'>
+					<div class="input-prepend input-append">
+					  <span class="add-on">Ext Filter (o)</span>
+					  {{view Ember.TextField class="input-xlarge" valueBinding="view.secondaryDimension" placeholder='Data Source Field' required='true'}}
+					</div>			
+				</div>
+			</div>
+			<div class='row' style='margin-top: 10px'>
+				<div class='span'> 
+					{{view Ember.Checkbox checkedBinding="view.modalEnabled"}}
+					<span>Enable Drill Through</span>
+				</div>
+			</div>
+			{{#if view.modalEnabled}}
+				<div class='row' style='margin-top: 10px'>
+					<div class='span'>
+						<div class="input-prepend input-append">
+							<span class="add-on">Drill Through Title</span>
+					  		{{view Ember.TextField class="input-xlarge" valueBinding="view.modalTitle" placeholder='Drill Through Title' required='true'}}
+						</div>			
+					</div>
+				</div>
+			{{/if}}
+
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary" >Create</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true" {{action 'removeChart' model target='view' }}>
+					Cancel
+				</button>
+				
+			</div>
+
+			</fieldset>
+		</form>	
+	</div>
+</div>

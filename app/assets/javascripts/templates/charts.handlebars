@@ -1,0 +1,17 @@
+
+<div class='row' style='margin-left:0px; margin-top:0px; margin-right:0px;'>
+	{{filterCharts}}
+
+	<ul class='row sortable' style='list-style-type: none; border: none; margin: 0px; padding: 0px; min-width:101%'>
+		{{#each chart in controller}}
+			{{ render "chart" chart }}
+		{{else}}
+			<!--h4 class='span alert alert-info'>
+				No Charts to Display
+			</h4-->
+			<div class="row">
+				<img src="assets/blank-dashboard.png" style="width: 97.6%;"/>
+			</div>
+		{{/each}}
+	</ul>
+</div>

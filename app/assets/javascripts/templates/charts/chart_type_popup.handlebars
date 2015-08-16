@@ -1,0 +1,26 @@
+<div id='edit_types' class=''>
+	<form class='form form-inline' style="margin-bottom:0px;">
+       <div class='row'>
+	<div class='span'>
+		<div class="btn-group" data-toggle="buttons-radio" valueBinding="view.chartType" id="chart_type_radio_group">
+{{#each t in editType }}
+
+
+		  <button type="button" class="btn" {{bindAttr value=t}} data-toggle="tooltip"  title= {{ getTitle t }}>
+		  	<img src="/assets/pie.png" style="width: 25px; height: 25px"/>
+		  </button>
+
+{{/each}}
+
+		</div>
+	</div>
+</div>
+		<div class="row">
+			<div class="span2 offset2" style="margin-top:10px;text-align:left;">
+			  <button type="submit" class='btn' >Save</button>
+			  <button class="btn" data-dismiss="modal" aria-hidden="true" >Cancel</button>
+			</div>
+	    </div>
+
+</form>
+		</div>

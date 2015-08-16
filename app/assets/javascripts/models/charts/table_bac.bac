@@ -1,0 +1,114 @@
+
+
+Cibi.Table = Ember.Object.extend({
+
+	draw: function() {
+		var obj = this;
+		
+		obj.chart.set("isSetup", true);
+		var width = obj.chart.get('width') ;
+		var height = obj.chart.get('height') - 80;
+		var grid_id = obj.element + "-grid";
+		html = "";
+		html = "<span><input id='"+obj.element+ "-grid-search' type='text' placeholder='Search'/></span>";
+		html += "<div id='" + grid_id + "' style=\"width:"+width+"px;height: "+height+"px\"></div>";
+		$("#" + obj.element).html(html);
+
+		var options =  {
+              enableCellNavigation: false,
+              forceFitColumns: true,
+              editable: false,
+              enableAddRow: false,
+              rowHeight: 24,
+		};		
+
+		var col_names = [];
+		obj.chart.get('measures').forEach(function(d){
+			col_names.push(d.get('fieldName'));
+		});
+		var columns = [];
+		var data  = obj.get('data');
+		if (!data) {
+			data = {length: 1000};
+			obj.set('data', data);
+		}
+		for(var i = 0; i < col_names.length; i++ ) {
+			if(col_names[i] == "id" || col_names[i].trim() == "") {
+				continue;
+			} else {
+				columns.push({
+					id: col_names[i],
+					cssClass: "cell-selection",
+					minWidth: 100,
+					resizable: true,
+					name: col_names[i],
+					field: col_names[i],
+					sortable: true
+				});
+			}
+		}
+		var grid_element=$("#"+grid_id);
+		if(!grid_element || grid_element.length == 0) {
+			return ;
+		}
+	    grid = new Slick.Grid("#" + grid_id, data, columns, options);
+	    obj.set('grid', grid);
+	    obj.attachEvents(col_names);
+	    obj.grid.onViewportChanged.notify();
+	},
+
+	attachEvents: function(col_names) {
+		var obj = this;
+	    obj.grid.onViewportChanged.subscribe(function (e, args) {
+	    	obj.loadData(null, null,col_names)
+	    });		
+
+		obj.grid.onSort.subscribe(function (e, args) {
+		    var sortdir = args.sortAsc ? 'asc' : 'desc';
+		    var sortcol = args.sortCol.field;
+		    obj.loadData(sortcol, sortdir,col_names);
+		});	   
+	},
+
+	loadData: function(sort_key, sort_order,col_names) {
+		var obj = this;
+    	var vp = obj.grid.getViewport();	    
+      	var l = vp.bottom - vp.top;
+      	var configObj = obj.chart.get("configObj");
+
+		var cds = obj.chart.get('chartsDataSources').objectAt(0);
+		obj.chart.set('dataLoading', true);
+		cds.chartData(onDataLoad, obj, null, l, vp.top, sort_key, sort_order);
+		
+		function onDataLoad(data, obj) {
+			
+			var tdata = obj.get('data');
+			tdata.length = data[0]["count"];
+			_.each(data[0]["results"],function(d){
+				for(var j=0;j<col_names.length;j++){
+					var value = obj.displayUnit ? formatValue(d[col_names[j]],obj.displayUnit):d[col_names[j]];
+					if(obj.displayUnit == "No Units (Indian)"){
+						value = CommaFormatted(d[col_names[j]],"Indian");
+					}else if(obj.displayUnit == "No Units (American)"){
+						value = CommaFormatted(d[col_names[j]],"American");
+					}
+					d[col_names[j]] = value;
+				}
+			})
+			data[0]["results"].forEach(function(d, i) {
+				d.id = vp.top + i + 1;
+				tdata[d.id] = d;
+			});
+
+			obj.set('data', tdata);
+			obj.grid.updateRowCount();
+			obj.grid.render();
+			obj.chart.set('dataLoading', false);
+			obj.chart.get('dashboard').highlightFilters();
+		}
+		for(var i = vp.top; i < vp.bottom; i++) {
+			obj.grid.invalidateRow(i);
+		}
+	},
+});	
+

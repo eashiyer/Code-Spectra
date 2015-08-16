@@ -1,0 +1,2 @@
+module DataContentsHelper
+end

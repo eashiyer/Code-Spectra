@@ -1,0 +1,156 @@
+	<li>
+		<a rel="popover" class="data_source_popover" style="font-size:0px;" data-toggle="tooltip" data-placement="right" title="Edit Chart Data" {{bindAttr id='dataSourcePopoverId'}} >
+			<img src="/assets/db.png" class="charts_data_source_icon" style="width: 13px; height: 13px; opacity: 0.5"></img>
+		</a>
+	
+		<div class="popover fade bottom in hidden" style="display: block; width: 365px; height: 350px;">
+			<div class="arrow hidden" style="left:37px;"></div>
+			<h3 class="popover-title hidden">Chart Data Source</h3>
+			<div class="popover-content hidden">
+				<form class='form form-inline' >
+					<div class="tabbable tabs-left" style="height:250px;overflow-x:hidden;">
+						<ul class="nav nav-tabs" id="main-tab-links">	
+						{{ reset_index }}	
+						{{#each cds in chartsDataSources}}
+						    <h5 class="muted">Data Source {{index}}</h4> 
+									<div {{ bindAttr id="cds.id"}}  class='span4 edit_charts_data_sources_div' style='margin-left:2px;padding-bottom:10px;border-bottom:2px solid #eeeeee;'>
+											<div class="input-prepend input-append">	
+												<span class="add-on medium">Data Source</span>
+												<select disabled class="data-source input-medium">
+												  <option {{bindAttr value=cds.id}}>{{cds.dataSource.name}}</option>
+												</select>
+											</div>	
+											{{#unless singleValueChart}}
+												<div class="input-prepend input-append">
+													<span class="add-on medium">Dimension Name</span>
+													{{view Ember.Select
+												       contentBinding="cds.dataSource.dimensionsArr"     
+												       valueBinding="cds.dimensionName"       
+												       required=true
+												       class="dimension-name input-medium"
+													}}
+												</div>
+												<div class="input-prepend input-append">
+													<span class="add-on medium">Format Dimension</span>
+													{{view Ember.Select
+												       contentBinding="cds.dimensionsSupportedFormats"
+												       valueBinding="cds.dimensionFormatAs"
+												       required=true
+												       class="dimension-format-as input-medium"
+													}}
+												</div>
+
+												<div class="input-prepend input-append">
+													<span class="add-on medium">Depth</span>
+													{{view Ember.Select
+												       contentBinding="cds.dataSource.depthArr"
+												       valueBinding="cds.depth"
+												       class="depth input-medium"
+												       prompt=" "
+													}}
+												</div>
+											{{else}}
+												<div class="input-prepend input-append">	
+													<span class="add-on medium">Dimension Name</span>
+													<select disabled class="data-source input-medium">
+													  <option></option>
+													</select>
+												</div>
+												<div class="input-prepend input-append">	
+													<span class="add-on medium">Format Dimension</span>
+													<select disabled class="data-source input-medium">
+													  <option></option>
+													</select>
+												</div>											
+												<div class="input-prepend input-append">	
+													<span class="add-on medium">Depth</span>
+													<select disabled class="data-source input-medium">
+													  <option></option>
+													</select>
+												</div>											
+											{{/unless}}
+											<div class='row'>
+												<div class='span'>
+													<label> Calculated Field </label>
+												</div> 
+												<div class='span'>
+													{{view Ember.Checkbox checkedBinding="cds.isCalculated" class="is-calculated"}}
+												</div>
+
+											</div>
+											{{#if cds.isCalculated}}
+												<div class="input-prepend input-append">
+													<span class="add-on medium">Fact</span>
+													{{input type="text" 
+														valueBinding="cds.fact" 
+														required=true 
+														placeholder="Enter Formula. Put field in []"
+														class="fact input-medium"
+													}}
+												</div>
+											{{else}}
+												<div class="input-prepend input-append">
+													<span class="add-on medium">Fact</span>
+													{{view Ember.Select
+												       contentBinding="cds.dataSource.factsArr"
+												       valueBinding="cds.fact"
+												       required=true
+												       class="fact input-medium"
+													}}
+												</div>
+											{{/if}}
+									
+											<div class="input-prepend input-append">
+												<span class="add-on large">Fact Display</span>
+												{{view Ember.TextField class='input-medium' type='text' valueBinding="cds.factDisplay" }}
+											</div>		
+
+											<div class="input-prepend input-append">
+												<span class="add-on medium">Format Fact</span>
+												{{view Ember.Select
+											       contentBinding="view.factFormats"       
+											       optionValuePath="content.key"
+											       optionLabelPath="content.name"
+											       valueBinding="cds.factFormat"
+											       required=true
+											       class="format-fact input-medium"
+												}}
+											</div>
+
+											<div class="input-prepend input-append">
+												<span class="add-on medium">Fact Type (o)</span>
+												{{view Ember.Select
+											       contentBinding="view.factTypes"
+											       valueBinding="cds.factType"
+											       class="fact-type input-medium"
+												}}
+
+											</div>
+											<div class="input-prepend input-append">
+												<span class="add-on medium">Fact Unit</span>
+												{{view Ember.Select
+											       contentBinding="view.factUnits"
+											       valueBinding="cds.factUnit"
+											       class="fact-unit input-medium"
+												}}
+											</div>
+
+											<div class="input-prepend input-append">
+												<span class="add-on medium">Count</span>
+												{{view Ember.TextField class=":input-medium" type='number' valueBinding="cds.count" required=true class="count"}}
+											</div>
+									</div>
+									
+						{{/each}}
+						</ul>
+					</div>
+					<div class="row">
+						<div class="span2" style="margin-top:10px;text-align:right;">
+							<button type="submit" class='btn' >Save</button>
+							<button class="btn" aria-hidden="true" onclick="$(this).closest('li').find('.charts_data_source_icon').click();return false;">Cancel</button>
+						</div>
+					</div>
+				</form>
+				</div>
+			</div>
+	</li>

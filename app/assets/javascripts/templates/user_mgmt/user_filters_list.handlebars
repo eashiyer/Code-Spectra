@@ -1,0 +1,7 @@
+{{#each filter in view.userFilters}}
+	{{view view.userFilterView contentBinding=filter dataSourceBinding=view.dataSource}}
+{{else}}
+	<h5 class="muted"> 
+		No filters defined for this data source! 
+	</h5>
+{{/each}}

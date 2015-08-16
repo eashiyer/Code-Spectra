@@ -1,0 +1,133 @@
+<div class='span4 ui-box' style="margin-left: 30px">
+	<div class="input-prepend input-append">	
+		<span class="add-on large">Data Source</span>
+		{{view Ember.Select
+	       contentBinding="data_sources"
+	       valueBinding="view.dataSourceId" 
+	       optionValuePath="content.id"
+	       optionLabelPath="content.name"
+        }}
+	</div>
+
+	{{#if view.toDisplayAttributes}}	
+		{{#unless view.single_value}}
+			<div class="input-prepend input-append">
+				<span class="add-on large">Dimension Name</span>
+				{{view Ember.Select
+			       contentBinding="view.dimensionsArr"
+			       valueBinding="view.dimensionName"
+			       required=true
+				}}
+			</div>
+
+			<div class="input-prepend input-append">
+				<span class="add-on large">Format Dimension</span>
+				{{view Ember.Select
+			       contentBinding="view.dimensionsSupportedFormats"
+			       valueBinding="view.dimensionFormatAs"
+				}}
+			</div>
+
+			<div class="input-prepend input-append">
+				<span class="add-on large">Depth</span>
+				{{view Ember.Select
+			       contentBinding="view.dimensionsArr"
+			       valueBinding="view.depth"
+				}}
+			</div>
+		{{else}}
+			<div class="input-prepend input-append">	
+				<span class="add-on medium">Dimension Name</span>
+				<select disabled class="data-source">
+				  <option></option>
+				</select>
+			</div>
+			<div class="input-prepend input-append">	
+				<span class="add-on medium">Format Dimension</span>
+				<select disabled class="data-source">
+				  <option></option>
+				</select>
+			</div>											
+			<div class="input-prepend input-append">	
+				<span class="add-on medium">Depth</span>
+				<select disabled class="data-source">
+				  <option></option>
+				</select>
+			</div>
+		{{/unless}}
+
+
+		<div class='row'>
+			<div class='span'>
+				<label> Calculated Field </label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox checkedBinding="view.is_calculated"}}
+			</div>
+		</div>
+
+		{{#if view.is_calculated}}
+			<div class="input-prepend input-append">
+				<span class="add-on large">Fact</span>
+				{{input type="text" 
+					valueBinding="view.fact" 
+					required=true 
+					placeholder="Enter Formula. Put field in []"
+				}}
+			</div>
+		{{else}}
+			<div class="input-prepend input-append">
+				<span class="add-on large">Fact</span>
+				{{view Ember.Select
+			       contentBinding="view.fieldsArr"
+			       valueBinding="view.fact"
+			       required=true
+				}}
+			</div>
+		{{/if}}
+
+
+		<div class="input-prepend input-append">
+			<span class="add-on large">Fact Display</span>
+			{{view Ember.TextField type='text' valueBinding="view.factDisplay" }}
+		</div>		
+
+		<div class="input-prepend input-append">
+			<span class="add-on large">Format Fact</span>
+			{{view Ember.Select
+		       contentBinding="view.factFormats"
+		       valueBinding="view.factFormat"
+		       optionValuePath="content.key"
+		       optionLabelPath="content.name"
+		       required=true
+			}}
+		</div>
+
+		<div class="input-prepend input-append">
+			<span class="add-on large">Fact Type (o)</span>
+			{{view Ember.Select
+		       contentBinding="factTypes"
+		       valueBinding="view.factType"
+			}}
+		</div>
+
+		<div class="input-prepend input-append">
+			<span class="add-on large">Fact Unit</span>
+			{{view Ember.Select
+		       contentBinding="factUnits"
+		       valueBinding="view.factUnit"
+			}}
+		</div>
+
+		<div class="input-prepend input-append">
+			<span class="add-on large">Count</span>
+			{{view Ember.TextField class="input-large" type='number' valueBinding="view.count" required=true}}
+		</div>
+
+	{{/if}}
+
+	{{#if view.isPivotTableChart}}
+		<span class="text-info">For this chart only Data Source is required</span>
+	{{/if}}
+</div>
+

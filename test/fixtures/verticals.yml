@@ -1,0 +1,11 @@
+# Budget:
+#   id: 1
+#   name: Budget Planning
+
+# Banking:
+#   id: 2
+#   name: Banking
+
+OrderMgmt:
+  id: 1
+  name: Order Management

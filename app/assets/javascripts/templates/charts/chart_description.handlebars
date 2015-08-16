@@ -1,0 +1,16 @@
+	<a rel="popover" class="description_popover" data-toggle="tooltip" data-placement="right auto" title="Chart description" {{bindAttr id='id'}}>
+		<i class='icon-question-sign muted'></i>
+		<div id='list_comments' class='hidden'>
+			<div class="row">
+				{{description}}
+			</div>
+		</div>
+		<br/>
+		<div id='new_comment' class='hidden'>
+			<div class="row">
+				<small class="pull-right">{{id}}</small>
+				<br/>
+				<button class="btn btn-mini" aria-hidden="" onclick="$(this).closest('li').find('.icon-question-sign').click();return false;">Close</button>
+			</div>
+		</div>
+	</a>

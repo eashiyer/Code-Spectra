@@ -1,0 +1,44 @@
+<strong>
+	Grouped Table Configs
+</strong>
+<hr class='compact'>
+<div class='row'>
+	<div class="span4">
+		<div class='row'>
+			<div class='span2'>
+				<label>Hide row totals</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox checkedBinding="configObject.hide_row_total" name='hide_row_total'}}
+			</div>
+		</div>
+		<div class='row'>
+			<div class='span2'>
+				<label>Hide column totals</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox checkedBinding="configObject.hide_column_total" name='hide_column_total'}}
+			</div>
+		</div>
+		<div class='row'>
+			<div class='span2'>
+				<label>Records per page</label>
+			</div>
+			<div class='span'>
+				{{view Cibi.NumberField valueBinding="configObject.limit" min="1" name="limit" class="input-mini"}}
+			</div>
+		</div>
+		<div class='row'>
+			<div class='span2'>
+				<label>Draw With Heatmap</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox checkedBinding="configObject.draw_with_heatmap" name='draw_with_heatmap'}}
+			</div>
+		</div>
+		<div style="margin-top:5px;margin-bottom:5px;">
+			<span style="padding-right:67px;">Number Format </span>
+			{{view Ember.Select contentBinding="view.displayUnits" valueBinding="configObject.displayUnit" name="displayUnit" class="small"}}
+		</div>
+	</div>
+</div>

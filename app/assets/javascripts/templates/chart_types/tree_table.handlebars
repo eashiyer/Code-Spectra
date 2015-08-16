@@ -1,0 +1,9 @@
+<table class='table table-bordered table-hover span8'>
+	<tr>
+		<th>Key</th>
+		<th class='span3'>Values</th>
+	</tr>
+	{{#each chartObj.treeData}}
+		{{view view.tableCellView contentBinding="this"}}		
+	{{/each}}
+</table>

@@ -1,0 +1,45 @@
+{{ view view.freeTrialView }}
+<h3 class="login-title">
+  <span>LOG IN TO</span>
+  <span class="spectra-color">SPECTRA</span>
+</h3>
+
+
+<form class='form-vertical sign-in-form'>
+
+  <div class="row input">
+    {{input type='text' class='input-large span12' placeholder='Email/Username' value=view.email}}
+  </div>
+
+  <div class="row input">
+    {{input type='password' class='input-large span12' placeholder='Password' value=view.password}}
+  </div>
+
+  <div class="row">
+    {{#if Cibi.Auth.infoMessage}}
+      <h5 class='small-alert' style="width:174px;font-size:14px;">
+        {{Cibi.Auth.infoMessage}}
+      </h5>
+    {{/if}}
+  </div>
+
+  <div class="row">
+    {{#if Cibi.Auth.errorMessage}}
+      <h5 class='text-error small-alert' style="width:174px;font-size:14px;">
+        {{Cibi.Auth.errorMessage}}
+      </h5>
+    {{/if}}
+  </div>
+
+  <div class="row">
+    {{input type='submit' class='btn btn-small btn-homepage btn-sign-in btn-block' style="margin-top: 0px" value="Sign In"}}
+  </div>
+
+  <div class="row last-action">
+    <div>{{#linkTo 'forgot_password'}}<span class="forgot-password">Forgot password?</span>{{/linkTo}}</div>
+    <span class="dont-have-account">Not a member yet?</span>
+    <a {{action 'showFreeTrialForm' target="view"}} class="spectra-color" style="margin-top: 0px">
+      Try for free</a>
+  </div>
+
+</form>

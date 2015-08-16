@@ -1,0 +1,99 @@
+<li class='filterDiv'>
+	<a rel="popover" class='statistical_relevance_popover' data-toggle="tooltip" data-placement="right auto" title="Statistical Toolbox" {{bindAttr id='drillId'}}>
+		<img src="/assets/statistical_relevance.png" class="statistical_relevance_icon muted" style="width: 13px; height: 13px; opacity: 0.5"></img>
+	</a>
+
+	<div class="popover fade bottom in hidden" style="top: 64px; display:block; width:375px;">
+		<div class="arrow hidden" style="left:220px;"></div>
+		<h3 class="popover-title hidden">Highlight points where</h3>
+		<div class="popover-content hidden" style="height:auto; overflow:auto; padding:8px;">
+			<form class='form form-inline' >
+				<div class="span" style="width:100%;">
+					<div class="row">
+						<div class="span" style="width: 15px;">							
+							{{view Ember.Checkbox class="highlightCheckbox"  checkedBinding="view.enable_highlight"}}
+						</div>
+						<div class="span" style="margin-left: 5px;">
+							<span>Enable Chart Highlighting</span>
+						</div>
+													
+					</div>
+				</div>
+				<div class="span" style="width:100%;">
+					<div class="row" style="margin-top:10px; margin-bottom:10px;">
+						<div class="span" style="width: 125px;">
+							{{view Ember.Select class="fullWidth"
+								contentBinding="view.supportedComparisonFunctions"
+								valueBinding="view.comparison_function"
+								selectionBinding="view.comparison_function"}}
+						</div>
+						<div class="span" style="width: 125px; margin-left: 5px;">
+							{{view Ember.Select class="fullWidth"
+								contentBinding="view.supportedComparisonOperators"
+								valueBinding="view.operator"
+								selectionBinding="view.operator"}}
+						</div>							
+					</div>
+					{{#if view.isPValue}}
+						<div class="row" style="margin-top:10px; margin-bottom:10px;">
+							<div class="span" style="width:100%; margin-top:10px;">
+								<div class="row">
+									<div class="span" style="width:30%;">
+										<span>Choose Test</span>
+									</div>
+									<div class="span" style="width:70%;">
+										{{view Ember.Select
+											contentBinding="view.supportedTests"
+											valueBinding="view.test"
+											selectionBinding="view.test"}}
+									</div>
+								</div>
+							</div>
+							<div class="span" style="width:100%; margin-top:10px;">
+								<div class="row">
+									<div class="span" style="width:30%;">
+										<span>Control Key</span>
+									</div>
+									<div class="span" style="width:70%;">
+										{{view Ember.Select
+											contentBinding="dimension_unique_values"
+											valueBinding="view.control_field"
+											selectionBinding="view.control_field"}}
+									</div>
+								</div>
+							</div>
+							<div class="span" style="width:100%; margin-top:10px;">
+								<div class="row">
+									<div class="span" style="width:30%;">
+										<span>Confidence Interval</span>
+									</div>
+									<div class="span" style="width:70%;">
+										{{view Ember.Select
+											contentBinding="view.supportedComparisonValues"
+											valueBinding="view.comparison_value"
+											selectionBinding="view.comparison_value"}}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="span" style="width: 15px;">
+								{{view Ember.Checkbox class="standardErrorCheckbox"  checkedBinding="view.enable_sem"}}
+							</div>	
+							<div class="span" style="margin-left: 5px;">
+								<span>Display Standard Error</span>
+							</div>						
+						</div>
+					{{/if}}					
+				</div>
+				<div class="span" style="width:100%;">
+					<div class="row" style="margin-top:30px; margin-bottom:10px;">
+						<button type="submit" class='btn' >Save</button>
+						<button class="btn" aria-hidden="true" onclick="$(this).closest('li').find('.statistical_relevance_icon').click();return false;">Cancel</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</li> 
