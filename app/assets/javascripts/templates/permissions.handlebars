@@ -1,0 +1,18 @@
+{{#if permissions}}
+	<table class="table table-bordered">
+		<tr>
+			<th>User Name</th>			
+			<th>Entity</th>
+			<th>Role</th>
+			<th>Edit | Delete</th>
+		</tr>
+	{{#each permission in permissions}}
+		{{render 'permission' permission}}
+	{{/each}}
+
+	</table>
+{{else}}
+	<h4 class='alert alert-info'>
+		No permissions for this workspace!
+	</h4>
+{{/if}}

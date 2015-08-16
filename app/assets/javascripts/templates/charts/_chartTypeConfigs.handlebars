@@ -1,0 +1,28 @@
+<div style="margin-top: 10px; margin-bottom: 10px">
+
+{{#if view.ctree}}
+	{{partial 'charts/ctreeConfigs'}}
+{{/if}}
+
+{{#if view.ctable}}
+	{{partial 'charts/ctableConfigs'}}
+{{/if}}
+
+{{#if view.geo}}
+	{{partial 'charts/geoConfigs'}}
+{{/if}}
+
+{{#if view.table}}
+	{{partial 'charts/tableConfigs'}}
+{{/if}}
+
+{{#if view.multiline}}
+	{{partial 'charts/multilineConfigs'}}
+{{/if}}
+
+{{#if view.hbar}}
+	{{partial 'charts/horizontalBarConfigs'}}
+{{/if}}
+
+{{partial 'charts/commonConfigs'}}
+</div>

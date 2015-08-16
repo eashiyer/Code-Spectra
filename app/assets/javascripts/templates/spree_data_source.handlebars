@@ -1,0 +1,75 @@
+<div class="alert alert-info sds_info_message" style="display: none;">
+</div>
+<form>
+	<div class="row">
+		<h5>Store Name</h5>
+	</div>
+	<div class="row control-group" id="store_name_control_grp">
+		{{#if view.modelExist}}
+			{{view Ember.TextField valueBinding="view.storeName" name='storeName' placeholder="Store Name" disabled="true"}}
+		{{else}}
+			{{view Ember.TextField valueBinding="view.storeName" name='storeName' placeholder="Store Name"}}
+		{{/if}}
+	</div>
+	<div class="row">
+		<h5>Store URL</h5>
+	</div>
+	<div class="row control-group" id="store_url_control_grp">
+		{{#if view.modelExist}}
+			{{view Ember.TextField valueBinding="view.storeUrl" name='storeUrl' placeholder="Store URL" disabled="true"}}
+		{{else}}	
+			{{view Ember.TextField valueBinding="view.storeUrl" name='storeUrl' placeholder="Store URL"}}
+		{{/if}}
+	</div>
+	<div class="row">
+		<h5>Spree Api Token</h5>
+	</div>
+	<div class="row control-group" id="api_token_control_grp">
+		{{#if view.modelExist}}
+			{{view Ember.TextField valueBinding="view.apiToken" name='apiToken' placeholder="Spree Api Token" disabled="true"}}
+		{{else}}
+			{{view Ember.TextField valueBinding="view.apiToken" name='apiToken' placeholder="Spree Api Token"}}
+		{{/if}}
+	</div>
+	<div class="row">
+		<h5>Import type</h5>
+	</div>
+	<div class="row">
+		{{#if view.modelExist}}
+			{{view Ember.TextField valueBinding="view.importType" name='importType' placeholder="Import type" disabled="true" }}
+	    {{else}}
+			{{view Ember.Select
+		       contentBinding="view.importOptions"
+		       valueBinding="view.importType" 
+		       optionValuePath="content.key"
+		       optionLabelPath="content.name"
+		       class="input-medium"
+	        }}
+	    {{/if}}
+	</div>	
+	<div class="row">
+		<h5>Frequency of import</h5>
+	</div>
+	<div class="row">
+		{{!#if view.modelExist}}
+			{{!view Cibi.NumberField valueBinding="view.frequencyOfImport" name='frequncy' class="mini" min='5' disabled="true" }}
+		{{!else}}
+			{{view Cibi.NumberField valueBinding="view.frequencyOfImport" name='frequncy' class="mini" min='5'}}
+		{{!/if}}
+	    Minutes
+	</div>
+	<div class="row">
+		<h5>
+			{{view Ember.Checkbox checkedBinding="view.enabled" valueBinding="view.enabled" name='enabled' }}
+		Enabled</h5>
+	</div>	
+	<div class='row'>
+		<div class="span" style="margin-top:10px;">
+		{{#if view.modelExist}}
+			<input type="submit" value="Update" class="btn btn-primary"></input>
+		{{else}}
+			<input type="submit" value="Save" class="btn btn-primary"></input>
+		{{/if}}
+		</div>
+	</div>	
+</form>

@@ -1,0 +1,45 @@
+spree_commerce:
+  inputs: 
+    - store_name
+    - store_url
+    - api_token
+  modules:
+    sales:
+      data_sources:
+        - data_source_name: "Mega Store 4"
+          data_source_type: spree_commerce
+          frequency: 300
+      workspaces:
+        - name: "Store Snapshot 17"
+          dashboards:
+            - display_name: summary
+              title: Store Summary
+              rows: 4
+              columns: 4
+              auto_refresh: true
+              refresh_interval: 30
+              charts:
+              # Single Value chart For Total Sales
+              - title: "Total Sales"
+                rows: 1
+                columns: 1
+                chart_type: 15 # Single Value
+                display_rank: 0
+                data_source_name: "Mega Store 4"
+                measures:
+                - field_name: 'total'
+                  display_name: 'Total Sale Amount'
+                  format_as: sum              
+              - title: "Items Sold"
+                rows: 1
+                columns: 1
+                chart_type: 15 # Single Value
+                display_rank: 0
+                data_source_name: "Mega Store 4"
+                measures:
+                - field_name: 'quantity'
+                  display_name: 'Total Items Sold'
+                  format_as: sum              
+            - display_name: abandonments
+            - display_name: customers
+            - display_name: products

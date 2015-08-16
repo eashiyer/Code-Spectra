@@ -1,0 +1,2 @@
+module ScheduledReportsHelper
+end

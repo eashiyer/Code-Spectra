@@ -1,0 +1,3 @@
+describe("Cibi.Vertical", function() { 
+	
+})

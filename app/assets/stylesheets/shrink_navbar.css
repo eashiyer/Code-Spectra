@@ -1,0 +1,54 @@
+body {
+  /*padding-top: 29px;*/
+}
+
+nav a {
+
+  /*font-size: 18px;*/
+}
+
+nav .navbar-toggle {
+  margin: 13px 15px 13px 0;
+}
+
+.navbar-brand {
+  font-size: 30px;
+}
+
+
+
+nav.navbar.shrink {
+  /*min-height: 35px;*/
+  height: 29px !important;
+}
+
+nav.navbar.shrink > #top-nav-bar{
+  /*min-height: 35px;*/
+  height: 29px !important;
+}
+
+nav.navbar.shrink  li.data_source_link{
+  /*min-height: 35px;*/
+  line-height: 29px;
+}
+
+nav.navbar.shrink  .dropdown > a{
+  /*min-height: 35px;*/
+  line-height: 29px;
+}
+
+
+nav.shrink a {
+  /*padding-top: 10px !important;
+  padding-bottom: 10px !important;*/
+  font-size: 15px;
+}
+
+nav.shrink .navbar-brand {
+  font-size: 25px;
+}
+
+nav.shrink .navbar-toggle {
+  padding: 4px 5px;
+  margin: 8px 15px 8px 0;
+}

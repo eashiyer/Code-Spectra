@@ -1,0 +1,42 @@
+
+{{#if Cibi.Auth.currentUser.isAdmin}}
+	{{ view Cibi.UsersNewView }}
+	<div class="span" style="width:100%;">
+		<div class="row" style="background-color: #E3E3E3;min-height: 620px; padding-left:20px;">
+			<div class="span" style="width:100%;">
+				<div class="row">
+					<div class="span"><h3>User Management</h3></div>
+					<button class="btn btn-info flat-button pull-right" type="button" style="background-color:#4093cd; margin:7px; margin-right:20px;" {{action showNewUserForm}} >Create User</button>
+				</div>
+			</div>
+			<div class="span" style="width:100%;">
+				<div class="row" style="padding-right:20px;">
+					<table class="span table table-striped table-bordered" style="width:100%;">
+			 			<thead>
+						    <tr>
+						      <th>Name</th>
+						      <th>Email</th>
+						      <th>IsAdmin</th>
+						      <th>Grant API Access</th>
+						      <th>Status</th>
+						      <th>&nbsp;</th>
+						      <th>&nbsp;</th>
+						    </tr>
+						</thead>
+						<tbody>
+							{{render users}}
+						</tbody>
+					</table>
+				</div>
+			</div>	
+		</div>
+	</div>
+{{else}}
+	<div class="span" style="width:100%;">
+		<div class="row" style="background-color: #E3E3E3;min-height: 620px; padding-left:20px;padding-top:20px;">
+			<div class="span text-error" style="width:100%;">
+				You are not authorized to see this page!
+			</div>
+		</div>
+	</div>
+{{/if}}

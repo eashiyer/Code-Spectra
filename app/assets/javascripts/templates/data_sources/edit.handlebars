@@ -1,0 +1,45 @@
+<div class="row" {{bindAttr style = view.accountTopNavColor}}>
+	
+</div>
+<div class="row" id="main-tab" style="min-height:550px; padding-left:15px;"> 
+	<div class='tabbable'>
+		<div class='tab-content' style="padding: 10px">
+			<div id="new-ds" class='tab-pane active'>
+				<h3> Edit {{name}}</h3>
+				<hr class="compact">
+				{{#if view.noticeMessage}}
+					<div id='new-data-source-notice' class='text-success'>
+						{{view.noticeMessage}}
+					</div>
+				{{/if}}
+				<form class="form" id='new-data-source-form'>
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label" for="input01">Display Name</label>
+							<div class="controls">
+								<input type="text" id='new-data-source-name' class="input-xlarge" {{ bindAttr value=name }}>
+								<p class="help-block">This name will appear in left navigation of data sources</p>
+							</div>
+						</div>
+						<!--div class="control-group">
+							<label class="control-label" for="input01">Load Count</label>
+							<div class="controls">
+							    <input type="text" id="count" class="input-medium" type='number' {{! bindAttr value=loadCount }}>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="input01">Enabled</label>
+							<div class="controls">
+							    {{!view Ember.Checkbox checkedBinding="enabled" id="enabled"}}
+							</div>
+						</div-->
+						<div class="form-actions">
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button class="btn" onclick="javascript:history.go(-1); return false;">Cancel</button>
+						</div>
+					</fieldset>
+				</form>	
+			</div>
+		</div>
+	</div>
+</div>

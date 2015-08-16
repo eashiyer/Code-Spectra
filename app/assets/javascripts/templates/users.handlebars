@@ -1,0 +1,37 @@
+{{#each user in controller}}
+		<tr>
+			<td>
+				{{user.fullName}} 
+			</td>
+			<td>
+				{{user.email}}
+			</td>
+			<td>
+				{{view Ember.Checkbox checkedBinding="user.isAdmin"}}				
+			</td>
+			<td>
+				{{view Ember.Checkbox checkedBinding="user.hasApiAccess"}}	
+			</td>
+			<td>
+				{{#if user.confirmedAt}}
+					active
+				{{else}}
+					pending
+				{{/if}}
+			</td>
+			<td>
+				{{#if Cibi.Auth.currentUser.isAdmin}}
+					{{#if user.isDirty}}
+						<a {{action 'update_user' user}}>Save</a>
+					{{else}}						
+						<a class="disabled">Save</a>
+					{{/if}}
+					| <a {{action 'delete_user' user}}>Delete</a>
+				{{/if}}
+			</td>
+
+			<td>
+				{{#linkTo "user_mgmt.user" user}} <i class='icon-filter'> </i> {{/linkTo}}
+			</td>
+		</tr>
+{{/each}}

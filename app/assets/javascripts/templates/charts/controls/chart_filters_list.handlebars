@@ -1,0 +1,11 @@
+<div class='row pull-right' style="max-height: 20px;max-width: 400px;">
+	{{#each filter in filteredChartFilters}}
+		{{#if filter.isLoaded }}
+			{{view view.chartFilterView contentBinding=filter }}
+		{{/if}}
+	{{/each}}					
+
+	{{#unless filteredChartFilters}}
+		<small class='muted pull-right'>No Filters </small>
+	{{/unless}}
+</div>				

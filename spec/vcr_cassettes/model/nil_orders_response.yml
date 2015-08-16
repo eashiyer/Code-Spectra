@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://mega-market-5303.spree.mx/api/orders.json?q%5Bupdated_at_gteq%5D=2020-07-30T23:30:00.000Z&token=46ab2aa91ff1fdb2f84411c0d5bc7ad245f2264ce7d0580e
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: !binary |-
+        T0s=
+    headers:
+      !binary "Q2FjaGUtQ29udHJvbA==":
+      - !binary |-
+        bWF4LWFnZT0wLCBwcml2YXRlLCBtdXN0LXJldmFsaWRhdGU=
+      !binary "Q29udGVudC1UeXBl":
+      - !binary |-
+        YXBwbGljYXRpb24vanNvbjsgY2hhcnNldD11dGYtOA==
+      !binary "RGF0ZQ==":
+      - !binary |-
+        VGh1LCAyOCBBdWcgMjAxNCAwNzowNzo0NyBHTVQ=
+      !binary "RXRhZw==":
+      - !binary |-
+        IjE4YTRhZDRkZjc5N2NlM2U0Njk0ODcyZmJmOGZjYzNkIg==
+      !binary "U2VydmVy":
+      - !binary |-
+        bmdpbngvMS4xLjE5
+      !binary "U3RhdHVz":
+      - !binary |-
+        MjAwIE9L
+      !binary "WC1Db250ZW50LVR5cGUtT3B0aW9ucw==":
+      - !binary |-
+        bm9zbmlmZg==
+      !binary "WC1GcmFtZS1PcHRpb25z":
+      - !binary |-
+        U0FNRU9SSUdJTg==
+      !binary "WC1SZXF1ZXN0LUlk":
+      - !binary |-
+        YzNlYTZhNzUtYWY4NC00MGM3LTgzYzUtYzhlNmU1N2U2MDFh
+      !binary "WC1SdW50aW1l":
+      - !binary |-
+        MC4wNDc5Njg=
+      !binary "WC1VYS1Db21wYXRpYmxl":
+      - !binary |-
+        Y2hyb21lPTE=
+      !binary "WC1Yc3MtUHJvdGVjdGlvbg==":
+      - !binary |-
+        MTsgbW9kZT1ibG9jaw==
+      !binary "Q29udGVudC1MZW5ndGg=":
+      - !binary |-
+        NTA=
+      !binary "Q29ubmVjdGlvbg==":
+      - !binary |-
+        a2VlcC1hbGl2ZQ==
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJjb3VudCI6MCwiY3VycmVudF9wYWdlIjoxLCJwYWdlcyI6MCwib3JkZXJz
+        IjpbXX0=
+    http_version: 
+  recorded_at: Thu, 30 Jul 2020 18:30:00 GMT
+recorded_with: VCR 2.9.2

@@ -1,0 +1,61 @@
+
+<strong>
+	Bar Chart Configs
+</strong>
+<hr class='compact'>
+<div class='row'>
+	<div class="span4">
+		<div class="row">
+			
+			<div class='span'>
+				<label>Display Error Bars?</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox valueBinding="view.display_error_bars" name='display_error_bars' value=true }}
+			</div>
+			
+			<div class='span'>
+				<label>Plot Absolute Values?</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox valueBinding="view.plot_abs_values" name='plot_abs_values' value=true }}
+			</div>
+
+		</div>
+
+		<div class="input-prepend input-append">
+			<span class="add-on">Y Axis Label</span>
+			{{view Ember.TextField class="input-large" valueBinding="view.y_axis_label" name='y_axis_label'}}
+		</div>
+	</div>
+
+
+	<div class='span'>
+		<h5>Advanced Statistical Analysis</h5>
+		<hr class='compact'>
+		<div class="row">
+			<div class='span'>
+				<label>Plot % Change?</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox valueBinding="view.plot_pc" name='plot_pc' value=true }}
+			</div>
+			<div class='span'>
+				<label>Highlight Statistical Relevance?</label>
+			</div>
+			<div class='span'>
+				{{view Ember.Checkbox valueBinding="view.highlight_statistical_relevance" name='highlight_statistical_relevance' value=true }}
+			</div>
+		</div>
+
+		<div class="input-prepend input-append">
+			<span class="add-on">Control Group </span>
+			{{view Ember.TextField 
+				class="input-xlarge" valueBinding="view.control_key" name='control_key'
+				placeholder="Control Group"
+			}}
+		</div>
+	</div>
+</div>
+
+

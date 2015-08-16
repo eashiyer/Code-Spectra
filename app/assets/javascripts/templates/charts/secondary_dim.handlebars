@@ -1,0 +1,16 @@
+<div class="btn-group">
+  <div class="btn btn-mini disabled">Select Dimension</div>
+  <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+  </button>
+
+  <ul class="dropdown-menu">
+	{{#each dim in secondaryDims}}
+		<li>
+			<a {{action 'setSecondaryDim' dim target=view}}>
+				{{dim}}
+			</a>
+		</li>
+	{{/each}}
+  </ul>
+</div>

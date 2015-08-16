@@ -1,0 +1,83 @@
+<li class='filterDiv'>
+	<a rel="popover" class="type_popover" style="font-size:0px;" data-toggle="tooltip" data-placement="right auto" title="Change Chart Type" {{bindAttr id='popoverId'}} >
+		<img src="/assets/chart_types.png" style="height: 13px; width: 13px; opacity: 0.5" class="edit_chart_types"/>
+	</a>
+	<div class="popover fade bottom in hidden" style=" display:block; height:187px; width:350px; ">
+		<div class="arrow hidden" style="left:90px;"></div>
+		<h3 class="popover-title hidden">Chart Type</h3>
+		<div class="popover-content hidden">
+			<form class='form form-inline' style="margin-bottom:0px;">
+
+		<div class="well-small input-prepend input-append">
+		
+			<div class="btn-group" data-toggle="buttons-radio" id="chart_type_radio_group" valueBinding="view.chartType">
+		
+			{{#if view.showBarGraph}} 
+			  <button type="button" class="btn" value=1 data-toggle="tooltip"  title="Bar Chart" >
+								  	<img src="/assets/bar.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+			   {{#if view.showPieGraph}} 
+			  <button type="button" class="btn" value=2 data-toggle="tooltip"  title="Pie Chart" >
+								  	<img src="/assets/pie.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+			{{#if view.showAreaGraph}} 
+			  <button type="button" class="btn" value=11 data-toggle="tooltip"  title="Area Chart" >
+								  	<img src="/assets/area.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+			{{#if view.showLineGraph}} 
+			  <button type="button" class="btn" value=8 data-toggle="tooltip"  title="Line Chart" >
+								  	<img src="/assets/line.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+
+	        {{#if view.showComboChart}} 
+			  <button type="button" class="btn" value=6 data-toggle="tooltip"  title="Combination Chart" >
+								  	<img src="/assets/combination.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+            {{#if view.showMultiline}} 
+			  <button type="button" class="btn" value=9 data-toggle="tooltip"  title="Multi Line Chart" >
+								  	<img src="/assets/multiline.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+            {{#if view.showDonutGraph}} 
+			  <button type="button" class="btn" value=17 data-toggle="tooltip"  title="Donut Chart" >
+								  	<img src="/assets/chart_types.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+            {{#if view.showFunnelGraph}} 
+			  <button type="button" class="btn" value=18 data-toggle="tooltip"  title="Funnel Chart" >
+								  	<img src="/assets/funnel.png" style="width: 25px; height: 25px"/>
+								  </button>
+			{{/if}}
+
+			{{#if view.showSingleValue}} 
+			  <button type="button" class="btn" value=15 data-toggle="tooltip" title="Single Value">
+								<img src="/assets/one.png" style="width: 25px; height: 25px"/>
+							</button>
+			{{/if}}
+			{{#if view.showGaugeGraph}} 
+			  <button type="button" class="btn" value=20 data-toggle="tooltip" title="Gauge Chart">
+								<img src="/assets/gaugeicon.png" style="width: 25px; height: 25px"/>
+							</button>
+			{{/if}}			
+
+			</div>
+		</div>
+
+        <hr class='compact'>
+        <div class="well-small">
+              <button type="submit" class='btn' >Save</button>
+			<button class="btn" onclick="$(this).closest('li').find('.edit_chart_types').click();return false;" aria-hidden="true" >Cancel</button>
+        </div>
+			</form>
+
+		</div>
+	</div>
+</li>
+
+
+

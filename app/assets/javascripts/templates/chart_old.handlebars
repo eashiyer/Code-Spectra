@@ -1,0 +1,161 @@
+{{#if chart.isLoaded }}
+	<div {{bindAttr id='containerId' class='className'}} >
+
+		<div class='row' style='padding:5px;'>
+			<div class='span'>
+				<div class='row'>
+					<div class='span' id="titlediv" style="height: 75px;">
+						<h4>{{ title }} 
+							<i class="icon-edit muted" style="cursor: pointer" {{ action "editChart" this target=view }}>
+							</i>
+						</h4>
+						{{#if subtitle}}
+							<h6>{{ subtitle }}</h6>
+						{{/if}}
+					</div>
+					{{view view.editTitleView}}
+					<div class='span pull-right'>
+						{{#if secondaryDimension}}
+							{{view view.secondaryFiltersView}}
+						{{else}}
+							{{view view.addSecondaryDimensionView }}
+						{{/if}}
+
+						{{#if filterOn }}
+							<div class='btn-group'>
+								<div class='btn btn-mini disabled button-label'>
+									{{currentFilter}}								
+								</div>
+								<a class='btn btn-mini pull-right' {{ action "reset" chart }}> 
+									x
+								</a>
+							</div>
+						{{/if}}
+                 
+						{{#if legendFilter }}
+							<div class='btn-group'>
+								<div class='btn btn-mini disabled button-label'>
+									{{legendFilter.key}}								
+								</div>
+								<a class='btn btn-mini pull-right' {{ action "resetLegendFilter" chart }}> 
+									x
+								</a>
+							</div>
+						{{/if}}
+
+					</div>
+				</div>
+		
+				<div class='row'>
+					<div {{bindAttr id='chartDataTotalId'}} class='span'>
+					</div>
+				</div>
+
+				<div class='row'>
+					<div {{bindAttr id='elemId' class=':draggable :span'}}>
+					</div>
+					
+
+					{{#if hasLegend}}
+						<div class='span' {{bindAttr id='legendId'}} style="margin-left: 0px;">
+						</div>
+					{{/if}}
+
+				</div>
+
+				{{#if noDimensions}}
+					<h4 class='alert alert-error'>Dimensions have not been setup for this chart </h4>
+				{{/if}}
+
+				{{#if errorMessage}}
+					<h4 class='alert alert-error'>
+						{{errorMessage}}
+					</h4>
+				{{/if}}
+
+				{{#unless isSetup}}		
+					<div class='row'>	
+						<div class='span'>
+							<img src='/assets/loading.gif' />
+						</div>
+					</div>
+				{{/unless}}
+
+			</div>
+
+			<div class='span pull-right' style="width: 30px; margin-left: 2px;">
+				<ul class="nav nav-pills pull-right">
+	                <div>
+                    	<li>
+                    		<button {{bindAttr id='drillId'}} data-toggle="tooltip" {{bindAttr title='titleToggle'}} {{bindAttr class='classToggle'}}  {{ action 'toggleDrill' this }} >
+                    			<i class = "icon-tasks muted" ></i>
+                    		</button>
+                    	</li>                            
+                    </div>
+
+					<div style='padding-right: 6px;' class='pull-right'>
+						{{render "comments" comments}}
+					</div>
+					
+					<br>
+					{{#if downloadable}}
+						<div style='padding-right: 6px;' class='pull-right'>
+							<li>
+								<a class="sample_link" data-toggle="tooltip" data-placement="right" title="Download Chart" {{ action "download" chart }} >
+									<i class='icon-download-alt muted'></i>
+								</a>
+							</li>
+						</div>
+					{{/if}}
+					{{#if chart.can_destroy}}
+						<br>
+						<div style='padding-right: 6px;' class='pull-right'>
+							<li><a class="sample_link" data-toggle="tooltip" data-placement="right" title="Delete Chart" {{ action 'delete' chart }}><i class='icon-trash muted'></i></a></li>
+						</div>
+					{{/if}}
+					
+					<br>
+					<div style='padding-right: 6px;' class='pull-right'>
+					    {{view view.chartMarginsView}}
+					</div>
+					
+					{{#if chart.can_destroy}}
+						<br>
+						<div style='padding-right: 6px;' class='pull-right'>
+							{{#if isSetup }}
+						 	   {{ view view.chartDataSourceView}}
+							{{/if}}
+						</div> 
+					{{/if}}
+
+					<div style='padding-right: 6px;' class='pull-right'>
+					{{#if isSetup}}
+					 	   {{ view view.chartConfigsView}}
+					 	   {{/if}}
+					</div> 				
+
+					<div style='padding-right: 6px;' class='pull-right'>
+					{{#if isSetup}}
+					  {{#if editType}}
+					    {{view view.chartTypesView}}
+					  {{/if}}
+					{{/if}}
+					</div>
+					<br>
+
+					<div style='padding-right: 6px;' class='pull-right'>
+					{{#if isSetup}}
+					 	   {{ view view.chartFiltersView}}
+					 	   {{/if}}
+					</div> 								
+				</ul>
+			</div>
+
+		</div>
+
+		{{view view.chartObjectsContainerView}}
+
+	</div>
+	{{ trigger draw }}
+{{/if}}
+

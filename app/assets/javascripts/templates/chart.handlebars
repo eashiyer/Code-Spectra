@@ -1,0 +1,266 @@
+{{#if chart.isLoaded }}
+	<div {{bindAttr id='containerId' class='className'}} >
+		{{#if isPivotTable}}
+			{{view view.pivotConfigsView}}
+		{{/if}}
+		<div class='row'>
+			<div class='row'>
+				<ul class="nav nav-pills chart-control-bar"> 
+				
+					<div class='filterDiv pull-left'>
+					    {{view view.chartMarginsView}}
+					</div>
+					
+  					{{#if chart.can_destroy}}					
+						<div class='filterDiv pull-left'>
+							{{#linkTo "dashboard.edit_chart" this }}
+								<i class="icon-edit muted" style="cursor: pointer" >
+		            			</i>
+		            		{{/linkTo}}
+
+						</div> 
+					{{/if}}					
+					{{!#if chart.can_destroy}}
+				
+						<!--div class='filterDiv pull-left'>
+							{{!#if isSetup }}
+						 	   {{! view view.chartDataSourceView}}
+							{{!/if}}
+						</div--> 
+					{{!/if}}
+
+					<div class='pull-left'>
+						{{#if isSetup}}
+					 	   {{ view view.chartConfigsView}}
+						{{/if}}
+					</div> 				
+
+					<div class='pull-left'>
+						{{#if isSetup}}
+						  {{#if editType}}
+						    {{view view.chartTypesView}}
+						  {{/if}}
+						{{/if}}
+					</div>
+				
+
+					<div class='pull-left'>
+						{{#if isSetup}}
+					 	   {{ view view.chartFiltersView}}
+					 	{{/if}}
+					</div>
+					<div class='pull-left'>
+						{{render "comments" comments}}
+					</div>	
+					<div class='pull-left'>
+						{{#if isSetup}}
+							{{ view view.drillThroughView}}
+						{{/if}}                    	                           
+                    </div>	
+                    <div class='pull-left'>
+                    	{{#if isSetup}}
+                    		{{ view view.forecastView}}
+                    	{{/if}}
+                    </div>
+
+                    {{#if showStatisticalToolbox}}
+	                    <div class='pull-left'>
+	                    	{{#if isSetup}}
+	                    		{{ view view.statisticalRelevanceView}}
+	                    	{{/if}}
+	                    </div>                    				
+	                {{/if}}
+
+					{{#if chart.can_destroy}}
+						
+						<div style='width: 25px; height: 100%; text-align: center;' class='pull-right'>
+							<li><a class="sample_link" data-toggle="tooltip" data-placement="right auto" title="Delete Chart" {{ action 'delete' chart }}><i class='icon-remove muted'></i></a></li>
+						</div>
+					{{/if}} 	
+					{{#unless isTableChart}}	
+						<div class='filterDiv pull-right'>
+							<a class="no_highlights" title="ChangeToFullScreenMode" {{action "convertToFullScreen"}}>
+								<i class='icon-resize-full muted'></i>
+							</a>
+						</div>
+					{{/unless}}
+					
+					{{#if downloadable}}
+						<div class='filterDiv pull-right'>
+
+							<div class="dropdown">
+								<a class="dropdown-toggle no_highlights" data-toggle="dropdown" title="Download">
+									<i class='icon-download-alt muted'></i>
+								</a>
+								<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+									{{#if isPivotTable}}
+										<li>
+											<a data-toggle="tooltip" id="download_image" {{ action "download" chart }}>
+												Download Pdf
+											</a>
+										</li>
+									{{else}}
+										<li>
+											<a data-toggle="tooltip" id="download_image" {{ action "download" chart }}>
+												Download Image
+											</a>
+										</li>
+									{{/if}}
+									
+									<li>
+										<a data-toggle="tooltip" id="download_data" {{ action "downloadData" chart }}>
+											Download Data
+										</a>
+									</li>
+								</ul>
+							</div>
+						
+						<!--		<a class="sample_link" data-toggle="tooltip" title="Download Chart" {{ action "download" chart }} >
+									<i class='icon-download-alt muted'></i>
+								</a>
+						-->
+						</div>
+					{{/if}}
+					{{#if onlyDataDownloadable}}
+						<div class='filterDiv pull-right'>
+							<div class="dropdown">
+								<a class="dropdown-toggle no_highlights" data-toggle="dropdown" title="Download">
+									<i class='icon-download-alt muted'></i>
+								</a>
+								<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+									<li>
+										<a data-toggle="tooltip" id="download_data" {{ action "downloadData" chart }}>
+											Download Data
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					{{/if}}	
+				</ul>
+			</div>
+			<div class='row' style="background-color:white; border-top-width:1px; border-top-style:solid; border-top-color:#cccccc; padding:5px;" id='popUpContainer'>
+				<div class='row' style="width:100%; padding-top:5px; padding-bottom:10px; max-height: 35px;">
+					<div class='span' id="titlediv">
+                        {{#if isolated}}
+                        	<img src="/assets/broken_link.png" height=15px width=15px style="margin-left: 3px;"/>
+                        {{/if}}
+						{{#if title  }}
+
+							<h4 style="color: #2093cc; margin-left: 15px;  display:inline;" class="title" data-toggle="tooltip" data-placement="bottom" {{bindAttr title=title}} {{ action "editChart" this target=view  }}  >{{ ntitle }}</h4>
+						{{else}}
+							<h4 class="muted" style="margin-left:15px; display:inline;" {{ action "editChart" this target=view }}>Title</h4>
+						{{/if}}
+						<img src="/assets/Toolbaricon_vertical_bar.png" style="height:15px;"/>
+						{{#if subtitle}}					
+							<h6 style="display:inline; color:#7C7C7C;" class="subtitle" data-toggle="tooltip" data-placement="bottom" {{bindAttr title=subtitle}} {{ action "editChart" this target=view }}>{{ nsubtitle }}</h6>
+						{{else}}
+							<h6 class="muted" style="display:inline;" {{ action "editChart" this target=view }}>Subtitle</h6>
+						{{/if}}					
+					</div>
+					{{view view.editTitleView}}
+					{{#if chart.dataLoading}}
+						<div class='span' style="margin-left: 10px; margin-right: 10px;">
+							<img src="/assets/ajax-loader.gif"/>
+						</div>
+					{{/if}}
+
+					{{#unless isSetup}}		
+						<div class='row'>	
+							<div class='span'>
+								<img src='/assets/ajax-loader.gif' />
+							</div>
+						</div>
+					{{/unless}}
+					
+					<div class='span pull-right muted' >					                   
+                    	{{ view view.descriptionView}}						
+					</div>								
+
+					<div class='span pull-right' style="min-height: 20px; max-height: 20px;">
+						{{#if legendFilter }}
+							<div class='btn-group'>
+								<div class='btn btn-mini disabled button-label'>
+									{{#if legendFilter.display_str}}
+										{{legendFilter.display_str}}
+									{{else}}
+										{{legendFilter.key}}								
+									{{/if}}
+								</div>
+								<a class='btn btn-mini pull-right' {{ action "resetLegendFilter" chart }}> 
+									x
+								</a>
+							</div>
+						{{/if}}
+					</div>
+				</div>
+				<div class='muted' style="font-size:10px;line-height:9px;margin-left:17px;">
+					<small> Updated {{time_ago updatedAt}}
+						{{#if updatedBy }} 
+							by {{updatedBy}} 
+						{{/if}}
+					</small>
+				</div>
+				{{view view.chartFiltersListView}}
+				<br>
+				{{#if isTimeSeriesChart}}
+					{{#if view.isDateType}}
+						<div class="pull-right">
+							<div class="dropdown" style="line-height:40px;">
+								<a {{ action "changeFormatAs" }} id = 'formatYear' class="btn flat-button new-chart-btn" style="margin-top: 0px; padding: 0px 12px;">Year</a>
+								<a {{ action "changeFormatAs" }} id = 'formatQuarter' class="btn flat-button new-chart-btn" style="margin-top: 0px; padding: 0px 12px;">Quarter</a>
+								<a {{ action "changeFormatAs" }} id = 'formatMonth' class="btn flat-button new-chart-btn" style="margin-top: 0px; padding: 0px 12px;">Month</a>
+								<a href="#" class="dropdown-toggle pullright" data-toggle="dropdown">	           	
+									<img src="/assets/Dropdown-arrow.png" style="margin-top: 0px; vertical-align: middle;"></img>
+								</a>
+								<ul class="dropdown-menu format-option" style="top:40px;left:5px;">
+									{{#each format in view.date_formats }}
+										<li><a {{action "changeFormatAs"}} id='other-formats' >{{format}}</a></li>
+									{{/each}}	
+								</ul>
+							</div>
+						</div>
+					{{/if}}
+				{{/if}}
+
+				{{#if isPivotTable}}
+					<!-- <br /><br />
+					<div class='row' style="margin-bottom:5px;">
+						<div class='span pull-right'>
+							<a {{!action "openConfigModal" this}}>Configure Report</a>
+						</div>	
+					</div> -->
+				{{/if}}								
+
+				<div class='row'>
+				{{#if errorMessage}}
+					<div {{bindAttr id='elemId' class=':draggable :span' style='view.chartErrorDimension'}} >					
+						<h4 class='alert alert-error'>
+							{{errorMessage}}
+						</h4>
+					</div>
+				{{else}}
+					<div {{bindAttr id='elemId' class=':draggable :span'}}>
+					</div>
+				{{/if}}					
+				</div>
+				<!-- <hr style="margin: 1px; border-top: 3px solid #eee;"> -->
+				<div class='row' style='max-height:50px;'>
+					{{#if hasLegend}}
+						<div class='span' {{bindAttr id='legendId'}} style="min-height:48px; max-height:48px; margin-left: 0px; border-top: 3px solid #eee; width:100%;">
+						</div>
+					{{/if}}
+				</div>
+
+				{{#if noDimensions}}
+					<h4 class='alert alert-error'>Dimensions have not been setup for this chart </h4>
+				{{/if}}
+
+			</div>
+		</div>
+
+		{{view view.chartObjectsContainerView}}
+
+	</div>
+	{{ trigger draw }}
+{{/if}}

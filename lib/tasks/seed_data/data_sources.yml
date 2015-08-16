@@ -1,0 +1,73 @@
+- id: 1
+  name: NIH Data
+  group: 
+    fact: TRXAMT
+    factType: money
+    ignore: ''
+    filter: TRX
+  dimensions: 
+  - IAA_NUMBER
+  - PROJNUM
+  - PARTY
+  - AGRNUM
+  - TRX
+  - TRXAMT
+  - AGRYR
+  - CODE
+  - CITY
+  - COUNTRY
+  - LAT
+  - LON
+- id: 2
+  name: Hierarchy Data
+  # public/data/hierarchy.csv 
+  group: 
+  dimensions: 
+  - LEVEL2_MANAGER
+  - LEVEL1_MANAGER
+  - DEPARTMENT
+  - EMPLOYEE
+- id: 3
+  name: SSB Deposits
+  # public/data/ssb/ssb_deposit_targets.csv
+  group: 
+  dimensions: 
+  - BranchName
+  - QuarterYr
+  - ActualDeposit
+  - DepositTarget
+- id: 4
+  name: SSB Churn
+  # public/data/ssb/ssb_churn.csv
+  group:
+  dimensions: 
+  - Branch
+  - Date
+  - AccountsOpened
+  - AccountsClosed
+- id: 5
+  name: SSB Loans
+  # public/data/ssb/ssb_loans.csv
+  group:
+  dimensions: 
+  - Branch Name
+  - Date
+  - Loan Type
+  - Loan Amount
+  - Quarter
+- id: 6
+  name: SSB Cust Satisfaction
+  # public/data/ssb/ssb_cust_sat.csv
+  group:
+  dimensions: 
+  - Branch Name
+  - QuarterYr
+  - Cust Sat
+- id: 7
+  name: SSB Deposit Actuals
+  # public/data/ssb/ssb_cust_sat.csv
+  group:
+  dimensions: 
+  - BranchName
+  - Date
+

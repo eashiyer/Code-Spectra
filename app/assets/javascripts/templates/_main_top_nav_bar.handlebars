@@ -1,0 +1,64 @@
+<ul class="nav pull-right" style="max-height:58px;">
+  {{#if Cibi.Auth.isTrial}}
+    <li class="muted data_source_link" style="margin-right:15px;">
+        <small>{{Cibi.Auth.daysRemain}} Days Left</small>
+    </li>
+  {{/if}}
+  	<li class="data_source_link" style="">
+  		{{#linkTo "verticals"}}
+  			Workspaces
+  		{{/linkTo}}
+  	</li>
+
+   	{{#if Cibi.Auth.currentUser.isAdmin}}
+ 		<li class="data_source_link" style="">
+ 			{{#linkTo "data_sources"}}
+ 				Data Sources
+ 			{{/linkTo}}
+ 		</li>
+   	{{/if}}
+
+	<li style="margin-top:17px; margin-bottom:17px; line-height:58px;"> 
+	  	<span style="display:block;">&nbsp;&nbsp;</span>
+	</li>
+   	
+   	<li class="dropdown" style="line-height:58px;">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			Welcome {{Cibi.Auth.currentUser.fullName}}		            		
+			<img src="/assets/Dropdown-arrow.png" style="margin-top: 0px; vertical-align: middle;"></img>
+		</a>
+    	<ul class="dropdown-menu">
+    		<li>
+    			{{#linkTo "user_profile"}}Profile{{/linkTo}}
+    		</li>	       	        	
+        	{{#if Cibi.Auth.currentUser.isAdmin}}
+        	 	<li>
+        	 		{{#linkTo "user_mgmt.index"}}
+        	 			User Management
+        	 		{{/linkTo}}
+        	 	</li>
+            <li>
+              {{#if Cibi.Auth.currentUser.account.isLoaded}}
+                {{#linkTo "account_settings.index" Cibi.Auth.currentUser.account.accountSetting}}
+                  Account Settings
+                {{/linkTo}}
+              {{/if}}
+            </li>        
+        	{{/if}} 
+	 	 	<li>
+    	 		{{#linkTo "settings.colors"}}Color Preference{{/linkTo}}
+    	 	</li>
+        	<li>
+        	 	<a {{action 'log_out' this target='view'}}>
+        	 		Log out
+        	 	</a>
+        	</li>
+          <li class="divider"></li>
+          <li>
+            <a href="http://cerebrateinc.wordpress.com" target="_blank">
+              Help
+            </a>
+          </li>		
+	  	</ul>
+	</li>
+</ul>

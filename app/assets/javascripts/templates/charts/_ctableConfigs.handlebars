@@ -1,0 +1,20 @@
+<div class="input-prepend input-append">
+	<span class="add-on">Hierarchy</span>
+	{{view Ember.TextField class="input-xlarge arrayField" valueBinding="view.hierarchy" name='hierarchy' placeholder="Comma Separated List of Fields"}}
+</div>
+
+<div class="input-prepend input-append">
+  <span class="add-on">Expansion Depth</span>
+  {{view Ember.TextField class="input-mini" valueBinding="view.expansion_depth" type='number' name='expansion_depth' placeholder="Default Expansion Depth in Tree"}}
+</div>
+
+<div class="row">
+	<div class='span'>
+		<label>Sort By Key?</label>
+	</div>
+	<div class='span'>
+		{{view Ember.Checkbox valueBinding="view.sort_by_key" name='sort_by_key' value=true }}
+	</div>
+</div>
+
+

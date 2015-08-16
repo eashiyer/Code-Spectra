@@ -1,0 +1,146 @@
+<div id='modal-pivot-configs' class='modal medium-modal hide fade'>
+	<div class="modal-header">
+		<div style= "float:right;width:100px">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					×
+				</button>
+			</div>
+			<h3 id="myModalLabel">Configs</h3>	
+		</div>
+	<div class="modal-body">	
+		<div class="row">
+			<div class="span2" style="margin-right:15px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								Fields								
+							</th>
+						</tr>						
+					</thead>
+					<tbody>
+						<tr>
+							<td class="droppableElement">
+								<ul class="nav" style="min-height:125px;" id="fields">
+									{{#each field in view.fields}}
+										<li class="draggableElement ui-state-default" 
+										style="list-style:none; margin: 5px; padding: 5px;">
+											<a {{action deleteField field target=view}}>
+												<i class='icon-remove-sign pull-right' >
+												</i>
+											</a>
+											<label style="margin: 0px;">{{field}}</label>
+										</li>
+									{{/each}}
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="span2" style="margin-right:15px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>	
+								Rows							
+							</th>
+						</tr>						
+					</thead>
+					<tbody>
+						<tr>
+							<td class="droppableElement">
+								<ul class="nav" id="row_fields" style="min-height:125px;">
+									{{#each field in view.row_fields}}
+										<li class="draggableElement ui-state-default ui-box" style="list-style:none; margin: 5px; padding: 5px;">
+												<a {{action deleteField field target=view}}>
+													<i class='icon-remove-sign pull-right' >
+													</i>
+												</a>
+												<label style="margin: 0px;">{{field}}</label>
+										</li>
+									{{else}}
+							      		<li class="placeholder ui-state-default">Add row fields here</li>
+									{{/each}}
+							    </ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="span2" style="margin-right:15px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>	
+								Columns							
+							</th>
+						</tr>						
+					</thead>
+					<tbody>
+						<tr>
+							<td class="droppableElement">
+								<ul class="nav" id="column_fields" style="min-height:125px;">
+									{{#each field in view.column_fields}}
+										<li class="draggableElement ui-state-default" 
+										style="list-style:none; margin: 5px; padding: 5px;">
+											<a {{action deleteField field target=view}}>
+												<i class='icon-remove-sign pull-right' >
+												</i>
+											</a>
+											<label style="margin: 0px;">{{field}}</label>
+										</li>
+									{{else}}
+							      		<li class="placeholder ui-state-default">Add column fields here</li>
+									{{/each}}
+							    </ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="span2" style="margin-right:15px;">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>
+								Measures						
+							</th>
+						</tr>						
+					</thead>
+					<tbody>
+						<tr>
+							<td class="droppableElement">
+								<ul class="nav" id="measure_fields" style="min-height:125px;">
+									{{#each measure in view.measure_fields_arr}}
+										<li class="draggableElement ui-state-default" 
+										style="list-style:none; margin: 5px; padding: 5px; display: -webkit-box;">		
+											{{view Ember.Select
+										       contentBinding=measure.content
+										       selectionBinding=measure.value
+										       class=measureSelect
+									        }}
+											<a style="padding: inherit;" {{action deleteField measure target=view}}>
+												<i class='icon-remove-sign pull-right' >
+												</i>
+											</a>
+										</li>
+									{{else}}
+							      		<li class="placeholder ui-state-default">Add measurable fields here</li>
+									{{/each}}
+							    </ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row" hidden>
+			{{view Ember.Checkbox}}<span style="padding-left: 5px; vertical-align: sub;">Display Total</span>
+		</div>
+		<div class="row pull-right">
+			<button class="btn btn-primary" {{action 'applyPivotConfigs' target='view'}} >Save</button>
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+		</div>
+	</div>
+</div>

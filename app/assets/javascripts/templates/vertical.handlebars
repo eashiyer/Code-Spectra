@@ -1,0 +1,52 @@
+<div id="vertical-bar" class="row affix vertical-bar" data-spy="affix" {{bindAttr style=view.accountTopNavColor}}>
+	<div class="span btn-group" {{bindAttr style=view.accountDBdropColor}}>
+	  <a class="btn dropdown-toggle btn-inverse flat-button" data-toggle="dropdown" href="#">
+	    Dashboard
+	    <span class="caret"></span>
+	  </a>
+	  <ul class="dropdown-menu" style="width:250px;">
+	  	{{#if this.can_edit}}
+		  	<div style="text-align: center;">
+				<input type="text" placeholder="Dashboard" id="dashboard_input" style="width:100px; vertical-align: baseline;">
+				<i class="icon-search" style="margin-right:20px;"></i>
+				{{#linkTo 'vertical.new' this }}
+					<button class="btn btn-inverse" type="button">Add</button>
+				{{/linkTo}}
+			</div>
+			<hr class="compact" style="border-bottom-color:#2093cd; border-top-color:#2093cd;"/>
+		{{/if}}
+	    {{render "dashboards" dashboards}}
+	  </ul>
+	</div>
+	<div class="span custom-divider"></div>
+	<div class="span dashboards">		
+		<ul class="nav nav-pills" >
+			<li style="margin-top:9px;">
+				<i class=" icon-fast-backward muted icon-white" style="cursor: pointer; vertical-align:middle;" {{action 'getPreviousDashBoards'}}></i>			
+			</li>
+			{{#each dashboard in currentDashboards}}
+			<li>			
+				{{#linkTo "dashboard.charts" dashboard}}
+					{{ dashboard.displayName }}
+				{{/linkTo}}
+			</li>
+			{{/each}}
+			<li style="margin-top:9px;">
+				<i class="icon-fast-forward muted icon-white" style="cursor: pointer; vertical-align:middle;" {{action 'getNextDashBoards'}}> </i>
+			</li>
+		</ul>
+	</div>
+	<div class="span pull-right" style="margin-right:20px; margin-top:10px;">
+	  	{{#linkTo 'vertical.users' this}}
+			<img src="/assets/users_icon.png" style="margin-left:7px; height:18px; width:25px;" />			
+		{{/linkTo}}
+	</div>		
+</div>
+<div class="row" id="main-tab" style="min-height:625px; padding-left:15px;">
+	{{#unless dashboards}}
+		<div id="createDashHead" class="" style="margin-top:60px;">
+			<img src="assets/blank-workspace.png"/>
+		</div>
+	{{/unless}}		
+	{{outlet}}	
+</div>

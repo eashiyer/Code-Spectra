@@ -1,0 +1,134 @@
+<div class="span" style="width:100%; background-color: #E3E3E3;min-height: 620px; padding-left:20px;">
+	<div class="row" style="margin-top: 10px; min-height: 100%">
+		<h3> CIBI Templates </h4>
+	</div>
+	{{#if isSaving}}
+		<div class="row">
+			<h4 class='alert alert-info'>
+				Saving...
+			</h4>
+		</div>
+	{{/if}}
+
+	{{#if view.successMessage}}
+		<div class="row">
+			<div class="text text-success" style="width:70%;">
+				<span>{{view.successMessage}}</span>
+			</div>			
+		</div>		
+	{{/if}}
+
+	{{#if view.noticeMessage}}
+		<div class="row">
+			<div class="text text-error" style="width:70%;">
+				<span>{{view.noticeMessage}}</span>
+			</div>			
+		</div>		
+	{{/if}}
+
+	<div class="row" style="margin-top: 20px; min-height: 100%">
+		<div class="span" style="width: 25%; border-right-color: black; border-right-style: solid; margin-right: 2%;">
+			<div class="row">
+				<h4 style="font-family: Roboto-Medium;">Templates Applied</h4>
+			</div>
+			<div class="row" style="margin-top: 15px;">
+				<ul style="list-style: none; margin-left: 0px; margin-top: 5px;">
+					{{#each template in accountTemplates}}
+						<li style="margin-bottom: 10px;">
+							<span>{{template.templateName}}</span>
+							{{#if template.templateName}}
+								<a {{action 'deleteTemplate' template target="view"}}>
+									&nbsp;<i class="icon-remove-sign muted" style="margin-top: 4px;"></i>
+								</a>
+							{{/if}}
+						</li>
+					{{else}}
+						<span class='text-info'> No templates applied to this account </span>
+					{{/each}}
+				</ul>
+			</div>
+		</div>
+		<div class="span" style="width:50%;">
+			<div class="row">
+				<div class="span" style="width:73%; margin-right:2%;">
+					{{#if view.isSpreeCommerceTemplate}}
+						<div class="row">
+							<h4 style="font-family: Roboto-Medium;">Apply spree commerce template</h4>
+						</div>
+						<div class="row" style="margin-top:15px;">
+							<form class="form-vertical">
+								<div class="control-group template-inputs" id="store_name_ctrl_grp">
+									<label class="control-label" for="store_name">Store Name</label>
+									<div class="controls">
+										{{view Ember.TextField class="input-large" valueBinding="view.templateInputs.store_name" required="true" id="store_name" placeholder="Store Name"}}
+									</div>
+								</div>
+								<div class="control-group template-inputs" id="store_url_ctrl_grp">
+									<label class="control-label" for="store_url">Store URL</label>
+									<div class="controls">
+										{{view Ember.TextField class="input-large" valueBinding="view.templateInputs.store_url" required="true" id="store_url" placeholder="Store URL"}}
+									</div>
+								</div>
+								<div class="control-group template-inputs" id="api_token_ctrl_grp">
+									<label class="control-label" for="api_token">API Key</label>
+									<div class="controls">
+										{{view Ember.TextField class="input-large" valueBinding="view.templateInputs.api_token" required="true" id="api_token" placeholder="API Key"}}
+									</div>
+								</div>
+								<div class="control-group">
+									<div class="row">
+										<div class='span'>
+											{{view Ember.Checkbox checkedBinding="view.templateInputs.sales" id='sales'}}
+										</div>
+										<div class='span'>
+											<label>Sales</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class='span'>
+											{{view Ember.Checkbox checkedBinding="view.templateInputs.inventory" id='inventory'}}
+										</div>
+										<div class='span'>
+											<label>Inventory</label>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="form-actions" style="padding-left:0px;">
+									  	<button type="button" class="btn btn-primary" {{action 'applyTemplate' target="view"}}>Apply</button>
+									  	<button type="button" class="btn">Cancel</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					{{else}}
+						<div class="text text-info">
+							<span>Coming soon! CIBI does not support this template yet.</span>
+						</div>
+					{{/if}}
+				</div>
+				<div class="span" style="width:25%;">
+					<div class="row">
+						<h4 style="font-family: Roboto-Medium;">Available Templates</h4>
+					</div>
+					<div class="row" style="margin-top:15px;">
+						<div class="input-append">								
+							<input type="text" placeholder="Search" id="available_template_input" style="width:179px;">
+							<span class="add-on" style="width:auto;">
+								<i class="icon-search"></i>
+							</span>
+						</div>							
+					</div>
+					<div class="row">
+						{{view Ember.Select
+					       contentBinding="availableTemplates"
+					       valueBinding="view.selectedTemplate"
+					       id="available_template_list"					       
+				        }}
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

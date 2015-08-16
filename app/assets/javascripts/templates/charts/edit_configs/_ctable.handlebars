@@ -1,0 +1,21 @@
+<div class="input-prepend input-append">
+	<span class="add-on">Hierarchy</span>
+	{{view Ember.TextField class="input-large arrayField" valueBinding="configObject.hierarchy" name='hierarchy'}}
+</div>
+
+<div class="input-prepend input-append">
+  <span class="add-on">Expansion Depth</span>
+  {{view Ember.TextField class="input-mini" valueBinding="configObject.expansion_depth" type='number' name='expansion_depth'}}
+</div>
+
+<div class="input-prepend input-append">
+	<span class="add-on">Columns (o)</span>
+	{{view Ember.TextField class="input-large arrayField" valueBinding="configObject.columns" name='columns'}}
+</div>
+
+<div style="margin-top:5px;margin-bottom:5px;">
+	<span style="padding-right:67px;">Number Format </span>
+	{{view Ember.Select contentBinding="view.displayUnits" valueBinding="configObject.displayUnit" name="displayUnit" class="small"}}
+</div>
+
+

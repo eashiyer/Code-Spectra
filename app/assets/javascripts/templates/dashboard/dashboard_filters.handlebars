@@ -1,0 +1,211 @@
+
+	<button class="btn btn-info flat-button" type="button" style="background-color:#4093cd; padding-left: 8px; padding-right: 8px; padding-top: 3px; padding-bottom: 3px;" {{action "openPopover" target=view on="click"}}>
+		<a rel="popover" class="dashboard_filter_popover" data-toggle="tooltip" data-placement="right" title="DashBoard Filters"  {{bindAttr id='view.dashboardFiltersPopoverId'}} >
+			<img src='/assets/Filtericon.png' style="height: 13px; padding-bottom: 5px;">
+			</img>
+			<span class="caret">
+			</span>
+		</a>
+	</button>
+
+	<div class="popover fade bottom in hidden" style="display: block; width: 300px;">
+		<div class="arrow hidden"></div>
+		<h3 class="popover-title hidden">Dashboard Filters</h3>
+		<div class="popover-content hidden">
+			<div class='row' style="min-height: 225px;">
+				<div class='span' style='margin-left: 10px;'>
+					<form class='form' style="margin-bottom:0px;">
+						Filter Display Name: <br>
+						{{input valueBinding="view.display_name" type='text' class="input-medium" }}
+						<br>
+
+						{{#if can_edit}}
+							{{view Ember.Checkbox checkedBinding="view.is_global" name='is_global' value=false class="align-checkbox"}} Shared Filter
+							<br>
+						{{/if}}
+						
+						<label style="margin-top:5px;">Field Name: </label>
+						{{view Ember.Select
+		    			    contentBinding="dashboardFieldsArr"
+    			            optionValuePath="content.text"
+      						optionLabelPath="content.text"
+		       				valueBinding="view.field_name"
+		       				class='input-medium'
+						}}						
+						<br>
+						{{#if view.field_name}}
+							{{#if view.datatype_date}}
+								{{#unless view.range_comparison}}
+									Format as: <br>
+										{{view Ember.Select
+						    			    contentBinding="view.period"
+						    			    valueBinding="view.format_as"
+						       				class='input-medium'
+										}}
+										<br>
+								{{/unless}}
+							{{/if}}
+						{{/if}}						
+
+						{{view Ember.Select
+		    			    contentBinding="view.operator_list"
+		    			   	optionLabelPath="content.display"
+		    			    optionValuePath="content.value"
+		       				valueBinding="view.comparison_operator"
+		       				class='input-medium'
+						}}
+						{{#if view.valuesLoading}}
+							<img src='/assets/ajax-loader.gif' />
+						{{/if}}
+						<br>
+							<div {{bindAttr id='view.filterValuesId'}}>
+							</div>
+						{{#if view.range_comparison}}
+						    <div class='row'>
+						    	<div class='span'>
+									{{view Ember.Checkbox checkedBinding="view.specific_date" class="range_selector radio-align" name="0"}}
+								</div>
+								<div class='span'>
+									<label>Choose specific dates</label>
+								</div>
+							</div>
+						    <div class='row'>
+						    	<div class='span'>
+									{{view Ember.Checkbox checkedBinding="view.reference_date_option" class="range_selector radio-align" name="1"}}
+								</div>
+								<div class='span'>
+									<label>Specify periods w.r.t reference date</label>
+								</div>
+							</div>
+						    <div class='row'>
+						    	<div class='span'>
+									{{view Ember.Checkbox checkedBinding="view.predefined_range" class="range_selector radio-align" name="2"}}
+								</div>
+								<div class='span'>
+									<label>Predefined range</label>
+								</div>
+							</div>							
+
+							{{#if view.specific_date}}
+								<div class="row" style="margin-top:5px;">
+									<div class="span">
+										<span>Lower: </span><br/>
+									  	<div id="datetimepicker" style="width: 150px;">
+									  		{{#if view.isDate}}
+												{{view Cibi.NewDateField valueBinding="view.start_date" id="dashboard_lower_range" classNames="startDate" style="margin-right:10px; width:100px;"}}	
+											{{else}}
+												{{#if view.isTime}}
+													{{view Cibi.NewTimeField valueBinding="view.start_date" id="dashboard_lower_range" classNames="startDate" style="margin-right:10px; width:100px;"}}	
+												{{else}}
+													{{#if view.isDateTime}}
+														{{view Cibi.NewDateTimeField valueBinding="view.start_date" id="dashboard_lower_range" classNames="startDate"}}			
+													{{/if}}
+												{{/if}}
+											{{/if}}
+									  	</div>
+									</div>
+									<div class="span">
+										<span>Upper:</span> <br/>
+									  	<div id="datetimepicker" style="width: 150px;">
+									  		{{#if view.isDate}}
+												{{view Cibi.NewDateField valueBinding="view.end_date" id="dashboard_upper_range" classNames="startDate" style="margin-right:10px; width:100px;"}}	
+											{{else}}
+												{{#if view.isTime}}
+													{{view Cibi.NewTimeField valueBinding="view.end_date" id="dashboard_upper_range" classNames="startDate" style="margin-right:10px; width:100px;"}}	
+												{{else}}
+													{{#if view.isDateTime}}
+														{{view Cibi.NewDateTimeField valueBinding="view.end_date" id="dashboard_upper_range" classNames="startDate"}}			
+													{{/if}}
+												{{/if}}
+											{{/if}}
+									  	</div>								
+									</div>
+								</div>
+							{{/if}}
+
+							{{#if view.reference_date_option}}
+								<div class='row' style="margin-top:10px;">
+									<b>Specify Period</b>
+								</div>
+							    <div class='row' style="margin-top:5px;">
+									<div class='span' style="width:45%;">
+										<input type="radio" class="radio-align" name="reference_direction" value="previous" checked> previous
+									</div>
+									<div class='span' style="width:45%;">
+										<input type="radio" class="radio-align" name="reference_direction" value="next"> next
+									</div>
+								</div>
+								<div class='row' style="margin-top:5px; width:100%;">
+									<div class="span">
+										{{view Cibi.NumberField valueBinding="view.reference_count" min="1" style="width:80px;"}}
+									</div>
+									<div class="span" style="margin-left: 10px;">
+										{{view Ember.Select
+					    			    contentBinding="view.period_unit"
+					    			    valueBinding="view.reference_unit"
+					       				class='input-medium'}}
+					       			</div>
+								</div>
+
+								<div class='row' style="margin-top:5px;">
+									<b>Reference Date</b>
+								</div>
+								<div class='row' style="margin-top:5px;">
+									<div class="span">
+										{{view Ember.Checkbox checkedBinding="view.reference_date_today" }}Today
+									</div>
+									<div class="span" style="margin-left: 10px;">
+									  	<div id="datetimepicker" style="width: 150px;">
+									  		{{#if view.isDate}}
+												{{view Cibi.NewDateField valueBinding="view.reference_date" id="reference_date" classNames="startDate" style="margin-right:10px; width:100px;"}}	
+											{{else}}
+												{{#if view.isTime}}
+													{{view Cibi.NewTimeField valueBinding="view.reference_date" id="reference_date" classNames="startDate" style="margin-right:10px; width:100px;"}}	
+												{{else}}
+													{{#if view.isDateTime}}
+														{{view Cibi.NewDateTimeField valueBinding="view.reference_date" id="reference_date" classNames="startDate"}}			
+													{{/if}}
+												{{/if}}
+											{{/if}}	
+									  	</div>
+									</div>
+								</div>
+							{{/if}}
+
+							{{#if view.predefined_range}}
+								<div class='row' style="margin-top:5px;">
+									<b>Select a range:</b>
+								</div>
+								<div class='row' style="margin-top:5px;">
+							  		{{#if view.isDate}}
+										{{view Ember.Select
+									       contentBinding="view.range_types"
+									       valueBinding='view.selected_range'
+									       class="input-medium"
+								        }}	
+									{{else}}
+										{{#if view.isDateTime}}
+											{{view Ember.Select
+										       contentBinding="view.combined_range_types"
+										       valueBinding='view.selected_range'
+										       class="input-medium"
+									        }}
+									    {{/if}}	
+									{{/if}}
+								</div>	
+							{{/if}}
+
+						{{/if}}
+						
+						
+						<input type="submit" value='Save' class='btn'/ >
+						<button class="btn" aria-hidden="true"
+						{{action 'cancel' target="view"}}>Cancel</button>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+
+	</div>
+

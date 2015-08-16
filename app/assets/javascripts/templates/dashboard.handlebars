@@ -1,0 +1,128 @@
+<div {{ bindAttr id='tabId' class=':tab-pane'}} style="width:100%; margin-top:44px;">
+	{{#unless chartNewEditRoute}}
+		{{#if chartsOnClickFilters}}
+			<div class="row affix chart-filter-bar">
+				{{#each filter in chartsOnClickFilters}}
+					{{#each val in filter.value}}
+						<a class='btn btn-mini flat-button chart-filter-btn' {{ action "resetChartFilter" filter val}} >
+							{{filter.operator}}&nbsp;{{val}}
+							&times;
+						</a>
+					{{/each}}
+				{{/each}}
+				{{#if Cibi.Auth.linked_dashboard}}
+					<div class='span pull-right' style="margin-right: 10px; line-height: 28px;">
+						<a {{ action "returnToPrevious" this }} class="btn flat-button new-chart-btn" style="margin-top: 0px; padding: 0px 12px;"> Return & Reset All </a>
+					</div>
+				{{/if}}	
+				<div class='span pull-right' style="margin-right: 10px; line-height: 28px;">
+					<a {{ action "reset" this }} class="btn flat-button new-chart-btn" style="margin-top: 0px; padding: 0px 12px;"> Reset All </a>
+				</div>	
+			</div>
+		{{/if}}
+	{{/unless}}
+
+	<div class="row">
+		<div class="span" id="dashboard_charts_container" style="width:100%;">
+			{{#unless chartNewEditRoute}}
+				<div class='row' style='margin-left:0px; margin-top:0px; width:98%;' >
+					<div class='span' id="titlediv" >
+						<h3 style="font-family:Roboto-Medium; font-size:18px;"> {{title}}
+							{{#if can_edit}}
+								{{#linkTo "dashboard.edit" this }}
+									<i class="icon-edit muted" style="cursor: pointer" >
+			            			</i>
+			            		{{/linkTo}} 
+
+									<i class="icon-trash muted" style="cursor: pointer" {{action 'deleteDashboard' this target=view}} >
+			            			</i>            		
+			            	{{/if}}
+			           	</h3>
+						<h4> {{subtitle}} </h4>
+					</div>
+
+					<div class='span pull-right' id="dashboard_menu">
+						<br>
+						<div style="float:left;margin-top:-10px;margin-right:10px;">
+							{{ view view.dashboardFiltersView}}
+						</div>			
+
+						<div style="float:left;margin-top:-10px;margin-right:10px;">
+						  {{ view view.dashboardLayoutView}}
+						</div>
+
+						<div style="float:left;margin-top:-10px;margin-right:10px;">
+							<div>
+							  <a class="btn btn-info flat-button sort-icon" title="Enable/Disable Sorting" data-tooltip="tooltip"  style="background-color:#4093cd; padding-top: 3px; padding-bottom: 4px;" {{action toggleSorting}}><i class="icon-move icon-white"></i></a>
+							</div>
+
+						</div>
+				
+						<div style="float:left;margin-top:-10px;margin-right:10px;">
+							<div class="dropdown">
+							  <a class="dropdown-toggle btn btn-info flat-button"  style="background-color:#4093cd; padding-top: 3px; padding-bottom: 4px;" data-toggle="dropdown" href="#"><img src="/assets/download_icon.png" style="height: 13px;"/></a>
+							  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+					  				<li>
+										<a data-toggle="tooltip" data-placement="right" id="download_png" {{ action "download" 'download_png' this }}>
+											Download PNG
+										</a>
+									</li>
+									<li>
+										<a data-toggle="tooltip" data-placement="right" id="download_pdf" {{ action "download" 'download_pdf' this }}>
+											Download PDF
+										</a>
+									</li>
+							  </ul>
+							</div>
+
+						</div>
+
+						<div style="float:left;margin-top:-10px;margin-right:10px;">
+							{{ view view.scheduleReportsView}}
+						</div>
+
+						{{#if can_edit}}
+							{{#linkTo 'dashboard.new' this  class="btn flat-button new-chart-btn" }}
+								Add Chart
+							{{/linkTo}}
+
+						{{/if}}
+					</div>
+				</div>
+	        	<div class="muted" style="margin-bottom: 5px;">
+	        		<small>Updated {{ time_ago updatedAt }}</small>
+	    		</div>
+				{{#if showDashboardFilters}}
+					<div {{bindAttr id='dashboardFiltersId'}} class='row' style='margin-right:22px;'>
+							{{#each filter in dashboardFilters}}
+								{{#if filter.isLoaded }}
+									{{ view view.dashboardFilterView contentBinding="filter"}}
+								{{/if}}	
+
+								{{else}}
+								<h6> No filters defined.</h6>
+							{{/each}}
+					</div>
+				{{/if}}
+
+				{{#if view.showGridLayout}}
+					<div class='overlay' style="width:95%;">
+					{{#each view.rowNums}}
+						<div class='row'>	
+							{{#each view.colNums}}
+								<div class="span chart_grid_placeholder" {{bindAttr style='view.chartGridDimensions'}}>
+								</div>
+							{{/each}}
+						</div>
+					{{/each}}
+					</div>
+				{{/if}}
+			{{/unless}}
+
+			{{#if Cibi.Auth.globalSetting.isLoaded}}
+				{{outlet}}
+			{{/if}}
+		</div>
+		
+	</div>	
+</div>

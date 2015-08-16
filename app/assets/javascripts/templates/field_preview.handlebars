@@ -1,0 +1,25 @@
+<td class="field_name">
+	<label> {{field}} </label>
+</td>
+
+<td>
+	{{view Ember.Select
+	       contentBinding="view.datatypes"
+	       optionValuePath="content.value"
+	       optionLabelPath="content.label"	
+	       valueBinding = "view.data_type"				      
+	       class="data_type input-small"	       
+        }}
+</td>
+
+<td>
+    {{render 'data_sources/options' this }}
+</td>
+
+<td>
+	<input type="text" {{bindAttr value="view.default_value"}} class="default_value">
+</td>
+
+<td style="text-align:center;">
+	<input type='checkbox' class='ignored'></input>
+</td>

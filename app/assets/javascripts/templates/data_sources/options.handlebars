@@ -1,0 +1,121 @@
+<table class="table-small">	
+		{{#if view.varchar }}
+			<tr>
+				<td>Length:</td>
+				<td><input type="number" min="200" value='200' class="string_length" style="width:40px;margin-left:10px;"/></td>
+			<tr>
+		{{/if}}
+
+		{{#if view.decimal}}
+			<tr>
+				<td>Max Digits:</td>
+				<td><input type="number" value='15' class="max_digits" style="width:40px;margin-left:10px;"/></td>
+			</tr>
+			<tr>
+				<td>Max Decimals:</td>
+				<td><input type="number" value='3' class="max_decimals" style="width:40px;margin-left:10px;"/></td>
+			</tr>
+		{{/if}}
+
+		{{#if view.date}}
+			
+			<tr>
+				<td>Format:</td>	
+				<td>
+					{{view Ember.Select contentBinding="view.date_formats"
+						class="date_format input small"
+					}}
+		        </td>
+	        </tr>
+		{{/if}}
+
+		{{#if view.time}}
+			<!--tr>
+				<td>Seperator:</td>
+				<td-->
+					{{!view Ember.Select
+				       contentBinding="view.time_seperators"
+				       valueBinding="view.time_seperator"			      
+				       class="time_seperator input-mini"	       
+			        }}		
+		        <!--/td>
+			</tr-->
+
+			<tr>
+				<td>Format:</td>
+				<td>
+					{{#if view.colon_format}}
+						{{view Ember.Select
+					       contentBinding="view.time_formats_colon"		      
+					       class="time_format input-small"	       
+				        }}
+			        {{else}}
+						{{view Ember.Select
+					       contentBinding="view.time_formats_space"		      
+					       class="time_format input-small"	       
+				        }}
+			        {{/if}}	
+		        </td>
+	        </tr>	
+		{{/if}}		
+
+		{{#if view.datetime}}
+		<!--tr>
+			<td>Date Seperator:</td>
+			<td-->
+			{{!view Ember.Select
+		       contentBinding="view.date_seperators"
+		       valueBinding="view.date_seperator"			      
+		       class="date_seperator input-mini "	       
+	        }}
+	        <!--/td>
+		</tr-->
+
+			<tr>
+			<td>Date Format:</td>
+			<td>
+			{{#if view.valid_date_separator}}
+				{{view Ember.Select
+			       contentBinding="view.date_formats"		      
+			       class="date_format input-small"	       
+		        }}
+	        {{else}}
+				<label class="text text-error">Invalid seperator</label>
+		    {{/if}}
+	        </td>
+			
+			<!--tr>
+			<td>Time Seperator:</td>
+			<td-->
+			{{!view Ember.Select
+		       contentBinding="view.time_seperators"
+		       valueBinding="view.time_seperator"			      
+		       class="time_seperator input-mini"	       
+	        }}	
+	        <!--/td>	
+			</tr-->
+
+			<tr>
+			<td>Time Format:</td>
+			<td>
+			{{#if view.colon_format}}
+				{{view Ember.Select
+			       contentBinding="view.time_formats_colon"		      
+			       class="time_format input-small"	       
+		        }}
+	        {{else}}
+				{{view Ember.Select
+			       contentBinding="view.time_formats_space"		      
+			       class="time_format input-small"	       
+		        }}
+	        {{/if}}		
+	        </td>
+	        </tr>
+		{{/if}}		
+
+		{{#if view.no_options}}
+		<tr>
+			<td>No options</td>
+		</tr>
+		{{/if}}
+</table>

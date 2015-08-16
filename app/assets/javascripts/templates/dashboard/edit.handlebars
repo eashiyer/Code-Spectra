@@ -1,0 +1,67 @@
+
+
+<div id ="new-dashboard-notice">
+</div>
+<form class="form-horizontal">
+	<fieldset>
+		<div class="control-group" id="display_name_control_group">
+			<label class="control-label" for="input01">Display Name</label>
+			<div class="controls">
+				{{input type ="text" id="display_name" class="input-xlarge" valueBinding="displayName" placeholder="Display Name"  }}
+				
+				<p class="help-block">This name will appear in dashboards list</p>
+			</div>
+		</div>
+		<div class="control-group" id="title_control_group">
+			<label class="control-label" for="input02">Title</label>
+			<div class="controls">
+				{{input type ="text" id="title" class="input-xlarge" valueBinding="title"  placeholder="Title"  }}
+			</div> 
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="input03">Sub Title</label>
+			<div class="controls">
+				{{input type ="text" id="subtitle" class="input-xlarge" valueBinding="subtitle" placeholder="Sub Title"}}
+			</div>
+		</div>
+		<div class="control-group">
+			<label class="control-label" for="input04">Description</label>
+			<div class="controls">
+				{{view Cibi.TextArea rows=3 id="description" class="input-xlarge" valueBinding="description" placeholder="Description" }}
+			</div>
+		</div>
+
+		<div class="control-group">
+			<div class="span" style="width: 20%;">
+				<label class="control-label" for="input03">Auto Refresh</label>
+				<div class="controls">
+					{{view Ember.Checkbox id="auto_refresh" valueBinding="autoRefresh" checkedBinding="autoRefresh"}}
+				</div>
+			</div>
+			<div class="span" style="width: 80%;">
+				<div class="row" style="display: -webkit-inline-box;">
+					<label style="padding-top: 4px; margin-right: 5px; margin-left: 5px;">
+						After Every
+					</label>
+					<div style="margin-left: 15px; margin-right: 5px;">
+						{{view Cibi.NumberField valueBinding="refreshInterval" min="1" class="input-mini"}}
+					</div>
+					<label style="padding-top: 4px; font-size: 13px;">Seconds</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-actions">
+			<button class='btn btn-primary' {{ action "submit" this target=view}}>Save</button>
+            <button class="btn" onclick="javascript:history.go(-1); return false;">Cancel</button>
+			
+		</div>
+	</fieldset>
+</form>
+
+
+
+
+
+
+
+

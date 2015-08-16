@@ -1,0 +1,91 @@
+<div class="span" style="width:100%; margin-top:44px;">
+	<div class='row main-tab-title'>
+		<div class='span'>
+			<h3>Authorized Users For Workspace {{view.name}}</h3>
+		</div>
+		<div class='span pull-right right-contained' style="margin: 7px">
+			{{#if can_destroy}}
+				<button class='btn' {{action 'addNew' target=view}} >
+					New Permission
+					<i class='icon-plus-sign muted'></i>				
+				</button>
+			{{/if}}
+		</div>
+	</div>
+	<hr class='compact'>
+	<div class="row">
+		<div class="span">
+			{{render "permissions"}}
+		</div>
+	</div>
+
+</div>
+<hr class='compact'>
+
+<div id='modal-new-permission' class='modal hide fade'>
+	<div class="modal-header" style="background-color:#323232; border-top-left-radius: 6px; border-top-right-radius: 6px; color: #eee;">
+		<h3>Create New Permission</h3>
+	</div>
+
+	<div class="modal-body">
+		{{#if users}}
+			<form class="form-horizontal">
+				<div class="control-group">
+					<label class="control-label">User</label>
+			    <div class="controls">
+				      {{view Ember.Select
+					       contentBinding="users"
+					       optionValuePath="content.id"
+					       optionLabelPath="content.fullName"
+					       valueBinding=view.user
+					       class="input-large"
+					       required=true
+						}}
+				    </div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Role</label>
+					 <div class="controls">
+						{{view Ember.Select
+					       contentBinding="view.roles"
+					       valueBinding=view.role
+					       class="input-large"
+					       required=true
+						}}
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">Select Entity</label>
+					 <div class="controls">
+					 	
+						{{view Ember.Checkbox checkedBinding="view.entityType"}}&nbsp; Entire Workspace<br>
+						{{#if view.entityType}}							
+							{{#each dashboard in dashboards}}
+								<br>
+								{{input type="checkbox" name=dashboard.id disabled="disabled"}}&nbsp;{{dashboard.displayName}}
+							{{/each}}
+						{{else}}	
+							{{#each dashboard in dashboards}}
+								<br>
+								{{input type="checkbox" name=dashboard.id}}&nbsp;{{dashboard.displayName}}
+							{{/each}}						
+						{{/if}}
+					</div>
+				</div>
+				<div class="form-actions">
+					<button class='btn btn-primary' {{action 'save' target=view}}>
+						Save
+					</button>
+
+					<button class='btn' {{action 'cancel' target=view}}>
+						Cancel
+					</button>
+				</div>
+			</form>
+		{{else}}
+			<h4 class='alert alert-info'>
+				All users are already authorized for this workspace!
+			</h4>
+		{{/if}}
+	</div>
+</div>

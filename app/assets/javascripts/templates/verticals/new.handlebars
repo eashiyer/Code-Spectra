@@ -1,0 +1,62 @@
+<div class="span" style="width:100%;">
+	<div class="row affix vertical-bar" id="account-settings" {{bindAttr style= view.accountTopNavColor}}>	
+		<button class="btn btn-info flat-button" type="button" style="margin-top:7px; background-color:#4093cd;">Create new</button>
+	</div>
+</div>
+<div class="row" style="min-height:600px;padding-top:50px;padding-left:20px;">
+	<div class="span">
+        {{#if isError}}
+            <h4 class='alert alert-error'> Unable to Save!</h4>
+        {{/if}}
+
+		<form method="POST">
+			<h3 style="margin-bottom:10px;">Create New Workspace </h4>
+				<div class="row">
+					<div class="span2"><h4 style="margin-top:10px;">Name of Vertical*</h4></div>
+				</div>
+				<div class="row">
+					<div class="span">
+						{{view Ember.TextField valueBinding="view.verticalName" name='verticalName' placeholder="Vertical Name" class="input-xlarge"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span"><h4 style="margin-top:10px;">Description</h4></div>
+				</div>
+				<div class="row">
+					<div class="span">
+						{{view Ember.TextArea valueBinding="view.verticalDescription" name='verticalDescription' placeholder="Description" rows="3" class="input-xlarge"}}
+					</div>
+				</div>
+				<div class="row">
+					<div class="span"><h4 style="margin-top:10px;">Icon</h4></div>
+				</div>
+
+				<div class="row">
+					<div class="span">
+						<div class="row" >
+							<img id="icon-preview" style="background-color: grey;" width="40" height="40"/>
+						</div>
+						<div class="row" style="padding-right:20px;">
+							<input id="iconUpload" type="file" name="files[]" multiple>	
+						</div>						
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="span" >Or select from commonly used ones</div>
+				</div>
+				<div class="row">
+					<div class="span" style="margin-left:10px;">
+						{{view view.iconTypesView}}
+					</div>
+				</div>																				
+				<div class="row" style="margin-top:50px;">
+					<div class="span">
+						<button type='submit' class='btn btn-primary'>Create</button>
+						<button class="btn" onclick="javascript:history.go(-1); return false;">Cancel</button>
+					</div>
+				</div>																				
+		</form>
+	</div>
+</div>
+

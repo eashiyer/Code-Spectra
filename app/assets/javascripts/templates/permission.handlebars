@@ -1,0 +1,50 @@
+<tr>
+	<td>{{permission.userName}}</td>
+	<td>
+		{{permission.entityName}}
+	</td>
+	<td>
+		{{#if can_destroy}}
+			{{view Ember.Select
+			    contentBinding="view.roles"
+			    valueBinding=permission.role
+			    class="input-small"
+			    required=true
+			}}
+		{{else}}
+			{{view Ember.Select
+			    contentBinding="view.roles"
+			    valueBinding=permission.role
+			    class="input-small"
+			    required=true
+			    disabled="disabled"
+			}}
+		{{/if}}
+	</td>	
+	<td>
+		<div class="btn-group">
+
+			{{#if permission.isDirty}}
+				<button class='btn btn-mini' {{action 'save' permission target=view}}>
+					Save
+				</button>
+			{{else}}						
+				<button class='btn btn-mini disabled'>
+					<i class="icon-pencil"></i>
+				</button>
+			{{/if}}
+
+
+			
+			{{#if can_destroy}}
+				<button class='btn btn-mini' {{action 'delete' permission target=view}}>
+					<i class="icon-trash"></i>
+				</button>
+			{{else}}
+				<button class='btn btn-mini disabled'>
+					<i class="icon-trash"></i>
+				</button>
+			{{/if}}				
+		</div>
+	</td>
+</tr>

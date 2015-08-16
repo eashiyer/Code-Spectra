@@ -1,0 +1,17 @@
+<li class='filterDiv'>
+	{{#if hasComments}}
+		<span class='notification-count'>{{commentsCount}}</span>
+	{{/if}}
+	<a rel="popover" class="comment_popover" data-toggle="tooltip" data-placement="right auto" title="Chart Annotations" {{bindAttr id='popoverId'}}>
+		<i class='icon-comment muted'></i>
+		<div id='list_comments' class='hidden'>
+			{{view Cibi.ListCommentsView}}
+		</div>
+
+		<div id='new_comment' class='hidden'>
+			{{view Cibi.NewCommentView}}
+		</div>
+	</a>
+
+
+</li>

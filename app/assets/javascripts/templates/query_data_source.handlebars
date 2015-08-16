@@ -1,0 +1,194 @@
+<div>
+		<div class='row' style="width:100%;">
+			{{view Ember.Select
+				contentBinding="view.connections"
+				valueBinding="view.connection" 
+				optionValuePath="content.id"
+				optionLabelPath="content.displayName"
+				id='query_ds_conn_id'
+				class="pull-left"
+				selectionBinding="view.data_connection_id"
+		    }}
+
+		    {{#if data_loading}}
+				<div class='span' style="margin-left: 10px; margin-right: 10px;">
+					<img src="/assets/ajax-loader.gif"/>
+				</div>
+			{{/if}}
+
+			<div class="span alert alert-info qds_info_message" style="visibility: hidden;">
+			</div>
+
+		    <button class='btn pull-right' {{ action saveQuery target='view' on='click'}}>Save</button>
+		</div>
+
+		<div class='row' style="width:100%;">
+			<div class="span modal" style="width:99.7%; min-height:200px; position:inherit; margin-right:10px; margin-bottom:10px;">
+				<div class="row modal-header">
+					<h4>Query</h4>
+				</div>
+				<div class="row modal-body">
+					{{view Cibi.TextArea rows=5 valueBinding="view.query" required=true placeholder="Query" class="queryTextArea" disabledBinding="view.isDisabled"}}
+				</div>
+			</div>
+		</div>		
+
+		{{#unless view.isDisabled}}
+			<div class='row' style="width:100%;">
+				<div class="span modal" style="width:99.7%; min-height:200px; position:inherit; margin-bottom:10px;">
+					<div class="row modal-header">
+						<h4 style="display: inline;">Results Preview</h4>
+						<a style="vertical-align: sub;" {{action previewResults target=view on='click'}}>
+							<i class = "icon-repeat pull-right" style="padding: 0px; margin: 5px;"></i>
+						</a>
+					</div>
+					<div class="row modal-body">
+						
+						{{#if preview_results}}
+							{{view view.previewResultsView}}
+						{{else}}
+							{{#if preview_error}}
+								<div class="alert alert-error">
+									<p>{{preview_error}}</p>
+								</div>
+							{{else}}
+								<div class="alert alert-block">
+									<p>No preview. Please hit refresh</p>
+								</div>
+							{{/if}}					
+						{{/if}}	
+					</div>
+				</div>
+			</div>
+
+			<div class='row' style="width:100%;">
+				<div class="span modal" style="width:99.7%; min-height:200px; position:inherit; margin-bottom:10px;">
+					<div class="row modal-header">
+						<h4>Fields</h4>
+					</div>
+					<div class="row modal-body fieldsPreview">
+						{{#if preview_results}}
+							{{view view.previewFieldsView}}
+						{{/if}}	
+					</div>
+				</div>
+			</div>
+		{{/unless}}
+
+		<div class='row' style="width:100%;">
+			<div class="span modal" style="width:99.7%; min-height:200px; position:inherit; margin-bottom:10px;">
+				<div class="row modal-header">
+					<h4>Data Source Properties</h4>
+				</div>
+				<div class="row modal-body">
+					<div class="span" style="width:60%;">
+						<div class="row" style="margin-bottom: 10px;">
+							<div class="span" style="width:50%;">
+								<div class="row">
+									<h5>Import Type</h5>
+								</div>
+								<div class="row" style="margin-bottom: 5px;">
+									{{#if view.isDisabled}}
+										<input type="text" {{bindAttr value="view.getImportTypeLabel"}} class="pull-left disabled" style="background-color:#eeeeee;">
+									{{else}}
+										{{view Ember.Select
+											id='query_ds_import_type_id'
+											contentBinding="view.importTypes"
+											optionValuePath="content.value"
+											optionLabelPath="content.label"
+											valueBinding="view.import_type"
+											class="pull-left"
+									    }}
+									{{/if}}									
+								</div>
+							</div>
+							<div class="span" style="width:50%;">
+								<div class="row">
+									<h5>Disable Query</h5>
+								</div>
+								<div class="row" style="margin-bottom: 10px;">
+									{{view Ember.Checkbox valueBinding="view.disable"
+									checkedBinding="view.disable"}}
+								</div>
+							</div>
+							
+						</div>
+						<div class="row" style="margin-bottom: 10px;">
+							<div class="span" style="width:50%;">
+								<div class="row">
+									<h5>Frequency of import (in minutes)</h5>
+								</div>
+								<div class="row" style="margin-bottom: 10px;">
+									{{view Cibi.NumberField min="1" class="input-mini" valueBinding="view.frequency" required=true}} minutes
+								</div>
+							</div>
+							{{#if view.isAppendTo}}
+								<div class="span" style="width:50%;">
+									<div class="row">
+										<h5>Unique Key</h5>
+									</div>
+									<div class="row" style="margin-bottom: 10px;">
+										{{#if view.isDisabled}}
+											<input type="text" {{bindAttr value="view.uniqueKey"}} class="pull-left disabled" style="background-color:#eeeeee;">
+										{{else}}
+											{{view Ember.Select
+												contentBinding="keyFields"
+												valueBinding="view.uniqueKey"
+												id='query_ds_unique_key_id'
+												class="pull-left"
+										    }}
+										{{/if}}
+									</div>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+					{{#if view.isAppendTo}}
+						<div class="span" style="width:40%;">
+							<div class="row">
+								<fieldset>
+								    <legend style="font-size: 16px; line-height: 20px;">
+								    	Bookmark Conditions
+								    	<i class="icon-question-sign pull-right"></i>
+								    </legend>
+								    <div class="span" style="width:50%;">
+								    	<div class="row">
+											<h5>Bookmark Key</h5>
+										</div>
+										<div class="row" style="margin-bottom: 10px;">
+											{{#if view.isDisabled}}
+												<input type="text" {{bindAttr value="view.bookmarkKey"}} class="pull-left disabled" style="background-color:#eeeeee;">
+											{{else}}
+												{{view Ember.Select
+													contentBinding="keyFields"
+													valueBinding="view.bookmarkKey"
+													id='query_ds_bookmark_key_id'
+													class="pull-left"
+											    }}
+											{{/if}}
+										</div>
+
+										<div class="row">
+											<h5>Bookmark Comparison Operator</h5>
+										</div>
+										<div class="row" style="margin-bottom: 10px;">
+											{{#if view.isDisabled}}
+												<input type="text" {{bindAttr value="view.bookmarkComparison"}} class="pull-left disabled mini" style="background-color:#eeeeee; text-align: center;">
+											{{else}}
+												{{view Ember.Select
+													contentBinding="view.bookmarkComparisonOperators"
+													valueBinding="view.bookmarkComparison"
+													id='query_ds_bookmark_comparison_id'
+													class="pull-left mini"
+											    }}
+											{{/if}}
+										</div>
+								    </div>
+								</fieldset>
+							</div>
+						</div>					
+					{{/if}}
+				</div>
+			</div>
+		</div>
+</div>

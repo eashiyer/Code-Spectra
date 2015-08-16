@@ -1,0 +1,92 @@
+<h2> Color Preferences </h2>
+<hr class='compact ' />
+
+{{#if isSaving}}
+	<h4 class='alert alert-info'>
+		Saving...
+	</h4>
+{{/if}}
+
+<form class="form" style="height: 800px">
+	<div class='row'>
+		<div class='span'>
+			Color Palette
+		</div>
+		<div class='span'>
+			{{#each color in palette}}
+				<span class='label' {{bindAttr style=color}}>&nbsp		
+				</span>
+			{{/each}}
+		</div>
+		&nbsp;
+		<div class="btn-group">
+		  <button class="btn-mini dropdown-toggle" data-toggle="dropdown">
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" style="max-width: 350px">
+				{{#each theme in colorThemes}}
+					<li> 
+						<a {{ action selectTheme _view.contentIndex}}
+						{{#each c in theme}}
+							<span class='label' {{bindAttr style=c}}>&nbsp		
+							</span>	
+						{{/each}}
+						</a>
+					</li>
+				{{/each}}	  
+		  </ul>
+		</div>
+	</div>
+	<hr>
+	<h3>Basic Chart Colors</h3>
+	<div class="row">
+		<div class="span">	
+			Bar Color
+			<br />
+			{{input type="color" class='input-mini' placeholder="#0099ff" valueBinding="bar"}}
+		</div>
+		<div class="span">	
+			Line Color
+			<br />
+			{{input type="color" class='input-mini' placeholder="#ff6633" valueBinding="line"}}
+		</div>
+	
+		<div class="span">
+			Area Color
+			<br />
+			{{input type="color" class='input-mini' placeholder="#0099ff" valueBinding="area"}}
+		</div>
+
+	</div>
+
+	<hr>
+	<h3>Statistical Indicators</h3>
+	<div class="row">
+		<div class="span">	
+			Error Bar Color
+			<br />
+			{{input type="color" class='input-mini' placeholder="#999999" valueBinding="errorBar"}}
+		</div>
+		<div class="span">	
+			Control Key Color
+			<br />
+			{{input type="color" class='input-mini' placeholder="#FFFF00" valueBinding="controlKey"}}
+		</div>
+	
+		<div class="span">
+			Statistical Relevance Color
+			<br />
+			{{input type="color" class='input-mini' placeholder="#00E600" valueBinding="statisticalRelevance"}}
+		</div>
+
+	</div>
+	<hr>
+	<div class='row'>
+		<div class="span">
+			<button class="btn btn-primary" {{action save}}> Save </button>
+		</div>
+
+	</div>
+	
+
+</form>

@@ -1,0 +1,53 @@
+dotFundsReport:
+  id: 1
+  dimension_name: IAA_NUMBER
+  depth: 
+  count: 200
+  fact: TRXAMT
+  fact_type: money
+  chart_id: 1
+  data_source_id: 1
+top20Projnum:
+  id: 2
+  count: 20
+  dimension_name: PROJNUM
+  fact: TRXAMT
+  depth: 
+  chart_id: 2
+  data_source_id: 1
+top20Year:
+  id: 3
+  count: Infinity
+  dimension_name: AGRYR
+  fact: TRXAMT
+  depth: 
+  fact_type: money
+  chart_id: 3
+  data_source_id: 1
+top20Party:
+  id: 4
+  count: 20
+  dimension_name: PARTY
+  depth: 
+  fact: TRXAMT
+  fact_type: money
+  chart_id: 4
+  data_source_id: 1
+GeoData:
+  id: 5
+  count: Infinity
+  dimension_name: IAA_NUMBER
+  depth: 
+  fact: TRXAMT
+  fact_type: money
+  chart_id: 5
+  data_source_id: 1
+CTree:
+  id: 6
+  count: Infinity
+  dimension_name: EMPLOYEE
+  depth: 
+  fact: TRXAMT
+  fact_type: money
+  chart_id: 6
+  data_source_id: 2

@@ -1,0 +1,103 @@
+<div class="row" id="main-tab" style="width:100%; min-height:620px;"> 
+	<div class='tabbable'>
+		<div class="row" {{bindAttr style=view.accountTopNavColor}}>
+			<ul class="nav nav-tabs data-source-nav">
+			  <li class='active'><a href="#new-ds" data-toggle="tab">Add Data Source</a></li>
+			  <li><a href="#connections" data-toggle="tab">Connections</a></li>
+			</ul>
+		</div>
+		<div class='tab-content' style="padding-left:15px; padding-right:15px;">
+			<div id='new-data-source-notice'>
+				{{#if view.errorMessage}}					
+			          <div class="text-error" style="margin-top:15px;">
+			            {{view.errorMessage}}
+			          </h4>
+		        {{/if}}				
+				{{#if view.successMessage}}					
+			          <h4 class="text-success" style="margin-top:15px;">
+			            {{view.successMessage}}
+			          </h4>
+		        {{/if}}				
+			</div>
+			<div id="new-ds" class='tab-pane active' style="padding: 10px">
+				<h3> New Data Source </h3>
+				<hr class='compact'>
+				<form class="form" id='new-data-source-form'>
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label" for="input01">Display Name</label>
+							<div class="controls">
+								<input type="text" id='new-data-source-name' class="input-xlarge" placeholder="Name" required>
+								<p class="help-block">This name will appear in left navigation of data sources</p>
+							</div>
+						</div>
+
+						<div class="btn-group" data-toggle="buttons-radio" id='new-data-source-type'>
+							<h4>File Data Sources</h4>
+							  <button type="button" class="btn" value="csv">
+							  	<img src="/assets/csv" class="img-rounded" style="width: 60px; height: 65px"/>
+							  </button>
+	  						  <button type="button" class="btn" value="excel">
+							  	<img src="/assets/excel" class="img-rounded data-source-icon" />
+							  	<br>Excel
+							  </button>
+						  	<br/><br/>
+						  	<h4>RDBMS Systems</h4>
+							  <button type="button" class="btn" value="mysql">
+							  		<img src="/assets/mysql" class="img-rounded data-source-icon" />
+							  		<br>MySQL
+							  </button>
+							  <button type="button" class="btn" value="mssql">
+							  		<img src="/assets/mssql" class="img-rounded data-source-icon" />
+							  		<br>MsSQL
+							  </button>
+							  <button type="button" class="btn" value="oracle">
+							  		<img src="/assets/oracle" class="img-rounded data-source-icon" />
+							  		<br>Oracle
+							  </button>
+						  	<br/><br/>
+
+						 
+						  
+						  
+
+						   <!--
+
+						  <button type="button" class="btn" value="sfdc">
+						  	<img src="/assets/sfdc.png" class="img-rounded data-source-icon" />
+						  	<br>
+						  	Salesforce
+						  </button>
+
+						  <button type="button" class="btn" value="web_api">
+						  	<img src="/assets/web_api" class="img-rounded data-source-icon" />
+						  	<br>Web API
+						  </button>
+
+						  -->
+						  	<h4>Web Services</h4>
+		  					  <button type="button" class="btn" value="spree_commerce">
+							  	<img src="/assets/spree_commerce" alt="Spree Commerce" class="img-rounded data-source-icon" />
+							  	<br>Spree Commerce
+							  </button>
+							  <br/>
+						</div>
+
+						<br><br>
+						<div>
+							<button type="submit" class="btn btn-primary">Save</button>
+							<button class="btn" onclick="javascript:history.go(-1); return false;">Cancel</button>
+						</div>
+					</fieldset>
+				</form>	
+			</div>
+			<div id='connections' class='tab-pane' style="padding: 10px">
+				{{ render "data_connections" }}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
