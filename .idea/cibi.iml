@@ -130,9 +130,11 @@
     <orderEntry type="library" scope="PROVIDED" name="bundler (v1.10.5, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v2.1.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="celluloid (v0.14.1, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="childprocess (v0.5.6, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="connection_pool (v1.1.0, rbenv: 1.9.3-p392) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.2.4, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="diff-lcs (v1.2.5, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubis (v2.7.0, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="ffi (v1.9.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="headless (v1.0.2, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="hike (v1.2.3, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v0.6.1, rbenv: 1.9.3-p392) [gem]" level="application" />
@@ -155,11 +157,14 @@
     <orderEntry type="library" scope="PROVIDED" name="redis-namespace (v1.3.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rmagick (v2.13.2, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-core (v2.13.1, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rspec-core (v2.99.2, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-expectations (v2.13.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-mocks (v2.13.1, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rspec-rails (v2.13.2, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ruby-oci8 (v2.1.8, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rubyzip (v1.0.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.2.9, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v2.43.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sidekiq (v2.13.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.7.1, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.7.1, rbenv: 1.9.3-p392) [gem]" level="application" />
@@ -168,6 +173,8 @@
     <orderEntry type="library" scope="PROVIDED" name="tilt (v1.4.1, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timers (v1.1.0, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="treetop (v1.4.14, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="watir-webdriver (v0.6.11, rbenv: 1.9.3-p392) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="websocket (v1.2.1, rbenv: 1.9.3-p392) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="xpath (v2.0.0, rbenv: 1.9.3-p392) [gem]" level="application" />
   </component>
   <component name="RModuleSettingsStorage">
