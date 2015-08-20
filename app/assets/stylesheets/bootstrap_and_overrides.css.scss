@@ -478,9 +478,9 @@ div.homepage-bg {
   //background-repeat: no-repeat;
   //background-color: #e0e0e0;
   //background-color: #323232;
-  background-repeat: no-repeat;
-  background-color: #b0e44f;
-  //background-color: #323232;
+  //background-repeat: no-repeat;
+  //background-color: #b0e44f;
+  background-color: white;
   border-top: solid black 1px;
 }
 
@@ -1331,3 +1331,11 @@ i.muted {
   line-height: 58px;
   box-shadow: 0 3px 1px black;
 }
+
+//.cibi-body {
+//  .footer {
+//    min-height: 0px;
+//    max-height: 53px;
+//    background-color: #b0e44f;
+//  }
+//}

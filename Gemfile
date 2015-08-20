@@ -10,6 +10,8 @@ gem 'rake', '>= 0.9.2.2'
 # in production environments by default.
 gem 'sass-rails',   '~> 3.2.3'
 
+gem "thin"
+
 gem 'bootstrap-sass'
 gem 'jquery-rails'
 gem 'jquery-plugins-rails', :git => 'https://github.com/cerebrateinc/jquery-plugins-rails.git'
