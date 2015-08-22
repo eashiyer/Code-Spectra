@@ -1,17 +1,13 @@
 {{#unless Cibi.Auth.signing_in}}
-  <div class="container cibi-body" style="padding-left:0px; padding-right:0px; padding-bottom:0px;">
+  <!--<div class="container cibi-body" style="padding-left:0px; padding-right:0px; padding-bottom:0px;">-->
 
+  <!--<div class="navbar navbar-inverse navbar-static-top" role="navigation">-->
 
-    <!-- TODO: fix header and footer -->
     <nav class="navbar navbar-fixed-top">
       <div id='top-nav-bar'
            class="navbar navbar-fixed-top pagination-centered navbar-content" {{bindAttr style=view.accountIconBarColor}}>
-        <div class="row" style="height:58px; padding-left:1%; padding-right: 1%;">
-          <a class="b line-height:58px;tn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </a>
+        <div class="row">
+
           <a class="brand" href="/" style="line-height:30px;">
             {{#if Cibi.Auth.signedIn}}
               <img {{bindAttr src=view.logoUrl style=view.logoDims}} class="brand-image">
@@ -33,16 +29,18 @@
     {{#if Cibi.Auth.accountExpired}}
       {{partial account_expiry_model}}
     {{/if}}
+  <!--</div>-->
 
+  <div class="container cibi-body">
     <div class="row">
       {{outlet}}
     </div>
 
     <div class="row footer">
     </div>
+  </div>
 
-
-  </div><!-- container -->
+  <!--</div>-->
 {{else}}
   <div style="width: 100%; opacity=0.6; z-index: 9999; text-align: center">
     <h1> CIBI </h1>
