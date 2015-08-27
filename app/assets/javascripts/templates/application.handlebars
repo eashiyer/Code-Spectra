@@ -1,12 +1,17 @@
 {{#unless Cibi.Auth.signing_in}}
-  <!--<div class="container cibi-body" style="padding-left:0px; padding-right:0px; padding-bottom:0px;">-->
+  <div class="container cibi-body" style="padding-left:0px; padding-right:0px; padding-bottom:0px;">
 
-  <!--<div class="navbar navbar-inverse navbar-static-top" role="navigation">-->
+  <div class="navbar navbar-inverse navbar-static-top" role="navigation">
 
     <nav class="navbar navbar-fixed-top">
       <div id='top-nav-bar'
            class="navbar navbar-fixed-top pagination-centered navbar-content" {{bindAttr style=view.accountIconBarColor}}>
-        <div class="row">
+        <div class="row" style="height:58px; padding-left:1%; padding-right: 1%;">
+          <a class="b line-height:58px;tn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
 
           <a class="brand" href="/" style="line-height:30px;">
             {{#if Cibi.Auth.signedIn}}
@@ -29,7 +34,7 @@
     {{#if Cibi.Auth.accountExpired}}
       {{partial account_expiry_model}}
     {{/if}}
-  <!--</div>-->
+  </div>
 
   <div class="container cibi-body">
     <div class="row">
@@ -40,10 +45,10 @@
     </div>
   </div>
 
-  <!--</div>-->
+  </div>
 {{else}}
   <div style="width: 100%; opacity=0.6; z-index: 9999; text-align: center">
-    <h1> Logging you in to Spectra </h1>
+    <h4> Logging you in to Spectra </h4>
     <br/> <br/>
     <img src="/ajax-loader-big3.gif">
     <br/><br/>
