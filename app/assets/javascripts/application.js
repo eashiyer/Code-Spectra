@@ -60,6 +60,9 @@
 //= require FileSaver.min.js
 //= require jquery.floatThead
 //= require d3-funnel 
+//= require fusioncharts.js
+//= require fusioncharts.charts.js
+//= require fusioncharts.theme.fint.js
 
 Cibi = Ember.Application.create({
 	// LOG_TRANSITIONS: true,
