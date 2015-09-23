@@ -66,8 +66,8 @@ Cibi.AreaChart = Ember.Object.extend({
       bottom: chart.get('marginBottom'),
       left: chart.get('marginLeft'),
     }
-    var height = obj.chart.get('height') - margin.top - margin.bottom;
-    var width = obj.chart.get('width') - margin.left - margin.right;
+    var height = obj.chart.get('height');// - margin.top - margin.bottom;
+    var width = obj.chart.get('width');// - margin.left - margin.right;
 
     var xValues = chartData.map(function (d) {
       return d.key;
@@ -96,126 +96,47 @@ Cibi.AreaChart = Ember.Object.extend({
     if (min > 0) {min = 0;}
     var svg = obj.chart.getSvgElement();
 
-    console.log(svg);
+    //console.log(svg);
 
-    //FusionCharts.ready(function(){
-    //  var revenueChart = new FusionCharts({
-    //    "type": "Area2D",
-    //    "renderAt": obj.element,
-    //    "width": width,
-    //    "height": height,
-    //    "dataFormat": "json",
-    //    "dataSource": {
-    //      "chart": {
-    //        "caption": "Visits by month",
-    //        "subcaption": "",
-    //        "plotgradientcolor": "",
-    //        "bgcolor": "FFFFFF",
-    //        "showalternatehgridcolor": "0",
-    //        "showplotborder": "0",
-    //        "showvalues": "0",
-    //        "labeldisplay": "WRAP",
-    //        "divlinecolor": "CCCCCC",
-    //        "showcanvasborder": "0",
-    //        "canvasborderalpha": "0",
-    //        "palettecolors": "f8bd19",
-    //        "yaxisvaluespadding": "10",
-    //        "showborder": "0"
-    //      },
-    //      "data": [
-    //        {
-    //          "label": "Jan",
-    //          "value": "420000"
-    //        },
-    //        //{
-    //        //  "label": "Feb",
-    //        //  "value": "460000",
-    //        //  "displayvalue": "Techcrunch{br}covered us",
-    //        //  "showvalue": "1",
-    //        //  "anchoralpha": "100",
-    //        //  "anchorradius": "7"
-    //        //},
-    //        {
-    //          "label": "Mar",
-    //          "value": "480000"
-    //        },
-    //        {
-    //          "label": "Apr",
-    //          "value": "520000"
-    //        },
-    //        //{
-    //        //  "label": "May",
-    //        //  "value": "560000",
-    //        //  "displayvalue": "Google Adwords{br}discontinued",
-    //        //  "showvalue": "1",
-    //        //  "anchoralpha": "100",
-    //        //  "anchorradius": "7"
-    //        //},
-    //        {
-    //          "label": "Jun",
-    //          "value": "510000"
-    //        },
-    //        {
-    //          "label": "Jul",
-    //          "value": "470000"
-    //        },
-    //        {
-    //          "label": "Aug",
-    //          "value": "430000"
-    //        },
-    //        {
-    //          "label": "Sep",
-    //          "value": "420000"
-    //        },
-    //        {
-    //          "label": "Oct",
-    //          "value": "370000"
-    //        },
-    //        {
-    //          "label": "Nov",
-    //          "value": "360000"
-    //        },
-    //        {
-    //          "label": "Dec",
-    //          "value": "360000"
-    //        }
-    //      ]
-    //    }
-    //  });
-    //
-    //  revenueChart.render();
-    //});
+    var yAxis = obj.chart.drawYAxis(svg, [min,max], obj.y_axis_label_right);
+    var ymin=yAxis(min);
+      if(obj.chart.get('axesConfigsObj')
+        && obj.chart.get('axesConfigsObj').yDomainMinValue
+        && obj.chart.get('axesConfigsObj').yDomainMaxValue
+        && obj.chart.get('axesConfigsObj').yDomainMinValue < obj.chart.get('axesConfigsObj').yDomainMaxValue
+        && obj.chart.get('axesConfigsObj').yDomainMinValue > min)
+      {
+        ymin=yAxis(obj.chart.get('axesConfigsObj').yDomainMinValue);
+      }
+    var xAxis = obj.chart.drawXAxis(svg, xValues, ymin);
 
-    //var yAxis = obj.chart.drawYAxis(svg, [min,max], obj.y_axis_label_right);
-    //var ymin=yAxis(min);
-    //  if(obj.chart.get('axesConfigsObj')
-    //    && obj.chart.get('axesConfigsObj').yDomainMinValue
-    //    && obj.chart.get('axesConfigsObj').yDomainMaxValue
-    //    && obj.chart.get('axesConfigsObj').yDomainMinValue < obj.chart.get('axesConfigsObj').yDomainMaxValue
-    //    && obj.chart.get('axesConfigsObj').yDomainMinValue > min)
-    //  {
-    //    ymin=yAxis(obj.chart.get('axesConfigsObj').yDomainMinValue);
-    //  }
-    //var xAxis = obj.chart.drawXAxis(svg, xValues, ymin);
-    //
-    //var colorScale = obj.chart.colorScale();
-    //
-    //var dimension=cds.get('dimensionName');
-    //var dimensionFormat=cds.get('dimensionFormatAs');
-    //var dimensionDataType=cds.get('dataSource').getDataType(dimension);
-    //
-    formatDate = obj.chart.get('formatDate');
-    parseDate = obj.chart.get('parseDate');
+    var colorScale = obj.chart.colorScale();
 
-    console.log(chartData);
-    console.log(obj);
+    var dimension=cds.get('dimensionName');
+    var dimensionFormat=cds.get('dimensionFormatAs');
+    var dimensionDataType=cds.get('dataSource').getDataType(dimension);
+
+    //formatDate = obj.chart.get('formatDate');
+    //parseDate = obj.chart.get('parseDate');
+    parseDate = function(string) {
+      var months = ["", "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return months[parseInt(string)];
+    }
+
+    //console.log(chartData);
+    //console.log("parseDate", parseDate);
+    //console.log(obj.chart.get('scale_type'));
 
     var fusionChartsData = [];
     $.each(chartData, function (i, value) {
-      fusionChartsData.push({
-        "label": (parseDate) ? parseDate(value.key) : value.key,
-        "value": value["Total Email campaigns"]
-      });
+      var data = {};
+      //data.label = (obj.chart.get('scale_type')=="time" && parseDate) ? parseDate(value.key) : value.key;
+      data.label = parseDate(value.key) || value.key;
+      data.value = value["Total Email campaigns"] || value["Total impressions"];
+      data.showvalue = "1";
+      data.anchoralpha = "100";
+      data.anchorradius = "5";
+      fusionChartsData.push(data);
     });
 
     FusionCharts.ready(function () {

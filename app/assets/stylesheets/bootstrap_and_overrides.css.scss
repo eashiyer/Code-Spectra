@@ -1377,7 +1377,6 @@ i.muted {
     padding-left: 0px;
   }
 }
-
-.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav > li > a {
+.navbar-inverse .nav > li > a:focus, .navbar-inverse .nav>li>a:hover {
   color: black;
 }
