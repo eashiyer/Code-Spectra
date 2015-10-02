@@ -1,10 +1,12 @@
 $(window).scroll(function() {
 	var flag = false;
-	if(Cibi.Auth.globalSetting.get('shrinkNavbar') === undefined){
-		flag = Cibi.Auth.globalSetting.get('collapseNavbar');		
-	}else{
-		flag = Cibi.Auth.globalSetting.get('shrinkNavbar')
-	}	
+  if (Cibi.Auth.globalSetting) {
+    if(Cibi.Auth.globalSetting.get('shrinkNavbar') === undefined){
+      flag = Cibi.Auth.globalSetting.get('collapseNavbar');
+    }else{
+      flag = Cibi.Auth.globalSetting.get('shrinkNavbar')
+    }
+  }
 	if(flag){
 	  var verticals_height = $("#verticals_nav").height();
 	  if ($(document).scrollTop() > 50) {
