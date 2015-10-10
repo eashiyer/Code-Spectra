@@ -126,7 +126,11 @@ Cibi.AreaChart = Ember.Object.extend({
     $.each(chartData, function (i, value) {
       var data = {};
       //data.label = (obj.chart.get('scale_type')=="time" && parseDate) ? parseDate(value.key) : value.key;
-      data.label = _parseDate(value.key) || value.key;
+      //data.label = _parseDate(value.key) || value.key;
+      $.each(_chartKeyProps, function (i, p) {
+        if (data.label) return false;
+        data.label = _parseDate(value[p]) || value[p];
+      });
       //data.value = value["Total Email campaigns"] || value["Total impressions"] ||
       //  value["Count of NECTABR"] || value["AVG of ASSET"];
       $.each(_chartValueProps, function (i, p) {
