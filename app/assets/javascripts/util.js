@@ -601,7 +601,11 @@ revrseFormatting = function(no,s){
 })(jQuery);
 
 var _chartValueProps = [
-  "Total Email campaigns", "Total impressions", "Count of NECTABR", "AVG of ASSET", "SUM of ASSET", "Avg of DEPSUM"
+  "Total Email campaigns", "Total impressions", "Count of NECTABR", "AVG of ASSET", "SUM of ASSET", "Avg of DEPSUM", "SUM of Revenue"
+];
+
+var _chartKeyProps = [
+  "key", "Purchase"
 ];
 
 var _parseDate = function(string) {
