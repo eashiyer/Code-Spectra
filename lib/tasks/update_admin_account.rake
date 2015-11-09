@@ -1,7 +1,7 @@
 namespace :admin do
 	desc "Rake task to generate starter configs"
 	task :update_account => :environment do
-		u = User.find_by_email "admin@cibi.com"
+		u = User.find_by_email "admin@mspectrumsolutions.com"
 		u.confirmed_at = Time.now
 		u.save
 		if u

@@ -11,7 +11,7 @@ class User < AuditedModel
   				  :remember_me, :first_name, :last_name,
   				  :is_admin, :user_permissions, :account_id,
             :user_color_preference_id, :confirmation_token, :confirmation_sent_at, 
-            :confirmed_at, :unhashed_password, :has_api_access, :authentication_token, :api_access_token
+            :confirmed_at, :unhashed_password, :has_api_access, :authentication_token, :api_access_token, :account
 
   belongs_to :account
   has_many :permissions, :dependent => :destroy

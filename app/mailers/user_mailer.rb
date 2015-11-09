@@ -13,6 +13,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @filename = filename
     attachments["#{@filename}"] = File.read("#{Rails.root}/public/dashboard_reports/#{@filename}")
-    mail(:from => "admin@cibi.com", :to => "#{email}", :subject => "Notification on your Dashboard")
-  end  
+    mail(:from => "admin@mspectrumsolutions.com", :to => "#{email}", :subject => "Notification on your Dashboard")
+    # mail(:from => "admin@cibi.com", :to => "#{email}", :subject => "Notification on your Dashboard")
+  end
 end
