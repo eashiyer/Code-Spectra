@@ -27,13 +27,13 @@ account = Account.find_by_name('Spectra Inc')
 # puts 'user: ' << user.email
 
 
-user = User.find_or_create_by_email :first_name => 'Admin', :last_name => 'Spectra', :email => 'admin@mspectrumsolutions.com', :password => 'mailPass#1', :password_confirmation => 'mailPass#1', :is_admin => true, :account => account
-puts 'user: ' << user.email
+# user = User.find_or_create_by_email :first_name => 'Admin', :last_name => 'Spectra', :email => 'admin@mspectrumsolutions.com', :password => 'mailPass#1', :password_confirmation => 'mailPass#1', :is_admin => true, :account => account
+# puts 'user: ' << user.email
 
-user = User.find_or_create_by_email :first_name => 'Phuong', :last_name => 'Huynh', :email => 'phuonghqh@gmail.com', :password => 'waiting2212', :password_confirmation => 'waiting2212', :is_admin => false, :account => account
-puts 'user: ' << user.email
+# user = User.find_or_create_by_email :first_name => 'Phuong', :last_name => 'Huynh', :email => 'phuonghqh@gmail.com', :password => 'waiting2212', :password_confirmation => 'waiting2212', :is_admin => false, :account => account
+# puts 'user: ' << user.email
 
-#
+
 # user = User.find_or_create_by_email :first_name => 'Shon', :last_name => 'Saoji', :email => 'shon@cerebrateinc.com', :password => 'shonPass#1', :password_confirmation => 'shonPass#1', :is_admin => false, :account => account
 # puts 'user: ' << user.email
 #
@@ -53,5 +53,11 @@ puts 'user: ' << user.email
 # puts 'user: ' << user.email
 #
 
-user = User.find_by_email('admin@cibi.com')
-user.destroy unless user.blank?
+# user = User.find_by_email('management@cerebrateinc.com')
+# user.destroy unless user.blank?
+
+# user = User.find_by_email('admin@cibi.com')
+# user.destroy unless user.blank?
+
+# user = User.find_by_email('phuonghqh@gmail.com')
+# user.destroy unless user.blank?
