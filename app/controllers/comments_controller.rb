@@ -17,13 +17,14 @@ class CommentsController < AuthController
     	end
       	if @comment.save
       		chart_users = @comment.chart.subscribers
-      		recepients = ['admin@mspectrumsolutions.com']
+      		recepients = []
       		chart_users.each do |u|
       			recepients << u.email
       		end
           chart = @comment.chart
           url = "#{request.protocol}#{request.host_with_port}/#/verticals/#{chart.vertical.id}/#{chart.dashboard.id}/charts"
       		UserMailer.comment_notification(@comment, current_user, recepients, url).deliver
+      		UserMailer.comment_notification(@comment, current_user, ['admin@mspectrumsolutions.com'], url).deliver
       		render :json => @comment
       	else
 			Rails.logger.debug @comment.errors.full_messages.join("\n")
