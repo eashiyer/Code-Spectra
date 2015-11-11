@@ -19,4 +19,5 @@ ActionMailer::Base.smtp_settings = {
 # }
 
 #"localhost:3000"
-#Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
+Mail.register_interceptor(DevelopmentMailInterceptor)
+# Mail.register_interceptor(DevelopmentMailInterceptor) if Rails.env.development?
