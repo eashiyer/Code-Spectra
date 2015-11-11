@@ -7,7 +7,7 @@ ActionMailer::Base.smtp_settings = {
   :authentication       => :plain,
   :enable_starttls_auto => true
 }
-ActionMailer::Base.delivery_method = :smtp
+# ActionMailer::Base.delivery_method = :smtp
 # ActionMailer::Base.smtp_settings = {
 #     :address              => "smtp.1and1.com",
 #     :port                 => 587,
