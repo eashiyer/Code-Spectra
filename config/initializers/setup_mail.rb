@@ -1,22 +1,22 @@
-# ActionMailer::Base.smtp_settings = {
-#   :address              => 'smtp.1and1.com',
-#   :port                 => 587,
-#   :domain               => 'mspectrumsolutions.com',
-#   :user_name            => 'admin@mspectrumsolutions.com',
-#   :password             => 'mailPass#1',
-#   :authentication       => :plain,
-#   :enable_starttls_auto => true
-# }
-
 ActionMailer::Base.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :domain               => "gmail.com",
-    :user_name            => "techlooperbyvnw@gmail.com",
-    :password             => "waiting2212",
-    :authentication       => "plain",
-    :enable_starttls_auto => true
+  :address              => 'smtp.1and1.com',
+  :port                 => 587,
+  :domain               => 'mspectrumsolutions.com',
+  :user_name            => 'admin@mspectrumsolutions.com',
+  :password             => 'mailPass#1',
+  :authentication       => :plain,
+  :enable_starttls_auto => true
 }
+
+# ActionMailer::Base.smtp_settings = {
+#     :address              => "smtp.gmail.com",
+#     :port                 => 587,
+#     :domain               => "gmail.com",
+#     :user_name            => "techlooperbyvnw@gmail.com",
+#     :password             => "waiting2212",
+#     :authentication       => "plain",
+#     :enable_starttls_auto => true
+# }
 
 # ActionMailer::Base.delivery_method = :smtp
 # ActionMailer::Base.smtp_settings = {
