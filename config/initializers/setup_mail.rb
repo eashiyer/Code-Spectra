@@ -1,10 +1,10 @@
 ActionMailer::Base.smtp_settings = {
   :address              => "smtp.1and1.com",
-  :port                 => "25",
-  :domain               => "1and1.com",
+  :port                 => "587",
+  # :domain               => "1and1.com",
   :user_name            => "phuong@mspectrumsolutions.com",
   :password             => "hochiminh",
-  :authentication       => "login",
+  :authentication       => true,
   :enable_starttls_auto => true
 }
 
