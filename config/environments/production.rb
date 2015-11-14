@@ -55,7 +55,7 @@ Cibi::Application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.default_options = {
-      from: 'admin <phuong@mspectrumsolutions.com>'
+    :from => 'admin <phuong@mspectrumsolutions.com>'
   }
   config.action_mailer.delivery_method = :sendmail
 
