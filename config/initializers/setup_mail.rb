@@ -1,11 +1,12 @@
 ActionMailer::Base.smtp_settings = {
   :address              => "smtp.perfora.net",
-  :port                 => "587",
+  :port                 => 587,
   :domain               => "mspectrumsolutions.com",
   :user_name            => "phuong@mspectrumsolutions.com",
   :password             => "hochiminh",
   :authentication       => "plain",
-  :enable_starttls_auto => true
+  :enable_starttls_auto => true,
+  :openssl_verify_mode  => 'none'
 }
 
 # ActionMailer::Base.smtp_settings = {
