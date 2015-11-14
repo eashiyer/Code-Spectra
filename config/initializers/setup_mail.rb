@@ -1,12 +1,12 @@
-ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.perfora.net",
-  :port                 => "587",
-  # :domain               => "1and1.com",
-  :user_name            => "phuong@mspectrumsolutions.com",
-  :password             => "hochiminh",
-  :authentication       => "plain",
-  :enable_starttls_auto => true
-}
+# ActionMailer::Base.smtp_settings = {
+#   :address              => "smtp.perfora.net",
+#   :port                 => "587",
+#   # :domain               => "1and1.com",
+#   :user_name            => "phuong@mspectrumsolutions.com",
+#   :password             => "hochiminh",
+#   :authentication       => "plain",
+#   :enable_starttls_auto => true
+# }
 
 # ActionMailer::Base.smtp_settings = {
 #     :address              => "smtp.gmail.com",

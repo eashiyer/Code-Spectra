@@ -51,10 +51,13 @@ Cibi::Application.configure do
   
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'http://ec2-54-214-147-245.us-west-2.compute.amazonaws.com' }
-  # config.action_mailer.perform_deliveries = true
-  # config.action_mailer.default_options = {from: 'admin <phuong@mspectrumsolutions.com>'}
-  # config.action_mailer.delivery_method = :sendmail
+  # config.action_mailer.default_url_options = { :host => 'http://ec2-54-214-147-245.us-west-2.compute.amazonaws.com' }
+
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_options = {
+      from: 'admin <phuong@mspectrumsolutions.com>'
+  }
+  config.action_mailer.delivery_method = :sendmail
 
   # config.cibi_url = 'http://198.251.79.225'
   config.cibi_url = 'http://108.175.12.25'
