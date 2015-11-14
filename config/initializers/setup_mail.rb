@@ -1,7 +1,7 @@
 ActionMailer::Base.smtp_settings = {
   :address              => "smtp.1and1.com",
-  :port                 => 587,
-  :domain               => "cerebrateinc.com",
+  # :port                 => 587,
+  # :domain               => "cerebrateinc.com",
   :user_name            => "phuong@mspectrumsolutions.com",
   :password             => "hochiminh",
   :authentication       => "plain",
