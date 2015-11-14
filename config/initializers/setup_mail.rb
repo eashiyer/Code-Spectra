@@ -1,10 +1,10 @@
 ActionMailer::Base.smtp_settings = {
   :address              => "smtp.1and1.com",
-  # :port                 => 587,
-  # :domain               => "cerebrateinc.com",
+  :port                 => "25",
+  :domain               => "1and1.com",
   :user_name            => "phuong@mspectrumsolutions.com",
   :password             => "hochiminh",
-  :authentication       => "plain",
+  :authentication       => "login",
   :enable_starttls_auto => true
 }
 
@@ -18,7 +18,7 @@ ActionMailer::Base.smtp_settings = {
 #     :enable_starttls_auto => true
 # }
 
-# ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.delivery_method = :smtp
 # ActionMailer::Base.smtp_settings = {
 #     :address              => "smtp.1and1.com",
 #     :port                 => 587,
