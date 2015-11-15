@@ -1,5 +1,5 @@
 ActionMailer::Base.smtp_settings = {
-  :address              => "auth.smtp.1and1.co.uk",
+  :address              => "smtp.1and1.com",
   :port                 => 25,
   :domain               => "1and1.com",
   :user_name            => "phuong@mspectrumsolutions.com",
