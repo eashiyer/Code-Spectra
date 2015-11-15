@@ -37,7 +37,7 @@ gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'roo', :git => 'https://github.com/ketan21/roo.git'
 gem 'devise', '3.0.0'
 gem 'curb'
-gem "mail"
+gem "mail", ">=2.6.3"
 gem 'redis'
 gem 'rmagick', :require => false
 gem 'newrelic_rpm'

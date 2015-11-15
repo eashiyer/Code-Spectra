@@ -54,7 +54,7 @@ Cibi::Application.configure do
   config.action_mailer.default_url_options = {
       :host => 'http://ec2-54-214-147-245.us-west-2.compute.amazonaws.com'
   }
-  config.action_mailer.delivery_method = :sendmail
+
   # config.action_mailer.perform_deliveries = true
 
   # config.cibi_url = 'http://198.251.79.225'
