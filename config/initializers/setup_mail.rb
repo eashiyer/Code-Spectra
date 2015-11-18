@@ -13,6 +13,7 @@ ActionMailer::Base.smtp_settings = {
     :user_name            => "admin@mspectrumsolutions.com",
     :password             => "mailPass#1",
     :authentication       => "plain",
+    :openssl_verify_mode  => "none",
     :enable_starttls_auto => true
 }
 
@@ -26,7 +27,7 @@ ActionMailer::Base.smtp_settings = {
 #     :enable_starttls_auto => true
 # }
 
-ActionMailer::Base.delivery_method = :smtp
+ActionMailer::Base.delivery_method = :sendmail
 # ActionMailer::Base.smtp_settings = {
 #     :address              => "smtp.1and1.com",
 #     :port                 => 587,
