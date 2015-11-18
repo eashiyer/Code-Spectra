@@ -12,7 +12,7 @@ ActionMailer::Base.smtp_settings = {
     :port                 => 587,
     :user_name            => "admin@mspectrumsolutions.com",
     :password             => "mailPass#1",
-    :authentication       => "plain",
+    :authentication       => "login",
     :enable_starttls_auto => true
 }
 
