@@ -6,7 +6,8 @@ class UserMailer < ActionMailer::Base
     @comment = comment
     @url = url
     recepient_list = recepients * ";"
-    mail(:from => "#{user.email}", :to => "#{recepient_list}", :subject => "Notification on your report '#{@comment.chart.title}'")
+    mail(:from => "admin@mspectrumsolutions.com", :to => "#{user.email}", :subject => "Notification on your report '#{@comment.chart.title}'")
+    # mail(:from => "admin@mspectrumsolutions.com", :to => "#{recepient_list}", :subject => "Notification on your report '#{@comment.chart.title}'")
   end
 
   def send_dashboard_report(user, filename, email)

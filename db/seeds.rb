@@ -6,22 +6,25 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Emanuel', :city => cities.first)
 
-puts "Spectra Account"
+# puts "Spectra Account"
 # account = Account.find_or_create_by_name(:name => 'Cerebrate Inc', :account_type => 'super');
-account = Account.find_by_name('Spectra Inc')
-unless account.blank?
-  account.name = "Spectra Inc"
-  account.save
-end
+# account = Account.find_by_name('Cerebrate Inc')
+# unless account.blank?
+#   account.name = "Spectra Inc"
+#   account.save
+# end
 
-account = Account.find_by_name('New Cerebrate')
-unless account.blank?
-  account.name = "New Spectra"
-  account.save
-end
+puts "Update to Spectra"
+Account.update_all("name = 'Spectra'", ["name = 'Spectra Inc'"])
 
-puts 'Default User for Spectra'
-account = Account.find_by_name('Spectra Inc')
+# account = Account.find_by_name('New Cerebrate')
+# unless account.blank?
+#   account.name = "New Spectra"
+#   account.save
+# end
+#
+# puts 'Default User for Spectra'
+# account = Account.find_by_name('Spectra Inc')
 
 # user = User.find_or_create_by_email :first_name => 'Admin', :last_name => 'Admin_last', :email => 'admin@cibi.com', :password => 'adminPass#1', :password_confirmation => 'adminPass#1', :is_admin => true, :account => account
 # puts 'user: ' << user.email

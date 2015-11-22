@@ -50,8 +50,14 @@ Cibi::Application.configure do
   # config.assets.precompile += %w( slick.js )
   
   # Disable delivery errors, bad email addresses will be ignored
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'http://ec2-54-214-147-245.us-west-2.compute.amazonaws.com' }
+  # config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  # config.action_mailer.default_url_options = { :host => "http://108.175.12.25" }
+  # config.action_mailer.default_url_options = {
+  #     :host => 'http://ec2-54-214-147-245.us-west-2.compute.amazonaws.com'
+  # }
+
+  # config.action_mailer.perform_deliveries = true
 
   # config.cibi_url = 'http://198.251.79.225'
   config.cibi_url = 'http://108.175.12.25'
