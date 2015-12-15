@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141014123920) do
+ActiveRecord::Schema.define(:version => 20151213162011) do
 
   create_table "account_settings", :force => true do |t|
     t.integer  "account_id"
@@ -31,8 +31,6 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.string   "dashboard_bar_color",       :default => "#323232"
     t.integer  "logo_width"
     t.boolean  "collapse_navbar",           :default => false
-    t.boolean  "sso_enabled",               :default => false
-    t.string   "authentication_url"
   end
 
   create_table "account_templates", :force => true do |t|
@@ -119,6 +117,8 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.boolean  "reference_date_today"
     t.datetime "reference_date"
     t.string   "display_name"
+    t.boolean  "is_global",            :default => true
+    t.integer  "user_id"
   end
 
   create_table "charts", :force => true do |t|
@@ -150,9 +150,10 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.integer  "rows",                 :default => 1
     t.integer  "columns",              :default => 1
     t.string   "updated_by"
-    t.integer  "account_template_id"
     t.boolean  "isolated",             :default => false
+    t.integer  "account_template_id"
     t.text     "description"
+    t.string   "chart_alert_emails"
   end
 
   create_table "charts_data_sources", :force => true do |t|
@@ -172,8 +173,8 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.string   "fact_display"
     t.string   "query_str"
     t.boolean  "row_query_mode"
-    t.integer  "account_template_id"
     t.boolean  "isolated",            :default => false
+    t.integer  "account_template_id"
   end
 
   create_table "charts_users", :force => true do |t|
@@ -217,7 +218,7 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.boolean  "reference_date_today"
     t.datetime "reference_date"
     t.string   "display_name"
-    t.boolean  "is_global",            :default => false
+    t.boolean  "is_global",            :default => true
     t.integer  "user_id"
     t.string   "predefined_range"
   end
@@ -235,7 +236,7 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.boolean  "auto_refresh",        :default => false
     t.integer  "refresh_interval"
     t.integer  "account_template_id"
-    t.boolean  "has_publicaccess",    :default => false
+    t.text     "description"
   end
 
   create_table "data_connections", :force => true do |t|
@@ -313,8 +314,6 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.integer  "chart_id"
     t.boolean  "enable_highlight",    :default => false
     t.boolean  "enable_sem",          :default => false
-    t.boolean  "is_value"
-    t.boolean  "is_calculated"
   end
 
   create_table "measures", :force => true do |t|
@@ -355,6 +354,7 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.string   "bookmark_comparison_operator"
     t.boolean  "last_run_successful"
     t.string   "last_run_status"
+    t.integer  "unsuccessfull_count",          :default => 0
   end
 
   create_table "rules", :force => true do |t|
@@ -382,7 +382,7 @@ ActiveRecord::Schema.define(:version => 20141014123920) do
     t.string   "store_name"
     t.string   "store_url"
     t.string   "api_token"
-    t.integer  "frequency_of_import"
+    t.integer  "frequency_of_import", :default => 5
     t.integer  "data_source_id"
     t.datetime "last_run_at"
     t.boolean  "last_run_successful"

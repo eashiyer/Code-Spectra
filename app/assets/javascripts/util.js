@@ -597,5 +597,10 @@ revrseFormatting = function(no,s){
             b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
         }
         return b;
-    })(window.location.search.substr(1).split('&'))
+    })(window.location.search.substr(1).split('&'));
+
+    $.emailPattern = (function() {
+      return /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    })();
+
 })(jQuery);
