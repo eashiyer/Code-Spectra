@@ -42,6 +42,7 @@ Cibi.DashboardNewView = Ember.View.extend({
 		e.preventDefault();
 		var title			   = this.get('title');
 		var subtitle		   = this.get('subtitle');
+		var chartAlertEmails		   = this.get('chartAlertEmails');
 		var description		   = this.get('description');
 		var chartType		   = this.get('chartType');
 		var cssClassName	   = this.get('cssClassName')
@@ -72,7 +73,33 @@ Cibi.DashboardNewView = Ember.View.extend({
 			return;
 		}
 
-		var cds = {};
+    chartAlertEmails = chartAlertEmails || "";
+    if (chartAlertEmails.length > 0) {
+      var emails = chartAlertEmails.split(",");
+      var invalidEmail = false;
+      $.each(emails, function(i, email) {
+        email = email.trim();
+        if (email == "") return true;
+
+        console.log(email, email.match($.emailPattern));
+        if (!email.match($.emailPattern)) {
+          var notice_elem = $("#new-chart-notice")
+          notice_elem.html('Please enter valid emails.');
+          notice_elem.addClass('alert alert-error');
+          notice_elem.fadeIn().delay(10000).fadeOut();
+          invalidEmail = true;
+          return false;
+        }
+      });
+      if (invalidEmail) return;
+    }
+    //str.match(pattern);//$.emailPattern
+    //if (chartAlertEmails != null) {
+    //
+    //}
+
+
+    var cds = {};
 		cds.data_source_id = this.get('dataSourceId');
 		cds.count=(chartType =="single_value" || chartType == "15") ? 2 : count;
 		cds.isolated = isolated;
@@ -81,6 +108,7 @@ Cibi.DashboardNewView = Ember.View.extend({
 		var c = {};
 		c.title = title;
 		c.subtitle = subtitle;
+		c.chartAlertEmails = chartAlertEmails;
 		c.description = description;
 		c.chartType = chartType;
 		c.cssClassName = cssClassName;

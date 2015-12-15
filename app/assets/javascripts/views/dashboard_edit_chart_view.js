@@ -6,11 +6,14 @@ Cibi.DashboardEditChartView = Ember.View.extend({
 		var chart_name = getChartName(chart.get('chartType'));
 		var title = chart.get('title');
 		var subtitle = chart.get('subtitle');
+		var chartAlertEmails = chart.get('chartAlertEmails');
 		var description = chart.get('description');
 		var isolated = chart.get('isolated');
 
 		obj.$().find('.title').val(title);
 		obj.$().find('.subtitle').val(subtitle);
+		//obj.$().find('.chartAlertEmails').val(chartAlertEmails);
+    obj.set('chartAlertEmails', chartAlertEmails);
 		obj.$().find('.count').val(count);
 		obj.set('description', description);
 		obj.set('isolated',isolated);
@@ -71,6 +74,7 @@ Cibi.DashboardEditChartView = Ember.View.extend({
 		e.preventDefault();
 		var title			   = this.get('title') || this.$().find(".title").val();
 		var subtitle		   = this.get('subtitle') || this.$().find(".subtitle").val();
+    var chartAlertEmails		   = this.get('chartAlertEmails') || this.$().find(".chartAlertEmails").val();
 		var description		   = this.get('description') || this.$().find(".description").val();
 		var chartType		   = this.get('chartType') || this.$().find(".active").val();
 		var count=this.get('count');
@@ -86,6 +90,26 @@ Cibi.DashboardEditChartView = Ember.View.extend({
 			return;
 		}
 
+    chartAlertEmails = chartAlertEmails || "";
+    if (chartAlertEmails.length > 0) {
+      var emails = chartAlertEmails.split(",");
+      var invalidEmail = false;
+      $.each(emails, function(i, email) {
+        email = email.trim();
+        if (email == "") return true;
+
+        if (!email.match($.emailPattern)) {
+          var notice_elem = $("#new-chart-notice")
+          notice_elem.html('Please enter valid emails.');
+          notice_elem.addClass('alert alert-error');
+          notice_elem.fadeIn().delay(10000).fadeOut();
+          invalidEmail = true;
+          return false;
+        }
+      });
+      if (invalidEmail) return;
+    }
+
 		var cds = {};
 		cds.data_source_id = this.get('dataSourceId');
 		cds.count=count;
@@ -96,6 +120,7 @@ Cibi.DashboardEditChartView = Ember.View.extend({
 		var configs = c.get('configs');
 		c.set('title', title);
 		c.set('subtitle', subtitle);
+		c.set('chartAlertEmails', chartAlertEmails);
 		c.set('description', description);
 		c.set('chartType', getChartNumber(chartType));
 		c.set('chartsDataSourcesStr', JSON.stringify(chartsDataSources));

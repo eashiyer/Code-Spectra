@@ -21,6 +21,7 @@ Cibi.Chart = DS.Model.extend({
 	title: DS.attr('string'),
 	subtitle: DS.attr('string'),
 	description: DS.attr('string'),
+  chartAlertEmails: DS.attr('string'),
 	chartType: DS.attr('string'),
 	configs: DS.attr('string'),
 	axesConfigs: DS.attr('string'),

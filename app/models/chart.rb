@@ -34,7 +34,7 @@ class Chart < AuditedModel
   				  :secondary_dimension,:dashboard_id, :title, :subtitle,
             :sort_by_key, :desc_order, :orientation_type, :drill_through_fields, 
             :excluded_rows, :axes_configs, :rows, :columns, :display_rank,
-            :created_at, :updated_at, :updated_by, :account_template_id, :isolated, :description
+            :created_at, :updated_at, :updated_by, :account_template_id, :isolated, :description, :chart_alert_emails
 
   validates :chart_type, :dashboard_id, :presence => true
 
@@ -268,4 +268,8 @@ class Chart < AuditedModel
     ChartFilter.where('chart_id = ? and disabled = ?', self.id, false)
   end
 
+  def alert_emails
+    #self.chart_alert_emails.split(/\s*,­\s*/).reject { |e| e.empty? } unless self.chart_alert_emails.empty?
+    self.chart_alert_emails.blank? ? [] : self.chart_alert_emails.split(",").reject { |e| e.empty? }
+  end
 end

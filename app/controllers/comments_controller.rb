@@ -17,7 +17,8 @@ class CommentsController < AuthController
     	end
       	if @comment.save
       		chart_users = @comment.chart.subscribers
-      		recepients = []
+      		recepients = @comment.chart.alert_emails
+
       		chart_users.each do |u|
       			recepients << u.email
       		end
